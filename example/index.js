@@ -1,4 +1,4 @@
-var Ev = require('../src')
+var Ev = require('../src/view')
 
 function subscribe (bus, state) {
     bus.on('foo', ev => state.foo.set('bar'))

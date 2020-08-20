@@ -17,8 +17,8 @@
     "build": "npm run build-js && npm run build-css",
     "build-js": "browserify -p esmify -p bundle-collapser/plugin src/index.js -t [ envify --NODE_ENV production ] -t [ babelify --presets [ \"@babel/preset-env\" ] ] -g unassertify -g uglifyify | uglifyjs -mc > public/bundle.js",
     "test": "tape test/{**/*,*}.js",
-    "build-css": "node-sass --output-style=compressed src/style/main.scss > public/style.css",
-    "sass-watch": "node-sass --watch src/style/main.scss --source-map-embed public/style.css",
+    "build-css": "node-sass --output-style=compressed src/view/style/main.scss > public/style.css",
+    "sass-watch": "node-sass --watch src/view/style/main.scss --source-map-embed public/style.css",
     "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
     "lint": "eslint . --config .eslintrc"
