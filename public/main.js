@@ -13,7 +13,7 @@ function createWindow () {
   })
 
   // console.log('env', process.env.NODE_ENV)
-  var server = fork(require.resolve('../src/server/index.js'))
+  var server = fork(require.resolve('../src/server.js'))
 
   // var appName
   // if (process.env.NODE_ENV === 'development') {
