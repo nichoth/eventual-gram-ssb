@@ -8,7 +8,7 @@ var _sbot
 var _view
 var _state
 test('doesnt explode', function (t) {
-    var { bus, view, state } = Eventual()
+    var { bus, state } = Eventual()
     start(function (err, { sbot }) {
         t.error(err)
         t.ok(sbot)
