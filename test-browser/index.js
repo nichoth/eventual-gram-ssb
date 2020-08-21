@@ -2,6 +2,8 @@ var test = require('tape')
 var start = require('../src/start')
 var evs = require('../src/EVENTS')
 var Eventual = require('../src/view')
+var subscribe = require('../src/subscribe')
+var App = require('../src/app')
 
 
 var _sbot
@@ -10,8 +12,10 @@ var _state
 test('doesnt explode', function (t) {
     var { bus, state } = Eventual()
     start(function (err, { sbot }) {
+        var app = App(sbot)
+        subscribe(bus, state, app)
         t.error(err)
-        t.ok(sbot)
+        t.ok(sbot, 'return sbot')
         _sbot = sbot
         _view = bus
         _state = state
