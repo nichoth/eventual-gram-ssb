@@ -1,7 +1,7 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
-var connect = require('./connect')
 var struct = require('observ-struct')
+var connect = require('./connect')
 
 function Ev () {
     var state = struct({})
