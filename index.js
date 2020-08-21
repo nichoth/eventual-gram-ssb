@@ -1,13 +1,9 @@
 var Eventual = require('./src/view')
 var subscribe = require('./src/subscribe')
 var start = require('./src/start')
+var App = require('./src/app')
 
 var { bus, view, state } = Eventual()
-
-function App (sbot) {
-    console.log('sbot in here', sbot)
-    return {}
-}
 
 start(function (err, { sbot }) {
     if (err) throw err
