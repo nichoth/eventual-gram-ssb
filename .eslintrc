@@ -46,6 +46,8 @@
         }
     },
 
+    "ignorePatterns": ["public/*"],
+
     "rules": {
         "arrow-parens": [0, "as-needed"],
         "react/jsx-no-bind": [2, { "ignoreRefs": true }],
