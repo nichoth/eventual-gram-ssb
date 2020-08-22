@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-const {  fork } = require('child_process');
+const { fork } = require('child_process')
 // var path = require('path')
 
 function createWindow () {
@@ -14,6 +14,7 @@ function createWindow () {
 
   // console.log('env', process.env.NODE_ENV)
   var server = fork(require.resolve('../src/server.js'))
+  // var server = spawn('node', [path.join(__dirname, '../src/server/index.js')])
 
   // var appName
   // if (process.env.NODE_ENV === 'development') {
@@ -26,7 +27,6 @@ function createWindow () {
     win.loadFile('./public/index.html')
   })
 
-  // var server = spawn('node', [path.join(__dirname, '../src/server/index.js')])
   server.on('exit', function (code, sig) {
     console.log('server exit', code, sig)
   })
