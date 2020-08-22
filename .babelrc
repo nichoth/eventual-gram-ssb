@@ -1,7 +1,8 @@
 {
     "plugins": [
+        ["@babel/plugin-transform-react-jsx"],
         ["module-resolver", {
-            "root": ["."],
+            "root": ["."]
         }]
     ],
     "presets": [
