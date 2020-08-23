@@ -1,8 +1,10 @@
 var React = require('react')
+var h = Reacy.createElement
 var ReactDOM = require('react-dom')
 var connect = require('./connect')
 var State = require('../state')
 import PropTypes from 'prop-types'
+var Shell = require('./shell')
 
 function Ev () {
     var state = State()
@@ -10,9 +12,6 @@ function Ev () {
         var { emit } = props
         console.log('props', props)
         return <div>
-            <button onClick={emit('foo')}>
-                foo
-            </button>
             <p>example</p>
         </div>
     }
