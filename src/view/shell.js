@@ -1,10 +1,9 @@
-var React = require('react')
-import PropTypes from 'prop-types'
+import { html } from 'htm/preact'
 
 function Shell (props) {
-    return <div>
-        {props.children}
-    </div>
+    return html`<div class="foo">
+        foo
+    </div>`
 }
 
 module.exports = Shell

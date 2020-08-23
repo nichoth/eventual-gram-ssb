@@ -2,11 +2,9 @@
     "plugins": [
         ["module-resolver", {
             "root": ["."]
-        }],
-        ["@babel/plugin-syntax-jsx"]
+        }]
     ],
     "presets": [
-        ["@babel/preset-react"],
         ["@babel/preset-env", {
             "targets": {
                 "browsers": [

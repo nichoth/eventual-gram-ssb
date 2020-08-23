@@ -1,9 +1,7 @@
-var React = require('react')
-var h = Reacy.createElement
-var ReactDOM = require('react-dom')
+import { render } from 'preact';
+import { html } from 'htm/preact';
 var connect = require('./connect')
 var State = require('../state')
-import PropTypes from 'prop-types'
 var Shell = require('./shell')
 
 function Ev () {
@@ -11,21 +9,19 @@ function Ev () {
     var View = (props) => {
         var { emit } = props
         console.log('props', props)
-        return <div>
+
+        return html`<div>
+            <${Shell} />
             <p>example</p>
-        </div>
+        </div>`
     }
     var { bus, view } = connect(state, View)
-
-    View.propTypes = {
-        emit: PropTypes.function.isRequired
-    }
 
     return { bus, view, state }
 }
 
 Ev.createElement = function (EventualView, el) {
-    ReactDOM.render(<EventualView />, el)
+    render(html`<${EventualView} />`, el)
 }
 
 module.exports = Ev

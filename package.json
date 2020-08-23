@@ -12,9 +12,8 @@
     "dist": "electron-builder -c.snap.publish=github --mac --windows --linux",
     "release": "electron-builder --mac --windows --linux --publish always",
     "tron": "env $(cat .env | xargs) electron .",
-    "test-thing": "browserify index.js -p esmify -t [ babelify --presets [ \"@babel/preset-env\" \"@babel/preset-react\" ] ] -dv",
     "start": "npm run build-css && concurrently --kill-others \"env $(cat .env | xargs) node src/server.js\" \"npm run serve\" \"npm run sass-watch\"",
-    "serve": "env $(cat .env | xargs) budo index.js:bundle.js --pushstate --dir=public --live -- -p esmify -t [ babelify --presets [ \"@babel/preset-env\" \"@babel/preset-react\" ] ] -t [ envify --NODE_ENV development ] -dv",
+    "serve": "env $(cat .env | xargs) budo index.js:bundle.js --pushstate --dir=public --live -- -p esmify -t babelify -t [ envify --NODE_ENV development ] -dv",
     "build": "npm run build-js && npm run build-css",
     "build-js": "browserify -p esmify -p bundle-collapser/plugin index.js -t [ envify --NODE_ENV production ] -t babelify -g unassertify -g uglifyify  -mc > public/bundle.js",
     "test": "tape test/{**/*,*}.js",
@@ -30,14 +29,13 @@
   "license": "ISC",
   "dependencies": {
     "@nichoth/events": "^1.1.2",
+    "htm": "^3.0.4",
     "muxrpc": "^6.5.0",
     "observ": "^0.2.0",
     "observ-struct": "^6.0.0",
-    "prop-types": "^15.7.2",
+    "preact": "^10.4.7",
     "pull-stream": "^3.6.14",
     "pull-ws": "^3.3.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "rimraf": "^3.0.2",
     "ssb-backlinks": "^2.1.0",
     "ssb-blobs": "^1.2.3",
@@ -57,9 +55,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/plugin-syntax-jsx": "^7.10.4",
-    "@babel/plugin-transform-react-jsx": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
     "babel-plugin-module-resolver": "^4.0.0",
     "babelify": "^10.0.0",
     "browserify": "^16.5.1",
@@ -71,8 +67,6 @@
     "envify": "^4.1.0",
     "eslint": "^7.4.0",
     "eslint-config-minlint": "^2.0.0",
-    "eslint-plugin-react": "^7.20.6",
-    "eslint-plugin-react-hooks": "^4.0.7",
     "esmify": "^2.1.1",
     "husky": "^4.2.5",
     "inline-htmlify": "^2.0.1",
@@ -82,13 +76,5 @@
     "uglify-js": "^3.10.0",
     "uglifyify": "^5.0.2",
     "unassertify": "^2.1.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nichoth/template-react.git"
-  },
-  "bugs": {
-    "url": "https://github.com/nichoth/template-react/issues"
-  },
-  "homepage": "https://github.com/nichoth/template-react#readme"
+  }
 }

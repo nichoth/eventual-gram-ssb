@@ -1,6 +1,8 @@
-var React = require('react')
-var { Component, createElement } = React
-var h = createElement
+// var React = require('react')
+// var { Component, createElement } = React
+var { h, Component } = require('preact')
+// var h = createElement
+// import { html } from 'htm/preact';
 var Bus = require('@nichoth/events')
 var xtend = require('xtend')
 
