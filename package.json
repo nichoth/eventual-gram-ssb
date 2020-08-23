@@ -67,6 +67,8 @@
     "envify": "^4.1.0",
     "eslint": "^7.4.0",
     "eslint-config-minlint": "^2.0.0",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
     "esmify": "^2.1.1",
     "husky": "^4.2.5",
     "inline-htmlify": "^2.0.1",

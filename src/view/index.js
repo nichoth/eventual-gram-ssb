@@ -1,5 +1,5 @@
-import { render } from 'preact';
-import { html } from 'htm/preact';
+import { render } from 'preact'
+import { html } from 'htm/preact'
 var connect = require('./connect')
 var State = require('../state')
 var Shell = require('./shell')
@@ -7,7 +7,7 @@ var Shell = require('./shell')
 function Ev () {
     var state = State()
     var View = (props) => {
-        var { emit } = props
+        // var { emit } = props
         console.log('props', props)
 
         return html`<div>
