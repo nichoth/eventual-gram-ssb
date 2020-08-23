@@ -1,5 +1,5 @@
 function App (sbot) {
-    console.log('sbot in here', sbot)
+    console.log('sbot in app', sbot)
     return {}
 }
 

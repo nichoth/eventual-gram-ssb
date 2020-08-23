@@ -5,7 +5,16 @@ var State = require('../state')
 
 function Ev () {
     var state = State()
-    var View = () => (<div>example</div>)
+    var View = (props) => {
+        var { emit } = props
+        console.log('props', props)
+        return <div>
+            <button onClick={emit('foo')}>
+                foo
+            </button>
+            <p>example</p>
+        </div>
+    }
     var { bus, view } = connect(state, View)
     return { bus, view, state }
 }
