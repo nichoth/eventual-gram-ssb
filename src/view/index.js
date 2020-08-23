@@ -11,7 +11,7 @@ function Ev () {
         console.log('props', props)
 
         return html`<div>
-            <${Shell} />
+            <${Shell}>foo</${Shell}>
             <p>example</p>
         </div>`
     }

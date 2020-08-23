@@ -2,7 +2,9 @@ import { html } from 'htm/preact'
 
 function Shell (props) {
     return html`<div class="foo">
-        foo
+        shell
+        ${' '}
+        ${props.children}
     </div>`
 }
 
