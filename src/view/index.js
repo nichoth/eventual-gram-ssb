@@ -2,6 +2,7 @@ var React = require('react')
 var ReactDOM = require('react-dom')
 var connect = require('./connect')
 var State = require('../state')
+import PropTypes from 'prop-types'
 
 function Ev () {
     var state = State()
@@ -16,6 +17,11 @@ function Ev () {
         </div>
     }
     var { bus, view } = connect(state, View)
+
+    View.propTypes = {
+        emit: PropTypes.function.isRequired
+    }
+
     return { bus, view, state }
 }
 
