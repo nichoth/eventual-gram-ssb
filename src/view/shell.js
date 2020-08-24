@@ -3,7 +3,10 @@ import { html } from 'htm/preact'
 function Shell (props) {
     var { emit } = props
 
-    return html`<div class="foo">
+    return html`<div class="shell">
+        <div class="menu">
+            menu stuff
+        </div>
         shell
         ${' '}
         ${props.children}
