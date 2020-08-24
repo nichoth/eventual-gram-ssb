@@ -1,7 +1,7 @@
 import { html } from 'htm/preact'
 
 function Home (props) {
-    var { emit } = props
+    // var { emit } = props
 
     console.log('props', props)
 
