@@ -15,7 +15,7 @@ function Ev () {
         var routeView = match.action(match)
 
         return html`<div>
-            <${Shell} emit=${emit}>
+            <${Shell} emit=${emit} ...${props}>
                 <${routeView} emit=${emit} ...${props} />
             <//>
 
