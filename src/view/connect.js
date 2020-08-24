@@ -5,6 +5,7 @@ var { h, Component } = require('preact')
 // import { html } from 'htm/preact';
 var Bus = require('@nichoth/events')
 var xtend = require('xtend')
+var catchRoutes = require('@nichoth/catch-routes')
 
 function connect (state, View) {
     var bus = Bus({ memo: true })
@@ -12,6 +13,10 @@ function connect (state, View) {
     function emit () {
         return bus.emit.apply(bus, arguments)
     }
+
+    catchRoutes(function (parsedUrl) {
+        state.route.set(parsedUrl)
+    })
 
     class Connector extends Component {
         constructor(props) {
@@ -27,7 +32,7 @@ function connect (state, View) {
         }
 
         render () {
-            return h(View, xtend(this.props, { emit }))
+            return h(View, xtend(this.state, this.props, { emit }))
         }
     }
 

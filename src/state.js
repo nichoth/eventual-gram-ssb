@@ -3,7 +3,10 @@ var observ = require('observ')
 
 function State () {
     return struct({
-        route: struct({}),  // required
+        route: struct({
+            href: '/',
+            pathname: '/'
+        }),  // required
         me: observ({}),
         avatarUrl: observ(null),
         posts: observ(null),
