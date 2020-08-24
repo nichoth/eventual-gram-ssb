@@ -39,6 +39,7 @@
     "pull-ws": "^3.3.2",
     "rimraf": "^3.0.2",
     "ruta3": "^2.0.1",
+    "ssb-avatar": "^0.2.0",
     "ssb-backlinks": "^2.1.0",
     "ssb-blobs": "^1.2.3",
     "ssb-config": "^3.4.4",
