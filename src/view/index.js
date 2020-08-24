@@ -18,9 +18,9 @@ function Ev () {
             <${Shell} emit=${emit} ...${props}>
                 <${routeView} emit=${emit} ...${props} />
             <//>
-
         </div>`
     }
+
     var { bus, view } = connect(state, View)
 
     return { bus, view, state }

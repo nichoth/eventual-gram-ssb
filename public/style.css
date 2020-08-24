@@ -1,13 +1,1 @@
-body {
-  margin: 0; }
-
-.menu {
-  padding: 0.5em;
-  border-bottom: 1px solid black;
-  margin-bottom: 1em;
-  height: 2em; }
-
-.avatar {
-  max-height: 100%; }
-
-/*# sourceMappingURL=data:application/json;base64,ewoJInZlcnNpb24iOiAzLAoJImZpbGUiOiAicHVibGljL3N0eWxlLmNzcyIsCgkic291cmNlcyI6IFsKCQkic3JjL3ZpZXcvc3R5bGUvbWFpbi5zY3NzIgoJXSwKCSJuYW1lcyI6IFtdLAoJIm1hcHBpbmdzIjogIkFBQUEsQUFBQSxJQUFJLENBQUM7RUFDRCxNQUFNLEVBQUUsQ0FBQyxHQUNaOztBQUVELEFBQUEsS0FBSyxDQUFDO0VBQ0YsT0FBTyxFQUFFLEtBQUs7RUFDZCxhQUFhLEVBQUUsZUFBZTtFQUM5QixhQUFhLEVBQUUsR0FBRztFQUNsQixNQUFNLEVBQUUsR0FBRyxHQUNkOztBQUVELEFBQUEsT0FBTyxDQUFDO0VBQ0osVUFBVSxFQUFFLElBQUksR0FDbkIiCn0= */
+body{margin:0}.menu{padding:0.5em;border-bottom:1px solid black;margin-bottom:1em;height:2em}.avatar{max-height:100%}
