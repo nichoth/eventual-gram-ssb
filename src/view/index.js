@@ -7,11 +7,13 @@ var Shell = require('./shell')
 function Ev () {
     var state = State()
     var View = (props) => {
-        // var { emit } = props
+        var { emit } = props
         console.log('props', props)
 
         return html`<div>
-            <${Shell}>foo</${Shell}>
+            <${Shell} emit=${emit}>
+                foo
+            <//>
             <p>example</p>
         </div>`
     }
