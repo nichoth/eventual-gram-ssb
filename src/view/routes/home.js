@@ -18,11 +18,13 @@ function Home (props) {
 
                 return html`<li class="post">
                     <img src=${props.postUrls[hash]} />
-                    <div class="post-text">
-                        ${post.value.content.text}
-                    </div>
-                    <div class="author">
-                        ${post.value.author}
+                    <div class="post-attributes">
+                        <div class="post-text">
+                            ${post.value.content.text}
+                        </div>
+                        <div class="author">
+                            ${post.value.author}
+                        </div>
                     </div>
                 </li>`
 
