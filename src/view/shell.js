@@ -13,8 +13,6 @@ function Shell (props) {
         </div>
 
         ${props.children}
-
-        <button onclick=${emit('foo')}>clicker</button>
     </div>`
 }
 

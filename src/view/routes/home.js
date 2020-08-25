@@ -18,7 +18,6 @@ function Home (props) {
 
                 return html`<li class="post">
                     <img src=${props.postUrls[hash]} />
-                    <br />
                     <div class="post-text">
                         ${post.value.content.text}
                     </div>
