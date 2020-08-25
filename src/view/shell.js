@@ -1,7 +1,7 @@
 import { html } from 'htm/preact'
 
 function Shell (props) {
-    var { emit } = props
+    // var { emit } = props
     var { avatarUrl } = props
     console.log('props', props)
     console.log('avatar url', avatarUrl)
