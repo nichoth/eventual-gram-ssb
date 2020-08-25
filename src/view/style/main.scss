@@ -12,3 +12,23 @@ body {
 .avatar {
     max-height: 100%;
 }
+
+// ---------------- home / list of posts --------------------
+.route-home {
+    margin: 2em;
+}
+
+.post {
+    margin-bottom: 2em;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.post-list {
+    padding: 0;
+    list-style: none;
+}
+
+// --------------------------------------------------------

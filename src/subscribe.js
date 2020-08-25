@@ -12,7 +12,7 @@ function subscribe (bus, state, app) {
 
 
     bus.on(evs.app.start, (ev) => {
-        console.log('start', ev)
+        console.log('***start***', ev)
 
         app.getProfile(function (err, profile) {
             if (err) throw err
@@ -26,6 +26,8 @@ function subscribe (bus, state, app) {
                 state.me.set(profile)
             })
         })
+
+        app.liveUpdates(state)
     })
 
 

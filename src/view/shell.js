@@ -11,9 +11,9 @@ function Shell (props) {
             <img class="avatar" src="${avatarUrl}" />
             menu stuff
         </div>
-        shell
-        ${' '}
+
         ${props.children}
+
         <button onclick=${emit('foo')}>clicker</button>
     </div>`
 }

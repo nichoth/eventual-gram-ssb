@@ -11,7 +11,7 @@ function Ev () {
 
     var View = function (props) {
         var { emit } = props
-        var match = router.match(props.route.href)
+        var match = router.match(props.route.pathname)
         var routeView = match.action(match)
 
         return html`<div>
