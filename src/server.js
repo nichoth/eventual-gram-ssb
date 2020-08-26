@@ -30,7 +30,7 @@ function startSSB () {
     }
 
     if (process.env.NODE_ENV === 'development' && !process.env.APP_NAME) {
-        appName = 'ssb-ev-DEV'
+        appName = 'ssb-ev-DEV-1'
     } else if (process.env.NODE_ENV === 'test') {
         appName = 'ssb-ev-TEST-' + Math.random()
     }
