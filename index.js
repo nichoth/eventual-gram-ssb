@@ -8,6 +8,7 @@ var { bus, view, state } = Eventual()
 
 start(function (err, { sbot }) {
     if (err) throw err
+    window.sbot = sbot
     var app = App(sbot)
 
     subscribe(bus, state, app)

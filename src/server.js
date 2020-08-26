@@ -60,6 +60,7 @@ function startSSB () {
     config.logging.level = 'notice'
 
     var _sbot = sbot
+        .use(require('ssb-db'))
         .use(require('ssb-plugins'))
         .use(require('ssb-master'))
         // .use(require('ssb-ws'))

@@ -4,6 +4,10 @@ var ts = require('./types')
 var toURL = require('ssb-serve-blobs/id-to-url')
 var xtend = require('xtend')
 
+
+window.toUrl = toURL
+
+
 function App (sbot) {
     console.log('sbot in app', sbot)
     return {

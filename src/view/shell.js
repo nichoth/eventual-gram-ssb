@@ -4,7 +4,6 @@ function Shell (props) {
     // var { emit } = props
     var { avatarUrl } = props
     console.log('props', props)
-    console.log('avatar url', avatarUrl)
 
     return html`<div class="shell">
         <div class="menu">

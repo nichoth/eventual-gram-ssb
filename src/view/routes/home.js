@@ -17,7 +17,9 @@ function Home (props) {
                 if (!hash) return null
 
                 return html`<li class="post">
-                    <img src=${props.postUrls[hash]} />
+                    <a href=${'/' + post.key}>
+                        <img src=${props.postUrls[hash]} />
+                    </a>
                     <div class="post-attributes">
                         <div class="post-text">
                             ${post.value.content.text}
