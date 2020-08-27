@@ -38,6 +38,13 @@ function subscribe (bus, state, app) {
         })
     })
 
+    bus.on(evs.post.new, function ({ image, text }) {
+        console.log('*new post*', image, text)
+        app.newPost({ image, text }, function (err, res) {
+            console.log('new post cb', err, res)
+        })
+    })
+
 }
 
 module.exports = subscribe

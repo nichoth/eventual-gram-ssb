@@ -22,11 +22,12 @@ function Shell (props) {
 // onSave
 // name
 function EditableField (props) {
+    var { name, onSave } = props
     var [isEditing, setEditing] = useState(false)
 
     function save (ev) {
         ev.preventDefault()
-        props.onSave(ev.target.name.value)
+        onSave(ev.target.name.value)
         setEditing(false)
     }
 
@@ -43,12 +44,12 @@ function EditableField (props) {
     // pencil emoji
     if (!isEditing) {
         return html`<span>
-            ${props.name} <button class="edit" onClick=${edit}>✏</button>
+            ${name} <button class="edit" onClick=${edit}>✏</button>
         </span>`
     }
 
     return html`<form onSubmit=${save}>
-        <input value=${props.name} name="name" />
+        <input value=${name} name="name" />
         <button type="submit">save</button>
         <button onClick=${cancel}>cancel</button>
     </form>`

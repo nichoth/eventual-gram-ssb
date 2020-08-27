@@ -3,6 +3,7 @@ var getAvatar = require('ssb-avatar')
 var ts = require('./types')
 var toURL = require('ssb-serve-blobs/id-to-url')
 var xtend = require('xtend')
+var createHash = require('multiblob/util').createHash
 
 
 window.toUrl = toURL
@@ -14,7 +15,36 @@ function App (sbot) {
         getProfile,
         getUrlForHash,
         liveUpdates,
-        setProfile
+        setProfile,
+        newPost
+    }
+
+    function newPost ({ image, text }, cb) {
+        var hasher = createHash('sha256')
+
+        S(
+            fileReaderStream(image),
+            hasher,
+            sbot.blobs.add(function (err, _hash) {
+                if (err) throw err
+                var hash = '&' + hasher.digest
+                
+                sbot.publish({
+                    type: ts.post,
+                    text: text || '',
+                    mentions: [{
+                        link: hash,        // the hash given by blobs.add
+                    //   name: 'hello.txt', // optional, but recommended
+                    //   size: 12,          // optional, but recommended
+                    //   type: 'text/plain' // optional, but recommended
+                    }]
+                }, function (err, data) {
+                    // console.log('new post', err, data, _hash)
+                    if (err) return cb(err)
+                    cb.apply(null, arguments)
+                })
+            })
+        )
     }
 
     function setProfile (id, newName, cb) {
@@ -27,7 +57,6 @@ function App (sbot) {
             cb(null, msg.value.content.name)
         })
     }
-
 
     function postStream () {
         return sbot.messagesByType({
