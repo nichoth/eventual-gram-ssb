@@ -9,6 +9,7 @@ function Shell (props) {
         <div class="menu">
             <img class="avatar" src="${avatarUrl}" />
             menu stuff
+            <a className="new-post" href="/new">+</a>
         </div>
 
         ${props.children}
