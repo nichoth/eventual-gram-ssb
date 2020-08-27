@@ -4,6 +4,7 @@ var ts = require('./types')
 var toURL = require('ssb-serve-blobs/id-to-url')
 var xtend = require('xtend')
 var createHash = require('multiblob/util').createHash
+var fileReaderStream = require('filereader-pull-stream')
 
 
 window.toUrl = toURL
