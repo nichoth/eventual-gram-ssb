@@ -28,7 +28,7 @@ function FilePreview (props) {
 
 function New (props) {
     var { emit } = props
-    var [selectedFile, setSelectedFile] = useState(null);
+    var [selectedFile, setSelectedFile] = useState(null)
 
     function chooseFile (ev) {
         console.log('choose', ev)
