@@ -43,7 +43,7 @@ function EditableField (props) {
     // pencil emoji
     if (!isEditing) {
         return html`<span>
-            ${props.name} <button onClick=${edit}>✏</button>
+            ${props.name} <button class="edit" onClick=${edit}>✏</button>
         </span>`
     }
 
