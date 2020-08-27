@@ -13,8 +13,21 @@ function App (sbot) {
     return {
         getProfile,
         getUrlForHash,
-        liveUpdates
+        liveUpdates,
+        setProfile
     }
+
+    function setProfile (id, newName, cb) {
+        sbot.publish({
+            type: 'about',
+            about: id,
+            name: newName
+        }, function (err, msg) {
+            if (err) return cb(err)
+            cb(null, msg.value.content.name)
+        })
+    }
+
 
     function postStream () {
         return sbot.messagesByType({

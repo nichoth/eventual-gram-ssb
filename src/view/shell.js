@@ -11,7 +11,6 @@ function Shell (props) {
         <div class="menu">
             <img class="avatar" src="${avatarUrl}" />
             <${EditableField} ...${me} onSave=${emit(evs.profile.save)}/>
-            <span>${me.name}</span>
             menu stuff
             <a className="new-post" href="/new">+</a>
         </div>

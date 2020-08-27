@@ -1,4 +1,5 @@
 var evs = require('./EVENTS')
+var xtend = require('xtend')
 
 function subscribe (bus, state, app) {
     bus.on('*', (evName, ev) => {
@@ -9,7 +10,6 @@ function subscribe (bus, state, app) {
     bus.on(evs.ok.ok, ev => {
         console.log('ok', ev)
     })
-
 
     bus.on(evs.app.start, (ev) => {
         console.log('***start***', ev)
@@ -30,7 +30,13 @@ function subscribe (bus, state, app) {
         app.liveUpdates(state)
     })
 
-
+    bus.on(evs.profile.save, function (newName) {
+        console.log('new Name', newName)
+        app.setProfile(state().me.id, newName, function (err, name) {
+            console.log('in herrererer', err, name)
+            state.me.set(xtend(state.me(), { name }))
+        })
+    })
 
 }
 
