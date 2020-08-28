@@ -39,8 +39,7 @@ function App (sbot) {
                     //   size: 12,          // optional, but recommended
                     //   type: 'text/plain' // optional, but recommended
                     }]
-                }, function (err, data) {
-                    // console.log('new post', err, data, _hash)
+                }, function (err, res) {
                     if (err) return cb(err)
                     cb.apply(null, arguments)
                 })

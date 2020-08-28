@@ -31,7 +31,6 @@ function New (props) {
     var [selectedFile, setSelectedFile] = useState(null)
 
     function chooseFile (ev) {
-        // console.log('choose', ev)
         var file = ev.target.files[0]
         setSelectedFile(file)
     }
@@ -40,13 +39,12 @@ function New (props) {
         ev.preventDefault()
         // todo should wait for save to finish
         var text = ev.target.elements.text.value
-        var image = this.state.selectedFile
+        var image = selectedFile
         emit(evs.post.new, { image, text })
         setSelectedFile(null)
     }
 
     function _nevermind (ev) {
-        console.log('val', (document.getElementById('file-input') || {}).value)
         document.getElementById('file-input').value = ''
         setSelectedFile(null)
     }
