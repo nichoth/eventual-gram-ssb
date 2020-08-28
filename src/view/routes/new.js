@@ -31,7 +31,7 @@ function New (props) {
     var [selectedFile, setSelectedFile] = useState(null)
 
     function chooseFile (ev) {
-        console.log('choose', ev)
+        // console.log('choose', ev)
         var file = ev.target.files[0]
         setSelectedFile(file)
     }
@@ -45,12 +45,19 @@ function New (props) {
         setSelectedFile(null)
     }
 
+    function _nevermind (ev) {
+        console.log('val', (document.getElementById('file-input') || {}).value)
+        document.getElementById('file-input').value = ''
+        setSelectedFile(null)
+    }
+
     return html`<div class="new-post">
-        <input type="file" accept="image/*" onChange=${chooseFile} />
+        <input id="file-input" type="file" accept="image/*"
+            onChange=${chooseFile} />
 
         ${selectedFile ?
             html`<${FilePreview} selectedFile=${selectedFile} 
-                nevermind=${() => setSelectedFile(null)}
+                nevermind=${_nevermind}
                 savePost=${savePost}
             />` :
             null
