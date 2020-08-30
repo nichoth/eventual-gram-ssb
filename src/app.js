@@ -11,9 +11,9 @@ window.toUrl = toURL
 
 
 function App (sbot) {
-    console.log('sbot in app', sbot)
     return {
         getProfile,
+        getProfileById,
         getUrlForHash,
         liveUpdates,
         setProfile,
@@ -93,6 +93,11 @@ function App (sbot) {
             }),
             getUrlForPost(),
             S.drain(function ([hash, url, post]) {
+                console.log('post in here', post)
+
+                // @TODO
+                // get the profile for the post in here
+
                 sbot.blobs.has(hash, function (err, res) {
                     if (!res) {
                         console.log('miss', err, res)
@@ -152,6 +157,21 @@ function App (sbot) {
                 cb(err, profile)
             })
         })
+    }
+
+    function getProfileById (id, cb) {
+        S(
+            sbot.links({
+                source: id,
+                dest: id,
+                rel: 'about',
+                values: true
+            }),
+            S.collect(function (err, msgs) {
+                console.log('get profile done', err, msgs)
+                cb(err, msgs)
+            })
+          )
     }
 }
 
