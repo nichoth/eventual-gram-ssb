@@ -25,7 +25,7 @@ function Home (props) {
                             ${post.value.content.text}
                         </div>
                         <div class="author">
-                            ${post.value.author}
+                            ${(props.people[post.value.author] || {}).name}
                         </div>
                     </div>
                 </li>`

@@ -86,6 +86,7 @@ function App (sbot) {
 
     function liveUpdates (state) {
         console.log('live start')
+
         S(
             postStream(),
             S.filter(function (post) {
@@ -95,8 +96,15 @@ function App (sbot) {
             S.drain(function ([hash, url, post]) {
                 console.log('post in here', post)
 
-                // @TODO
-                // get the profile for the post in here
+                var authorId = post.value.author
+
+                if (!state().people[authorId]) {
+                    getProfileById(authorId, function (err, { name }) {
+                        var people = state.people()
+                        people[authorId] = { name }
+                        state.people.set(people)
+                    })
+                }
 
                 sbot.blobs.has(hash, function (err, res) {
                     if (!res) {
@@ -124,10 +132,9 @@ function App (sbot) {
                 var arr = (state.posts() || [])
                 arr.unshift(post)
                 state.posts.set(arr)
-
             }, function done (err) {
                 if (err) return console.log('error', err)
-                console.log('all done', arguments)
+                console.log('live done', arguments)
             })
         )
     }
@@ -168,8 +175,10 @@ function App (sbot) {
                 values: true
             }),
             S.collect(function (err, msgs) {
-                console.log('get profile done', err, msgs)
-                cb(err, msgs)
+                var nameMsgs = msgs.filter(msg => msg.value.content.name)
+                var nameMsg = nameMsgs[nameMsgs.length - 1]
+
+                cb(err, { name: nameMsg.value.content.name })
             })
         )
     }
