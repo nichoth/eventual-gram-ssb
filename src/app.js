@@ -100,6 +100,7 @@ function App (sbot) {
 
                 if (!state().people[authorId]) {
                     getProfileById(authorId, function (err, { name }) {
+                        if (err) throw err
                         var people = state.people()
                         people[authorId] = { name }
                         state.people.set(people)
