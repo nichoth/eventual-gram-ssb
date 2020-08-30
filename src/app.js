@@ -171,7 +171,7 @@ function App (sbot) {
                 console.log('get profile done', err, msgs)
                 cb(err, msgs)
             })
-          )
+        )
     }
 }
 
