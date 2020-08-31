@@ -40,7 +40,48 @@ See `app.getProfileById`
 ----------------------------------------------
 
 ## 8-30-2020
+The DB has seemingly been borked twice.
 
 
+----------------------------------------------
+
+
+## 8-31-2020
+To create databases for testing, you can specify a different data-directory using the ssb_appname environment variable. For instance:
+
+```
+ssb_appname=test ssb-server start
+```
+
+The primary user's private key is kept in the `~/.ssb/secret` file.
+
+If you want to set a new primary user, while still using the same database, you can move `~/.ssb/secret` to some other location (eg `~/.ssb/secret.backup`). Scuttlebot will automatically create a new user and secret, when started next.
+
+[create test users](https://scuttlebot.io/docs/config/creating-test-users.html)
+
+[create a test DB](https://scuttlebot.io/docs/config/creating-test-databases.html)
+
+[create secondary users](https://scuttlebot.io/docs/basics/create-secondary-users.html)
+
+see [ssb-feed](https://www.npmjs.com/package/ssb-feed)
+
+```js
+var ssbFeed = require('ssb-feed')
+var ssbKeys = require('ssb-keys')
+
+// create the new feed
+var alice = ssbFeed(sbot, ssbKeys.generate())
+
+// Post to alice's feed
+alice.publish({
+  type: 'post',
+  text: 'hello world, I am alice.'
+}, function (err) { ... })
+```
+
+How does that know where to store messages? It takes an `sbot` param.
+
+
+[scuttlebutt](https://github.com/dominictarr/scuttlebutt) -- is this the DB layer with a stream interface for replication like i had wanted?
 
 
