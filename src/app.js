@@ -108,6 +108,24 @@ function App (sbot) {
                     })
                 }
 
+                // if (state.me().id === authorId) {
+                //     if (!state().people[authorId]) {
+                //         var people = state.people()
+                //         people[authorId] = { name }
+                //         state.people.set(people)
+                //     }
+                // } else {
+                //     if (!state().people[authorId]) {
+                //         getProfileById(authorId, function (err, { name }) {
+                //             if (err) throw err
+                //             var people = state.people()
+                //             people[authorId] = { name }
+                //             state.people.set(people)
+                //         })
+                //     }
+                // }
+
+
                 sbot.blobs.has(hash, function (err, res) {
                     if (!res) {
                         console.log('miss', err, res)
@@ -169,6 +187,7 @@ function App (sbot) {
     }
 
     function getProfileById (id, cb) {
+        console.log('id', id)
         S(
             sbot.links({
                 source: id,
@@ -177,10 +196,12 @@ function App (sbot) {
                 values: true
             }),
             S.collect(function (err, msgs) {
+                console.log('aaaaaaa msgs', msgs)
                 var nameMsgs = msgs.filter(msg => msg.value.content.name)
+                console.log('namemsgsssss', nameMsgs)
                 var nameMsg = nameMsgs[nameMsgs.length - 1]
 
-                cb(err, { name: nameMsg.value.content.name })
+                cb(err, { name: nameMsg ? nameMsg.value.content.name : '' })
             })
         )
     }
