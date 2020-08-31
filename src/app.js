@@ -89,6 +89,7 @@ function App (sbot) {
 
         S(
             postStream(),
+            S.through(console.log.bind(console, 'post in here')),
             S.filter(function (post) {
                 return post.value
             }),

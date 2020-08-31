@@ -16,6 +16,11 @@ function Home (props) {
                     null
                 if (!hash) return null
 
+                var author = (props.people[post.value.author] || {})
+                var authorId = post.value.author
+                // console.log('author', author)
+                // console.log('id', authorId)
+
                 return html`<li class="post">
                     <a href=${'/' + post.key}>
                         <img src=${props.postUrls[hash]} />
@@ -25,7 +30,7 @@ function Home (props) {
                             ${post.value.content.text}
                         </div>
                         <div class="author">
-                            ${(props.people[post.value.author] || {}).name}
+                            <a href="/${authorId}">${author.name}</a>
                         </div>
                     </div>
                 </li>`
