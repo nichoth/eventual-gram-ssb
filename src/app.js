@@ -3,7 +3,7 @@ var getAvatar = require('ssb-avatar')
 var ts = require('./types')
 var toURL = require('ssb-serve-blobs/id-to-url')
 // var xtend = require('xtend')
-var after = require('after')
+// var after = require('after')
 var createHash = require('multiblob/util').createHash
 var fileReaderStream = require('filereader-pull-stream')
 
@@ -59,13 +59,13 @@ function App (sbot) {
         })
     }
 
-    function postStream () {
-        return sbot.messagesByType({
-            type: ts.post,
-            // reverse: true,
-            live: true
-        })
-    }
+    // function postStream () {
+    //     return sbot.messagesByType({
+    //         type: ts.post,
+    //         // reverse: true,
+    //         live: true
+    //     })
+    // }
 
     function getUrlForPost () {
         return S(
