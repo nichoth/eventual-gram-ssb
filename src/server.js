@@ -29,13 +29,15 @@ function startSSB () {
         appName += ('-' + process.env.APP_NAME)
     }
 
+    console.log('node env', process.env.NODE_ENV)
     if (process.env.NODE_ENV === 'development' && !process.env.APP_NAME) {
-        appName = 'ssb-ev-DEV-1'
+        appName = 'ssb-ev-DEV'
     } else if (process.env.NODE_ENV === 'test') {
         appName = 'ssb-ev-TEST-' + Math.random()
     }
 
     if (process.env.NODE_ENV === 'test') {
+        console.log('blaaaaaa')
         process.on('exit', function () {
             rimraf.sync(path.join(home, '.' + appName))
         })
@@ -53,24 +55,23 @@ function startSSB () {
     // }
 
     var config = ssbConfigInject(appName, opts)
-
     var keyPath = path.join(config.path, 'secret')
     config.keys = ssbKeys.loadOrCreateSync(keyPath)
     // error, warning, notice, or info (Defaults to notice)
     config.logging.level = 'notice'
 
     var _sbot = sbot
-        .use(require('ssb-plugins'))
+        // .use(require('ssb-db'))
+        // .use(require('ssb-plugins'))
         .use(require('ssb-master'))
-        .use(require('ssb-db'))
-        // .use(require('ssb-ws'))
+        // // .use(require('ssb-ws'))
         .use(require('ssb-gossip'))
         .use(require('ssb-replicate'))
         .use(require('ssb-backlinks'))
         .use(require('ssb-blobs'))
         .use(require('ssb-serve-blobs'))
-        .use(require('ssb-invite'))
-        .use(require('ssb-friends'))
+        // .use(require('ssb-invite'))
+        // .use(require('ssb-friends'))
         .call(null, config)
 
     // .use(require('ssb-private'))

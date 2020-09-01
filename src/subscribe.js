@@ -27,7 +27,21 @@ function subscribe (bus, state, app) {
             })
         })
 
-        app.liveUpdates(state)
+        app.messages(function (err, msgs) {
+            console.log('in here', err, msgs)
+            var posts = msgs.map(([hash, url, post]) => post)
+            // var urls = msgs.map(([hash, url, post]) => url)
+            
+            var urls = msgs.reduce(function (acc, [hash, url, post]) {
+                acc[hash] = url
+                return acc
+            }, {})
+
+            state.postUrls.set(urls)
+            state.posts.set(posts)
+        })
+
+        // app.liveUpdates(state)
     })
 
     bus.on(evs.profile.save, function (newName) {

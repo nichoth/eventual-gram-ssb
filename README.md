@@ -48,7 +48,6 @@ The DB has seemingly been borked twice.
 
 ## 8-31-2020
 To create databases for testing, you can specify a different data-directory using the ssb_appname environment variable. For instance:
-
 ```
 ssb_appname=test ssb-server start
 ```
@@ -85,3 +84,4 @@ How does that know where to store messages? It takes an `sbot` param.
 [scuttlebutt](https://github.com/dominictarr/scuttlebutt) -- is this the DB layer with a stream interface for replication like i had wanted?
 
 
+Need to run a second instance of ssb at the same time as the main instance

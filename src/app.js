@@ -7,7 +7,6 @@ var createHash = require('multiblob/util').createHash
 var fileReaderStream = require('filereader-pull-stream')
 
 
-window.toUrl = toURL
 
 
 function App (sbot) {
@@ -17,7 +16,8 @@ function App (sbot) {
         getUrlForHash,
         liveUpdates,
         setProfile,
-        newPost
+        newPost,
+        messages
     }
 
     function newPost ({ image, text }, cb) {
@@ -69,6 +69,7 @@ function App (sbot) {
     function getUrlForPost () {
         return S(
             S.map(function onData (post) {
+                console.log('bbbbbb', post)
                 if (!post.value.content.mentions) return null
 
                 var hash = post.value.content.mentions[0] ?
@@ -79,7 +80,24 @@ function App (sbot) {
                 return [hash, post]
             }),
             S.map(function ([hash, post]) {
+                console.log('ccccccccc', hash, post)
                 return [hash, toURL(hash), post]
+            })
+        )
+    }
+
+    function messages (cb) {
+        S(
+            sbot.messagesByType({ type: ts.post }),
+            // getUrlForPost(),
+            // S.collect(function (err, [hash, url, posts]) {
+            //     console.log('aaaaaarrg', err, posts)
+            //     cb(err, posts)
+            // })
+            getUrlForPost(),
+            S.collect(function (err, data) {
+                console.log('aaaaaarrg', err, data)
+                cb(err, data)
             })
         )
     }
