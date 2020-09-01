@@ -85,3 +85,7 @@ How does that know where to store messages? It takes an `sbot` param.
 
 
 Need to run a second instance of ssb at the same time as the main instance
+
+I think the `ssb-db` plugin was messing it up
+
+

@@ -1,5 +1,6 @@
 var evs = require('./EVENTS')
 var xtend = require('xtend')
+var after = require('after')
 
 function subscribe (bus, state, app) {
     bus.on('*', (evName, ev) => {
@@ -28,14 +29,31 @@ function subscribe (bus, state, app) {
         })
 
         app.messages(function (err, msgs) {
-            console.log('in here', err, msgs)
+            console.log('messages', err, msgs)
             var posts = msgs.map(([hash, url, post]) => post)
-            // var urls = msgs.map(([hash, url, post]) => url)
             
             var urls = msgs.reduce(function (acc, [hash, url, post]) {
                 acc[hash] = url
                 return acc
             }, {})
+
+
+            var authorIds = posts.map(post => post.value.author)
+
+            var next = after(authorIds.length, function (err, res) {
+                console.log('afterrrrrrr', err, res)
+                if (err) throw err
+                state.people.set(res)
+            })
+
+            var acc = {}
+            authorIds.forEach(function (id) {
+                app.getProfileById(id, function (err, { name }) {
+                    if (err) return next(err)
+                    acc[id] = { name }
+                    next(null, acc)
+                })
+            })
 
             state.postUrls.set(urls)
             state.posts.set(posts)

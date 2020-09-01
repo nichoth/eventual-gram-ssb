@@ -60,6 +60,7 @@ function startSSB () {
     // error, warning, notice, or info (Defaults to notice)
     config.logging.level = 'notice'
 
+    // these are the plugins on the ssb-server readme exmple
     var _sbot = sbot
         // .use(require('ssb-db'))
         // .use(require('ssb-plugins'))
