@@ -64,7 +64,7 @@ function subscribe (bus, state, app) {
     bus.on(evs.profile.save, function (newName) {
         console.log('new Name', newName)
         app.setProfile(state().me.id, newName, function (err, name) {
-            // console.log('in herrererer', err, name)
+            if (err) throw err
             state.me.set(xtend(state.me(), { name }))
         })
     })
