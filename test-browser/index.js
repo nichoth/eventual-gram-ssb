@@ -23,6 +23,22 @@ test('doesnt explode', function (t) {
     })
 })
 
+test('make a new post', function (t) {
+    t.plan(1)
+    var file
+    var rm = _state.posts(function onChange (posts) {
+        t.ok(posts[0].value.content.mentions[0], 'should set the state')
+        rm()
+    })
+
+    document.createElement('canvas').toBlob(function (blob) {
+        file = new File([blob], 'canvas.jpg', { type: blob.type })
+        var image = file
+        var text = 'foo'
+        _view.emit(evs.post.new, { image, text })
+    }, 'image/jpeg')
+})
+
 test('set profile', function (t) {
     t.plan(1)
     var rm = _state.me(onChange)

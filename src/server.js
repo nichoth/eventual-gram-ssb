@@ -37,7 +37,6 @@ function startSSB () {
     }
 
     if (process.env.NODE_ENV === 'test') {
-        console.log('blaaaaaa')
         process.on('exit', function () {
             rimraf.sync(path.join(home, '.' + appName))
         })

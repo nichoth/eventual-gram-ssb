@@ -89,3 +89,12 @@ Need to run a second instance of ssb at the same time as the main instance
 I think the `ssb-db` plugin was messing it up
 
 
+----------------------------------------------------
+
+## 9-1-2020
+
+Need to make a second user in an automated way, for tests.
+
+
+
+

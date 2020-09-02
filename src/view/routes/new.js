@@ -32,6 +32,7 @@ function New (props) {
 
     function chooseFile (ev) {
         var file = ev.target.files[0]
+        // console.log('file', file)
         setSelectedFile(file)
     }
 

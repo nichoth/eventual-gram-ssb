@@ -37,7 +37,6 @@ function subscribe (bus, state, app) {
                 return acc
             }, {})
 
-
             var authorIds = posts.map(post => post.value.author)
 
             var next = after(authorIds.length, function (err, res) {
@@ -73,7 +72,9 @@ function subscribe (bus, state, app) {
     bus.on(evs.post.new, function ({ image, text }) {
         console.log('*new post*', image, text)
         app.newPost({ image, text }, function (err, res) {
-            console.log('new post cb', err, res)
+            var posts = (state.posts() || [])
+            posts.unshift(res)
+            state.posts.set(posts)
         })
     })
 

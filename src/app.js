@@ -5,7 +5,8 @@ var toURL = require('ssb-serve-blobs/id-to-url')
 // var xtend = require('xtend')
 // var after = require('after')
 var createHash = require('multiblob/util').createHash
-var fileReaderStream = require('filereader-pull-stream')
+// var fileReaderStream = require('filereader-pull-stream')
+var fileReader = require('pull-file-reader')
 
 
 
@@ -25,7 +26,8 @@ function App (sbot) {
         var hasher = createHash('sha256')
 
         S(
-            fileReaderStream(image),
+            fileReader(image),
+            // fileReaderStream(image),
             hasher,
             sbot.blobs.add(function (err, _hash) {
                 if (err) throw err
