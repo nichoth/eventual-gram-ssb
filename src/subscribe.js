@@ -72,6 +72,7 @@ function subscribe (bus, state, app) {
     bus.on(evs.post.new, function ({ image, text }) {
         console.log('*new post*', image, text)
         app.newPost({ image, text }, function (err, res) {
+            if (err) throw err
             var posts = (state.posts() || [])
             posts.unshift(res)
             state.posts.set(posts)
