@@ -24,10 +24,11 @@ test('doesnt explode', function (t) {
 })
 
 test('make a new post', function (t) {
-    t.plan(1)
+    t.plan(2)
     var file
     var rm = _state.posts(function onChange (posts) {
         t.ok(posts[0].value.content.mentions[0], 'should set the state')
+        t.equal(posts[0].value.content.text, 'foo', 'should set text')
         rm()
     })
 
@@ -51,12 +52,12 @@ test('set profile', function (t) {
 
 test('set avatar', function (t) {
     t.plan(1)
-    var file = new File(['foo bar'], 'foo.txt')
     var rm = _state(function onChange() {
         t.ok(_state().me.image, 'has a file hash')
         rm()
     })
 
+    var file = new File(['foo bar'], 'foo.txt')
     _view.emit(evs.profile.setAvatar, {
         target: {
             files: [file]
