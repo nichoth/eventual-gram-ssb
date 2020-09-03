@@ -1,6 +1,4 @@
-var S = require('pull-stream')
 var evs = require('./EVENTS')
-var ts = require('./types')
 var xtend = require('xtend')
 var after = require('after')
 

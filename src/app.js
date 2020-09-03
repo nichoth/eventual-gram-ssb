@@ -223,6 +223,7 @@ function App (sbot) {
         S(
             sbot.createUserStream({ id: feedId }),
             S.collect(function (err, msgs) {
+                if (err) throw err
                 var posts = msgs.filter(msg => {
                     return msg.value.content.type === ts.post
                 })
