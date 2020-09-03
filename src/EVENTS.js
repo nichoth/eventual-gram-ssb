@@ -4,7 +4,8 @@ var EVENTS = namespace({
     ok: ['ok'],
     profile: ['save', 'setAvatar'],
     app: ['start'],
-    post: ['new']
+    post: ['new'],
+    feed: ['get']
 })
 
 module.exports = EVENTS

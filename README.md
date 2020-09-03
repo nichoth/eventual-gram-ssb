@@ -96,5 +96,11 @@ I think the `ssb-db` plugin was messing it up
 Need to make a second user in an automated way, for tests.
 
 
+----------------------------------------------------------
+
+## 9-3-2020
+[messages by user](https://scuttlebot.io/docs/advanced/messages-by-user.html) -- for the `/userId` route
+
+
 
 

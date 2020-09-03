@@ -15,7 +15,8 @@ function State () {
         pubs: struct({
             list: observ([]),
             err: observ(null)
-        })
+        }),
+        feeds: struct({})
     })
 }
 

@@ -1,4 +1,6 @@
+var S = require('pull-stream')
 var evs = require('./EVENTS')
+var ts = require('./types')
 var xtend = require('xtend')
 var after = require('after')
 
@@ -77,6 +79,22 @@ function subscribe (bus, state, app) {
             posts.unshift(res)
             state.posts.set(posts)
         })
+    })
+
+    bus.on(evs.feed.get, function (feedId) {
+        console.log('**get feed**', feedId)
+        S(
+            sbot.createUserStream({ id: feedId }),
+            S.collect(function (err, msgs) {
+                console.log('**feed**', err, msgs)
+                var feeds = state.feeds()
+                var posts = msgs.filter(msg => {
+                    return msg.value.content.type === ts.post
+                })
+                console.log('posts bu user', posts)
+                feeds[feedId] = msgs
+            })
+        )
     })
 
 }
