@@ -19,7 +19,8 @@ function App (sbot) {
         // liveUpdates,
         setProfile,
         newPost,
-        messages
+        messages,
+        getUserPosts
     }
 
     function newPost ({ image, text }, cb) {
@@ -214,6 +215,19 @@ function App (sbot) {
                 var nameMsg = nameMsgs[nameMsgs.length - 1]
 
                 cb(err, { name: nameMsg ? nameMsg.value.content.name : '' })
+            })
+        )
+    }
+
+    function getUserPosts (feedId, cb) {
+        S(
+            sbot.createUserStream({ id: feedId }),
+            S.collect(function (err, msgs) {
+                var posts = msgs.filter(msg => {
+                    return msg.value.content.type === ts.post
+                })
+                console.log('posts by user', posts)
+                cb(null, posts)
             })
         )
     }

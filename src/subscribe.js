@@ -86,19 +86,12 @@ function subscribe (bus, state, app) {
 
         if (state.feeds()[feedId]) return
 
-        S(
-            sbot.createUserStream({ id: feedId }),
-            S.collect(function (err, msgs) {
-                console.log('**feed**', err, msgs)
-                var feeds = state.feeds()
-                var posts = msgs.filter(msg => {
-                    return msg.value.content.type === ts.post
-                })
-                console.log('posts by user', posts)
-                feeds[feedId] = posts
-                state.feeds.set(feeds)
-            })
-        )
+        app.getUserPosts(feedId, function (err, posts) {
+            console.log('**feed**', err, posts)
+            var feeds = state.feeds()
+            feeds[feedId] = posts
+            state.feeds.set(feeds)
+        })
     })
 
 }
