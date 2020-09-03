@@ -2,7 +2,7 @@ var struct = require('observ-struct')
 var observ = require('observ')
 
 function State () {
-    return struct({
+    var state = struct({
         route: struct({
             href: '/',
             pathname: '/'
@@ -18,6 +18,10 @@ function State () {
         }),
         feeds: struct({})
     })
+
+    state(_state => console.log('state change', _state))
+
+    return state
 }
 
 module.exports = State

@@ -7,8 +7,29 @@ function createFeedRoute (feedId) {
     return function Feed (props) {
         var { emit } = props
         emit(evs.feed.get, feedId)
-        console.log('props', props)
-        return html`<div>feed</div>`
+        if(!props.feeds[feedId]) return null
+
+        var posts = props.feeds[feedId]
+
+        return html`<ul class="feed">
+            ${posts.map(function (post) {
+                var hash = post.value.content.mentions[0] ?
+                    post.value.content.mentions[0].link :
+                    null
+                if (!hash) return null
+
+                return html`<li class="post">
+                    <a href=${'/' + post.key}>
+                        <img src=${props.postUrls[hash]} />
+                    </a>
+                    <div class="post-attributes">
+                        <div class="post-text">
+                            ${post.value.content.text}
+                        </div>
+                    </div>
+                </li>`
+            })}
+        </ul>`
     }
 }
 

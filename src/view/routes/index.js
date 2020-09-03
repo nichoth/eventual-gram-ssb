@@ -16,7 +16,7 @@ function _Router () {
     router.addRoute('/*', (match) => {
         var { splats } = match
         var feedId = splats[0]
-        console.log('btoa', btoa(feedId))
+        console.log('**in route**', feedId)
         return createFeedRoute(feedId)
     })
 
