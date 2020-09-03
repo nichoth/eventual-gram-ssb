@@ -11,7 +11,7 @@ function createFeedRoute (feedId) {
 
         var posts = props.feeds[feedId]
 
-        return html`<ul class="feed">
+        return html`<ul class="feed post-list">
             ${posts.map(function (post) {
                 var hash = post.value.content.mentions[0] ?
                     post.value.content.mentions[0].link :
