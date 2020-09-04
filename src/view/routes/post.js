@@ -1,5 +1,5 @@
 import { html } from 'htm/preact'
-var evs = require('../../EVENTS')
+// var evs = require('../../EVENTS')
 
 function createPostView (postId) {
     return function PostView (props) {
