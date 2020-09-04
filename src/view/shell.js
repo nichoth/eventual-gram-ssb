@@ -14,7 +14,7 @@ function Shell (props) {
             <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
             <span> | </span>
             menu stuff
-            <a className="new-post" href="/new">+</a>
+            <a className="new-post-icon" href="/new">+</a>
         </div>
 
         ${props.children}
