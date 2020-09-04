@@ -5,7 +5,6 @@ var toURL = require('ssb-serve-blobs/id-to-url')
 // var xtend = require('xtend')
 // var after = require('after')
 var createHash = require('multiblob/util').createHash
-// var fileReaderStream = require('filereader-pull-stream')
 var fileReader = require('pull-file-reader')
 
 
@@ -201,14 +200,26 @@ function App (sbot) {
         })
     }
 
-    function setAvatar ({ id, fileId }, cb) {
-        // sbot
-        console.log('set avatar', arguments)
-        sbot.publish({
-            type: 'about',
-            about: id,
-            image: fileId
-        }, cb)
+    function setAvatar ({ file, id }, cb) {
+        var hasher = createHash('sha256')
+
+        S(
+            fileReader(file),
+            hasher,
+            sbot.blobs.add(function (err, _hash) {
+                var hash = '&' + hasher.digest
+                if (err) throw err
+
+                var imageUrl = URL.createObjectURL(file)
+                sbot.publish({
+                    type: 'about',
+                    about: id,
+                    image: hash
+                }, cb)
+
+                cb(null, { imageUrl, hash })
+            })
+        )
     }
 
     function getProfileById (id, cb) {

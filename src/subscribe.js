@@ -1,9 +1,9 @@
-var S = require('pull-stream')
+// var S = require('pull-stream')
 var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
-var fileReader = require('pull-file-reader')
-var createHash = require('multiblob/util').createHash
+// var fileReader = require('pull-file-reader')
+// var createHash = require('multiblob/util').createHash
 
 function subscribe (bus, state, app) {
     bus.on('*', (evName, ev) => {
@@ -98,35 +98,16 @@ function subscribe (bus, state, app) {
         var file = ev.target.files[0]
         console.log('file', file)
 
-        var hasher = createHash('sha256')
-
         // bus, state, app
 
         var { id } = state.me()
-        S(
-            fileReader(file),
-            hasher,
-            sbot.blobs.add(function (err, _hash) {
-                var hash = '&' + hasher.digest
-                if (err) throw err
-                console.log('**err, hash**', err, hash)
-
-                app.setAvatar({ fileId: hash, id }, function (err, msg) {
-                    if (err) throw err
-                    console.log('**aaaaaaa**', err, msg)
-                    var imageUrl = URL.createObjectURL(file)
-                    state.avatarUrl.set(imageUrl)
-                    state.me.set(xtend(state.me(), {
-                        image: hash
-                    }))
-                })
-            })
-        )
-        // var { fileID } = blobs.add
-
-        // type: 'about',
-        // about: id,
-        // image: fileId
+        app.setAvatar({ file, id }, function (err, { imageUrl, hash }) {
+            if (err) throw err
+            state.avatarUrl.set(imageUrl)
+            state.me.set(xtend(state.me(), {
+                image: hash
+            }))
+        })
     })
 
 }
