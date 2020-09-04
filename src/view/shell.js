@@ -10,9 +10,9 @@ function Shell (props) {
     return html`<div class="shell">
         <div class="menu">
             <img class="avatar" src="${avatarUrl}" />
+            <${AvatarInput} emit=${emit} />
             <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
             <span> | </span>
-            <${AvatarInput} emit=${emit} />
             menu stuff
             <a className="new-post" href="/new">+</a>
         </div>
