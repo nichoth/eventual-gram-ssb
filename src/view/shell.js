@@ -12,8 +12,6 @@ function Shell (props) {
             <img class="avatar" src="${avatarUrl}" />
             <${AvatarInput} emit=${emit} />
             <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
-            <span> | </span>
-            menu stuff
             <a className="new-post-icon" href="/new">+</a>
         </div>
 
