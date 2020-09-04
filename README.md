@@ -101,6 +101,10 @@ Need to make a second user in an automated way, for tests.
 ## 9-3-2020
 [messages by user](https://scuttlebot.io/docs/advanced/messages-by-user.html) -- for the `/userId` route
 
+found [this testbot](https://github.com/ssbc/scuttle-testbot) today
+
+can set the avatar
+
 
 
 
