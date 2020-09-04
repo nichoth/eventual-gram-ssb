@@ -15,6 +15,10 @@ function connect (state, View) {
     }
 
     catchRoutes(function (parsedUrl) {
+        console.log('parsedUrl', parsedUrl)
+        // parsedUrl.href = decodeURIComponent(parsedUrl.href)
+        // parsedUrl.pathname = decodeURIComponent(parsedUrl.pathname)
+        console.log('in here', parsedUrl)
         state.route.set(parsedUrl)
     })
 

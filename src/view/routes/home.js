@@ -22,7 +22,7 @@ function Home (props) {
                 // console.log('id', authorId)
 
                 return html`<li class="post">
-                    <a href=${'/' + post.key}>
+                    <a href=${encodeURI('/' + post.key)}>
                         <img src=${props.postUrls[hash]} />
                     </a>
                     <div class="post-attributes">
