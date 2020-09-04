@@ -3,10 +3,17 @@ import { html } from 'htm/preact'
 
 function createPostView (postId) {
     return function PostView (props) {
-        console.log('in post view', postId)
-        console.log('in post view', props)
+        console.log('in post view post ID', postId)
+        console.log('in post view props', props)
 
-        return html`<div>post view</div>`
+        var post = props.posts.find(post => post.key === postId)
+        var fileHash = post.value.content.mentions[0].link
+        var imgUrl = props.postUrls[fileHash]
+
+        return html`<div class="single-post">
+            <img src="${imgUrl}" />
+            post view
+        </div>`
     }
 }
 
