@@ -1,9 +1,6 @@
-// var S = require('pull-stream')
 var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
-// var fileReader = require('pull-file-reader')
-// var createHash = require('multiblob/util').createHash
 
 function subscribe (bus, state, app) {
     bus.on('*', (evName, ev) => {
