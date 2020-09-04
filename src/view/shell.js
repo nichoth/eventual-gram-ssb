@@ -10,13 +10,23 @@ function Shell (props) {
     return html`<div class="shell">
         <div class="menu">
             <img class="avatar" src="${avatarUrl}" />
-            <${EditableField} ...${me} onSave=${emit(evs.profile.save)}/>
+            <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
+            <span> | </span>
+            <${AvatarInput} emit=${emit} />
             menu stuff
             <a className="new-post" href="/new">+</a>
         </div>
 
         ${props.children}
     </div>`
+}
+
+function AvatarInput (props) {
+    var { emit } = props
+    return html`<input type="file" id="avatar" name="avatar"
+        accept="image/png, image/jpeg"
+        onchange=${emit(evs.profile.setAvatar)}
+    />`
 }
 
 // onSave

@@ -19,8 +19,6 @@ function State () {
         feeds: struct({})
     })
 
-    state(_state => console.log('state change', _state))
-
     return state
 }
 

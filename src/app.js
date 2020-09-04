@@ -20,7 +20,8 @@ function App (sbot) {
         setProfile,
         newPost,
         messages,
-        getUserPosts
+        getUserPosts,
+        setAvatar
     }
 
     function newPost ({ image, text }, cb) {
@@ -198,6 +199,16 @@ function App (sbot) {
                 cb(err, profile)
             })
         })
+    }
+
+    function setAvatar ({ id, fileId }, cb) {
+        // sbot
+        console.log('set avatar', arguments)
+        sbot.publish({
+            type: 'about',
+            about: id,
+            image: fileId
+        }, cb)
     }
 
     function getProfileById (id, cb) {
