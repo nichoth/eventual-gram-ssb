@@ -13,7 +13,7 @@
     "release": "electron-builder --mac --windows --linux --publish always",
     "tron": "env $(cat .env | xargs) electron .",
     "start": "npm run build-css && concurrently --kill-others \"env $(cat .env | xargs) node src/server.js\" \"npm run serve\" \"npm run sass-watch\"",
-    "serve": "env $(cat .env | xargs) budo index.js:bundle.js --pushstate --dir=public --live -- -p esmify -t babelify -t [ envify --NODE_ENV development ] -t uglifyify -dv",
+    "serve": "env $(cat .env | xargs) budo index.js:bundle.js -P --dir=public --live -- -p esmify -t babelify -t [ envify --NODE_ENV development ] -t uglifyify -dv",
     "build": "npm run build-js && npm run build-css",
     "build-js": "browserify -p esmify -p bundle-collapser/plugin index.js -t [ envify --NODE_ENV production ] -t babelify -g unassertify -g uglifyify -mc > public/bundle.js",
     "test": "tape test/{**/*,*}.js",

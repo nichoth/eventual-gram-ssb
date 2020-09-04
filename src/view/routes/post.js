@@ -12,7 +12,7 @@ function createPostView (postId) {
 
         return html`<div class="single-post">
             <img src="${imgUrl}" />
-            post view
+            <div>post view</div>
         </div>`
     }
 }
