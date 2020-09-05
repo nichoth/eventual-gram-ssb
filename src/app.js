@@ -21,6 +21,7 @@ function App (sbot) {
         messages,
         getUserPosts,
         setAvatar
+        // getAvatarById
     }
 
     function newPost ({ image, text }, cb) {
@@ -231,15 +232,35 @@ function App (sbot) {
                 values: true
             }),
             S.collect(function (err, msgs) {
-                // console.log('aaaaaaa msgs', msgs)
+                console.log('msgs in here', msgs)
                 var nameMsgs = msgs.filter(msg => msg.value.content.name)
-                // console.log('namemsgsssss', nameMsgs)
                 var nameMsg = nameMsgs[nameMsgs.length - 1]
+                var images = msgs.filter(msg => msg.value.content.image)
+                var imageMsg = images[images.length - 1]
 
-                cb(err, { name: nameMsg ? nameMsg.value.content.name : '' })
+                cb(err, {
+                    name: nameMsg ? nameMsg.value.content.name : '',
+                    image: imageMsg.value.content.image
+                })
             })
         )
     }
+
+    // function getAvatarById (id, cb) {
+    //     S(
+    //         sbot.links({
+    //           source: id,
+    //           dest: id,
+    //           rel: 'about',
+    //           values: true
+    //         }),
+    //         S.collect(function (err, msgs) {
+    //             if (err) return cb(err)
+    //             console.log('msgs', msgs)
+    //             cb(null, msgs)
+    //         })
+    //     )
+    // }
 
     function getUserPosts (feedId, cb) {
         S(

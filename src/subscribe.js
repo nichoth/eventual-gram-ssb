@@ -46,10 +46,15 @@ function subscribe (bus, state, app) {
 
             var acc = {}
             authorIds.forEach(function (id) {
-                app.getProfileById(id, function (err, { name }) {
+                app.getProfileById(id, function (err, person) {
                     if (err) return next(err)
-                    acc[id] = { name }
-                    next(null, acc)
+                    console.log('person here', person)
+                    var { name, image } = person
+                    app.getUrlForHash(image, (err, imgUrl) => {
+                        if (err) throw err
+                        acc[id] = { name, image, imgUrl }
+                        next(null, acc)
+                    })
                 })
             })
 
@@ -90,6 +95,15 @@ function subscribe (bus, state, app) {
             state.feeds.set(feeds)
         })
     })
+
+    // bus.on(evs.people.getAvatar, function (ev) {
+    //     var { userId } = ev
+    //     // bus, state, app
+    //     app.getAvatarById(userId, function (err, msgs) {
+    //         if (err) throw err
+    //         console.log('aaaaa msgs', err, msgs)
+    //     })
+    // })
 
     bus.on(evs.profile.setAvatar, function (ev) {
         var file = ev.target.files[0]

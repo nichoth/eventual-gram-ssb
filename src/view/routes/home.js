@@ -8,7 +8,6 @@ function Home (props) {
     if (!props.posts) return html`<div>home</div>`
 
     return html`<div class="route-home">
-
         <ul class="post-list">
             ${props.posts.map(post => {
                 var hash = post.value.content.mentions[0] ?
@@ -16,19 +15,28 @@ function Home (props) {
                     null
                 if (!hash) return null
 
-                var author = (props.people[post.value.author] || {})
                 var authorId = post.value.author
+                var author = (props.people[authorId] || {})
+                var postAvatar = (author.imgUrl || '')
 
                 return html`<li class="post">
                     <a href=${encodeURI('/' + post.key)}>
                         <img src=${props.postUrls[hash]} />
                     </a>
                     <div class="post-attributes">
-                        <div class="post-text">
-                            ${post.value.content.text}
+                        <div class="post-avatar">
+                            <img src="${postAvatar}" />
                         </div>
-                        <div class="author">
-                            <a href="/${authorId}">${author.name}</a>
+                        <div class="post-metadata">
+                            ${post.value.content.text ?
+                                html`<div class="post-text">
+                                    ${post.value.content.text}
+                                </div>` :
+                                null
+                            }
+                            <div class="author">
+                                <a href="/${authorId}">${author.name}</a>
+                            </div>
                         </div>
                     </div>
                 </li>`
