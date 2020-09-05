@@ -49,6 +49,23 @@ body {
     margin-right: 0.5rem;
 }
 
+.user-name {
+    position: relative;
+    bottom: 0.5rem;
+    & > button {
+        background-color: transparent;
+        border: none;
+        color: blue;
+        font-size: 2rem;
+        position: relative;
+        top: 4px;
+        &:hover {
+            color: cyan;
+        }
+    }
+}
+
+
 // ---------------- home / list of posts --------------------
 .route-home {
     margin: 2em;
