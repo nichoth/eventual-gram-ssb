@@ -11,8 +11,10 @@ function Shell (props) {
 
     return html`<div class="shell">
         <div class="menu">
-            <${AvatarInput} emit=${emit} avatarUrl=${avatarUrl} />
-            <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
+            <div>
+                <${AvatarInput} emit=${emit} avatarUrl=${avatarUrl} />
+                <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
+            </div>
             <a className="new-post-icon" href="/new">+</a>
         </div>
 
