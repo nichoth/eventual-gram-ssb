@@ -7,7 +7,7 @@ function Shell (props) {
     var { avatarUrl, me } = props
     console.log('props', props)
 
-            // <img class="avatar" src="${avatarUrl}" />
+    // <img class="avatar" src="${avatarUrl}" />
 
     return html`<div class="shell">
         <div class="menu">
