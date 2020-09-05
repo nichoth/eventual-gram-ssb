@@ -7,10 +7,11 @@ function Shell (props) {
     var { avatarUrl, me } = props
     console.log('props', props)
 
+            // <img class="avatar" src="${avatarUrl}" />
+
     return html`<div class="shell">
         <div class="menu">
-            <img class="avatar" src="${avatarUrl}" />
-            <${AvatarInput} emit=${emit} />
+            <${AvatarInput} emit=${emit} avatarUrl=${avatarUrl} />
             <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
             <a className="new-post-icon" href="/new">+</a>
         </div>
@@ -20,11 +21,16 @@ function Shell (props) {
 }
 
 function AvatarInput (props) {
-    var { emit } = props
-    return html`<input type="file" id="avatar" name="avatar"
-        accept="image/png, image/jpeg"
-        onchange=${emit(evs.profile.setAvatar)}
-    />`
+    var { emit, avatarUrl } = props
+    return html`
+        <label for="avatar-input" id="avatar-label">
+            <img class="avatar" src="${avatarUrl}" />
+        </label>
+        <input type="file" id="avatar-input" name="avatar"
+            accept="image/png, image/jpeg"
+            onchange=${emit(evs.profile.setAvatar)}
+        />
+    `
 }
 
 // onSave

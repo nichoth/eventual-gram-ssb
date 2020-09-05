@@ -18,8 +18,6 @@ function Home (props) {
 
                 var author = (props.people[post.value.author] || {})
                 var authorId = post.value.author
-                // console.log('author', author)
-                // console.log('id', authorId)
 
                 return html`<li class="post">
                     <a href=${encodeURI('/' + post.key)}>
