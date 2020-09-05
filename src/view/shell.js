@@ -24,15 +24,15 @@ function Shell (props) {
 
 function AvatarInput (props) {
     var { emit, avatarUrl } = props
-    return html`
+    return html`<span class="avatar-holder">
         <label for="avatar-input" id="avatar-label">
-            <img class="avatar" src="${avatarUrl}" />
+            <img class="avatar" src="${avatarUrl}" title="avatar" />
         </label>
         <input type="file" id="avatar-input" name="avatar"
             accept="image/png, image/jpeg"
             onchange=${emit(evs.profile.setAvatar)}
         />
-    `
+    </span>`
 }
 
 // onSave
