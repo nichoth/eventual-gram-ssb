@@ -15,7 +15,7 @@ function Shell (props) {
                 <${AvatarInput} emit=${emit} avatarUrl=${avatarUrl} />
                 <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
             </div>
-            <a className="new-post-icon" href="/new">+</a>
+            <a className="new-post-icon" href="/new" title="new">+</a>
         </div>
 
         ${props.children}
@@ -26,7 +26,7 @@ function AvatarInput (props) {
     var { emit, avatarUrl } = props
     return html`<span class="avatar-holder">
         <label for="avatar-input" id="avatar-label">
-            <img class="avatar" src="${avatarUrl}" title="avatar" />
+            <img class="avatar" src="${avatarUrl}" title="set avatar" />
         </label>
         <input type="file" id="avatar-input" name="avatar"
             accept="image/png, image/jpeg"

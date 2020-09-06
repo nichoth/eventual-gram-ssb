@@ -9,20 +9,29 @@ function createPostView (postId) {
 
         var author = (props.people[post.value.author] || {})
         var authorId = post.value.author
+        var postAvatar = (author.imgUrl || '')
 
         return html`<div class="single-post">
             <img src="${imgUrl}" />
 
             <div class="author">
+                <div class="post-avatar">
+                    <img src="${postAvatar}" />
+                </div>
+
                 <h1>
                     <a href="/${authorId}">${author.name}</a>
                 </h1>
             </div>
 
-            <div class="post-text">
-                ${post.value.content.text}
+            <div class="post-metadata">
+                ${post.value.content.text ?
+                    html`<div class="post-text">
+                        ${post.value.content.text}
+                    </div>` :
+                    null
+                }
             </div>
-
         </div>`
     }
 }
