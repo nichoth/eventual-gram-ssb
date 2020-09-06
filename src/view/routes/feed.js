@@ -18,13 +18,26 @@ function createFeedRoute (feedId) {
                     null
                 if (!hash) return null
 
+                var authorId = post.value.author
+                var author = (props.people[authorId] || {})
+                var postAvatar = (author.imgUrl || '')
+
                 return html`<li class="post">
                     <a href=${'/' + post.key}>
                         <img src=${props.postUrls[hash]} />
                     </a>
                     <div class="post-attributes">
-                        <div class="post-text">
-                            ${post.value.content.text}
+                        <div class="post-avatar">
+                            <img src="${postAvatar}" />
+                        </div>
+
+                        <div class="post-metadata">
+                            ${post.value.content.text ?
+                                html`<div class="post-text">
+                                    ${post.value.content.text}
+                                </div>` :
+                                null
+                            }
                         </div>
                     </div>
                 </li>`
