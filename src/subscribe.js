@@ -29,8 +29,8 @@ function subscribe (bus, state, app) {
         })
 
         app.messages(function (err, msgs) {
+            if (err) throw err
             var posts = msgs.map(([hash, url, post]) => post)
-            
             var urls = msgs.reduce(function (acc, [hash, url, post]) {
                 acc[hash] = url
                 return acc
