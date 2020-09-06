@@ -110,3 +110,11 @@ can set the avatar
 
 ## 9-4-2020
 
+---------------------------------------------------
+
+## 9-5-2020
+
+* got the avatar to show next to all posts in home route
+
+
+

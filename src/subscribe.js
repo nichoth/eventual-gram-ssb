@@ -29,7 +29,6 @@ function subscribe (bus, state, app) {
         })
 
         app.messages(function (err, msgs) {
-            console.log('messages', err, msgs)
             var posts = msgs.map(([hash, url, post]) => post)
             
             var urls = msgs.reduce(function (acc, [hash, url, post]) {
@@ -48,7 +47,6 @@ function subscribe (bus, state, app) {
             authorIds.forEach(function (id) {
                 app.getProfileById(id, function (err, person) {
                     if (err) return next(err)
-                    console.log('person here', person)
                     var { name, image } = person
                     app.getUrlForHash(image, (err, imgUrl) => {
                         if (err) throw err

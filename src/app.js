@@ -7,9 +7,6 @@ var toURL = require('ssb-serve-blobs/id-to-url')
 var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
 
-
-
-
 function App (sbot) {
     return {
         getProfile,
@@ -232,7 +229,6 @@ function App (sbot) {
                 values: true
             }),
             S.collect(function (err, msgs) {
-                console.log('msgs in here', msgs)
                 var nameMsgs = msgs.filter(msg => msg.value.content.name)
                 var nameMsg = nameMsgs[nameMsgs.length - 1]
                 var images = msgs.filter(msg => msg.value.content.image)
