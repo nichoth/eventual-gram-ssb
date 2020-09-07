@@ -24,9 +24,11 @@ function Home (props) {
                         <img src=${props.postUrls[hash]} />
                     </a>
                     <div class="post-attributes">
-                        <div class="post-avatar">
-                            <img src="${postAvatar}" />
-                        </div>
+                        <a class="avatar-link" href="/${authorId}">
+                            <div class="post-avatar">
+                                <img src="${postAvatar}" />
+                            </div>
+                        </a>
                         <div class="post-metadata">
                             ${post.value.content.text ?
                                 html`<div class="post-text">
