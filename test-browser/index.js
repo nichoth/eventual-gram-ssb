@@ -74,11 +74,11 @@ test('a different feed', function (t) {
 
     // this is bad because the whoami call isn't guaranteed to happen in the
     // correct order
-    var id
-    _sbot.whoami(function (err, info) {
-        t.error(err)
-        id = info.id
-    })
+    // var id
+    // _sbot.whoami(function (err, info) {
+    //     t.error(err)
+    //     id = info.id
+    // })
 
     // follow the second feed
     _sbot.publish({
