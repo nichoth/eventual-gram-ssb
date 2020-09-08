@@ -117,4 +117,9 @@ can set the avatar
 * got the avatar to show next to all posts in home route
 
 
+-----------------------------------------------------------
+
+## 9-6-2020
+
+
 

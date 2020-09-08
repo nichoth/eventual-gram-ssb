@@ -6,6 +6,10 @@ body {
     }
 }
 
+button.edit {
+    transition: color 0.2s;
+}
+
 .menu {
     padding: 0.5em;
     border-bottom: 1px solid black;

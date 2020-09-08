@@ -3,8 +3,6 @@ import { html } from 'htm/preact'
 function Home (props) {
     // var { emit } = props
 
-    console.log('props', props)
-
     if (!props.posts) return null
 
     return html`<div class="route-home">
