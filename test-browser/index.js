@@ -8,7 +8,6 @@ var ssbKeys = require('ssb-keys')
 var ssbFeed = require('ssb-feed')
 var S = require('pull-stream')
 
-
 var _sbot
 var _view
 var _state
