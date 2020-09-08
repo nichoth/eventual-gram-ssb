@@ -73,22 +73,25 @@ test('a different feed', function (t) {
     var alice = ssbKeys.generate()
     var feed = ssbFeed(_sbot, alice)
 
+    // this is bad because the whoami call isn't guaranteed to happen in the
+    // correct order
     var id
     _sbot.whoami(function (err, info) {
         t.error(err)
         id = info.id
     })
 
+    // follow the second feed
     _sbot.publish({
         type: 'contact',
         contact: feed.id,
         following: true 
     }, function (err, res) {
         t.error(err, 'should not have error')
-        // console.log('res', res)
         publishAlice()
     })
 
+    // write to feed 2
     function publishAlice () {
         feed.publish({
             type: 'post',
@@ -97,11 +100,12 @@ test('a different feed', function (t) {
             t.error(err, 'should not return error')
             t.equal(res.value.content.text, 'hello world, I am alice.')
 
+            // check if msg 2 exists in feed 1
             S(
-                _sbot.createUserStream({ id: id }),
+                _sbot.messagesByType({ type: 'post' }),
                 S.collect((err, msgs) => {
                     t.error(err, 'error')
-                    var post = msgs.find(msg => msg.value.author === id)
+                    var post = msgs.find(msg => msg.value.author === feed.id)
                     t.ok(post, 'has post')
                 })
             )

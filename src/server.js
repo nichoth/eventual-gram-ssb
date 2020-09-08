@@ -99,7 +99,7 @@ function startSSB () {
         // arguments are (remote, local)
         var rpcServer = muxrpc(null, manifest)(_sbot)
         var rpcServerStream = rpcServer.createStream(function onEnd (err) {
-            console.log('rpc stream close', err)
+            if (err) console.log('rpc stream close', err)
         })
 
         S(wsStream, rpcServerStream, wsStream)
