@@ -4,6 +4,9 @@ var evs = require('../src/EVENTS')
 var Eventual = require('../src/view')
 var subscribe = require('../src/subscribe')
 var App = require('../src/app')
+var ssbKeys = require('ssb-keys')
+var ssbFeed = require('ssb-feed')
+var S = require('pull-stream')
 
 
 var _sbot
@@ -52,7 +55,7 @@ test('set profile', function (t) {
 
 test('set avatar', function (t) {
     t.plan(1)
-    var rm = _state(function onChange() {
+    var rm = _state(function onChange(state) {
         t.ok(_state().me.image, 'has a file hash')
         rm()
     })
@@ -65,9 +68,50 @@ test('set avatar', function (t) {
     })
 })
 
+test('a different feed', function (t) {
+    t.plan(6)
+    var alice = ssbKeys.generate()
+    var feed = ssbFeed(_sbot, alice)
+
+    var id
+    _sbot.whoami(function (err, info) {
+        t.error(err)
+        id = info.id
+    })
+
+    _sbot.publish({
+        type: 'contact',
+        contact: feed.id,
+        following: true 
+    }, function (err, res) {
+        t.error(err, 'should not have error')
+        // console.log('res', res)
+        publishAlice()
+    })
+
+    function publishAlice () {
+        feed.publish({
+            type: 'post',
+            text: 'hello world, I am alice.'
+        }, function (err, res) {
+            t.error(err, 'should not return error')
+            t.equal(res.value.content.text, 'hello world, I am alice.')
+
+            S(
+                _sbot.createUserStream({ id: id }),
+                S.collect((err, msgs) => {
+                    t.error(err, 'error')
+                    var post = msgs.find(msg => msg.value.author === id)
+                    t.ok(post, 'has post')
+                })
+            )
+        })
+    }
+})
+
 test('all done', function (t) {
     _sbot.close(function (err) {
-        t.error(err, 'no error')
+        t.error(err, 'no error on close')
         t.end()
     })
 })

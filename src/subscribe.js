@@ -112,10 +112,10 @@ function subscribe (bus, state, app) {
         var { id } = state.me()
         app.setAvatar({ file, id }, function (err, { imageUrl, hash }) {
             if (err) throw err
-            state.avatarUrl.set(imageUrl)
             state.me.set(xtend(state.me(), {
                 image: hash
             }))
+            state.avatarUrl.set(imageUrl)
         })
     })
 
