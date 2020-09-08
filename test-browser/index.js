@@ -68,27 +68,11 @@ test('set avatar', function (t) {
 })
 
 test('a different feed', function (t) {
-    t.plan(6)
+    t.plan(3)
     var alice = ssbKeys.generate()
     var feed = ssbFeed(_sbot, alice)
 
-    // this is bad because the whoami call isn't guaranteed to happen in the
-    // correct order
-    // var id
-    // _sbot.whoami(function (err, info) {
-    //     t.error(err)
-    //     id = info.id
-    // })
-
-    // follow the second feed
-    _sbot.publish({
-        type: 'contact',
-        contact: feed.id,
-        following: true 
-    }, function (err, res) {
-        t.error(err, 'should not have error')
-        publishAlice()
-    })
+    publishAlice()
 
     // write to feed 2
     function publishAlice () {
@@ -97,7 +81,6 @@ test('a different feed', function (t) {
             text: 'hello world, I am alice.'
         }, function (err, res) {
             t.error(err, 'should not return error')
-            t.equal(res.value.content.text, 'hello world, I am alice.')
 
             // check if msg 2 exists in feed 1
             S(
