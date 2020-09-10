@@ -15,6 +15,9 @@ function Shell (props) {
                 <${AvatarInput} emit=${emit} avatarUrl=${avatarUrl} />
                 <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
             </div>
+
+            <a className="pubs-route" href="/pubs" title="pubs">pubs</a>
+
             <a className="new-post-icon" href="/new" title="new">+</a>
         </div>
 

@@ -121,8 +121,15 @@ can set the avatar
 
 ## 9-6-2020
 
-Make a test that writes to a new feed.
+[x] Make a test that writes to a new feed.
 
 Need to find out how to 'replicate' with another feed
+
+---------------------------------------------------------------
+
+## 9-10-2020
+
+* [ ] make a route for pubs
+
 
 

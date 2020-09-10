@@ -3,6 +3,7 @@ var Home = require('./home')
 var New = require('./new')
 var createFeedRoute = require('./feed')
 var createPostView = require('./post')
+var Pubs = require('./pubs')
 
 function _Router () {
     var router = Router()
@@ -14,7 +15,12 @@ function _Router () {
         return New
     })
 
+    router.addRoute('/pubs', () => {
+        return Pubs
+    })
+
     // encoded percent sign
+    // post route
     router.addRoute('/%25*', function (match) {
         var { splats } = match
         // var postId = splats[0]
@@ -24,6 +30,7 @@ function _Router () {
         return createPostView(postId)
     })
 
+    // user route
     router.addRoute('/*', (match) => {
         var { splats } = match
         var feedId = splats[0]
