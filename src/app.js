@@ -8,6 +8,25 @@ var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
 
 function App (sbot) {
+    // S(
+    //     sbot.messagesByType({ type: 'contact' }),
+    //     S.collect(function (err, msgs) {
+    //         if (err) return console.log('errrrrr', err)
+    //         console.log('contact msgs', msgs)
+    //     })
+    // )
+
+
+    function getPubs (cb) {
+        S(
+            sbot.messagesByType({ type: 'pub' }),
+            S.collect(function (err, msgs) {
+                if (err) return cb(err)
+                cb(null, msgs)
+            })
+        )
+    }
+
     return {
         getProfile,
         getProfileById,
@@ -17,8 +36,14 @@ function App (sbot) {
         newPost,
         messages,
         getUserPosts,
-        setAvatar
+        setAvatar,
+        joinPub,
+        getPubs
         // getAvatarById
+    }
+
+    function joinPub (inviteCode, cb) {
+        sbot.invite.accept(inviteCode, cb)
     }
 
     function newPost ({ image, text }, cb) {

@@ -119,6 +119,20 @@ function subscribe (bus, state, app) {
         })
     })
 
+    bus.on(evs.pub.join, function (invite) {
+        console.log('join a pub', invite)
+        app.joinPub(invite, function (err) {
+            if (err) throw err
+            console.log('pub joined', err)
+        })
+    })
+
+    bus.once(evs.route.pubs, function (ev) {
+        app.getPubs(function (err, pubs) {
+            console.log('got pubs', err, pubs)
+        })
+    })
+
 }
 
 module.exports = subscribe

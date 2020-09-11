@@ -129,7 +129,8 @@ Need to find out how to 'replicate' with another feed
 
 ## 9-10-2020
 
-* [ ] make a route for pubs
+* [x] make a route for pubs
+* [x] just need an input that takes an invite code
 
-
+sbot automatically adds the messages `pub` and `contact` it seems. Don't need to write them yourself
 

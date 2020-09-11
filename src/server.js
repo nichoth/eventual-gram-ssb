@@ -9,7 +9,8 @@ var home = require('user-home')
 var path = require('path')
 var ssbKeys = require('ssb-keys')
 var ssbConfigInject = require('ssb-config/inject')
-var caps = require('./caps.json')
+// var caps = require('./caps.json')
+var caps = require('ssb-caps')
 var manifest = require('./manifest.json')
 var WS_PORT = process.env.WS_PORT || 8000
 
@@ -70,7 +71,7 @@ function startSSB () {
         .use(require('ssb-backlinks'))
         .use(require('ssb-blobs'))
         .use(require('ssb-serve-blobs'))
-        // .use(require('ssb-invite'))
+        .use(require('ssb-invite'))
         // .use(require('ssb-friends'))
         .call(null, config)
 
