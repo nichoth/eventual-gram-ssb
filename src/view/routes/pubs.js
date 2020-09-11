@@ -13,7 +13,7 @@ function pubsRoute ({ emit, pubs }) {
             emit(evs.pub.join, invite)
         }}>
 
-            <${FormPart} label="Invite code" name="invite" class="pubs"/>
+            <${FormInput} label="Invite code" name="invite" class="pubs"/>
 
             <button type="submit">Join pub</button>
         </form>
@@ -26,7 +26,7 @@ function pubsRoute ({ emit, pubs }) {
     </div>`
 }
 
-function FormPart (props) {
+function FormInput (props) {
     var { label, name } = props
     return html`<div class="form-part ${props.class}">
         <label for="${name}">${label}</label>
