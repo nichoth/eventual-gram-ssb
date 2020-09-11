@@ -120,15 +120,17 @@ function subscribe (bus, state, app) {
     })
 
     bus.on(evs.pub.join, function (invite) {
-        console.log('join a pub', invite)
+        console.log('start joining a pub', invite)
         app.joinPub(invite, function (err) {
             if (err) throw err
             console.log('pub joined', err)
         })
     })
 
-    bus.once(evs.route.pubs, function (ev) {
+    // @TODO should not use .once
+    bus.once(evs.route.pubs, function () {
         app.getPubs(function (err, pubs) {
+            state.pubs.list.set(pubs)
             console.log('got pubs', err, pubs)
         })
     })

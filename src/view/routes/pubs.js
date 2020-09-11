@@ -20,7 +20,7 @@ function pubsRoute ({ emit, pubs }) {
 
         <ul>
             ${pubs.list.map(function (pub) {
-                return html`<li>pub</li>`
+                return html`<li>${pub.value.content.address.host}</li>`
             })}
         </ul>
     </div>`
