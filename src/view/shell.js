@@ -16,9 +16,11 @@ function Shell (props) {
                 <${EditableField} ...${me} onSave=${emit(evs.profile.save)} />
             </div>
 
-            <a className="pubs-route" href="/pubs" title="pubs">pubs</a>
+            <a class="home-route" href="/" title="home">home</a>
 
-            <a className="new-post-icon" href="/new" title="new">+</a>
+            <a class="pubs-route" href="/pubs" title="pubs">pubs</a>
+
+            <a class="new-post-icon" href="/new" title="new">+</a>
         </div>
 
         ${props.children}
