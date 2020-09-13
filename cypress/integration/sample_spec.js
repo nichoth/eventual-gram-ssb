@@ -1,6 +1,6 @@
 var ssbKeys = require('ssb-keys')
 var ssbFeed = require('ssb-feed')
-var start = require("../../src/start")
+var start = require('../../src/start')
 var S = require('pull-stream')
 
 // describe('My First Test', () => {
