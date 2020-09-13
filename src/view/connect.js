@@ -6,10 +6,10 @@ var { h, Component } = require('preact')
 var Bus = require('@nichoth/events')
 var xtend = require('xtend')
 var catchRoutes = require('@nichoth/catch-routes')
-var Router = require('./routes')
+// var Router = require('./routes')
 
 function connect (state, View) {
-    var router = Router()
+    // var router = Router()
     var bus = Bus({ memo: true })
 
     function emit () {
