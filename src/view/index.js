@@ -1,7 +1,7 @@
 import { render } from 'preact'
 import { html } from 'htm/preact'
-var connect = require('./connect')
 var State = require('../state')
+var connect = require('./connect')
 var Shell = require('./shell')
 var Router = require('./routes')
 
@@ -12,7 +12,12 @@ function Ev () {
     var View = function (props) {
         var { emit } = props
         var match = router.match(props.route.pathname)
-        var routeView = match ? match.action(match) : null
+        var route = match ? match.action(match) : null
+        var routeView = route ? route.view : null
+        // var events = (route.events || [])
+        // events.forEach(ev => {
+        //     emit(ev, null)
+        // })
 
         return html`<div>
             <${Shell} emit=${emit} ...${props}>

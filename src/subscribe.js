@@ -131,7 +131,6 @@ function subscribe (bus, state, app) {
     bus.once(evs.route.pubs, function () {
         app.getPubs(function (err, pubs) {
             state.pubs.list.set(pubs)
-            console.log('got pubs', err, pubs)
         })
     })
 

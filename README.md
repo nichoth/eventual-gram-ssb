@@ -134,3 +134,10 @@ Need to find out how to 'replicate' with another feed
 
 sbot automatically adds the messages `pub` and `contact` it seems. Don't need to write them yourself
 
+------------------------------------------------
+
+## 9-12-2020
+
+
+
+

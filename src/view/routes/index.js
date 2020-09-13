@@ -4,19 +4,20 @@ var New = require('./new')
 var createFeedRoute = require('./feed')
 var createPostView = require('./post')
 var Pubs = require('./pubs')
+var evs = require('../../EVENTS')
 
 function _Router () {
     var router = Router()
     router.addRoute('/', function (match) {
-        return Home
+        return { view: Home }
     })
 
     router.addRoute('/new', () => {
-        return New
+        return { view: New }
     })
 
     router.addRoute('/pubs', () => {
-        return Pubs
+        return { view: Pubs, events: [evs.route.pubs] }
     })
 
     // encoded percent sign
@@ -27,7 +28,7 @@ function _Router () {
         console.log('splats', splats)
         var postId = '%' + decodeURIComponent(splats[0])
         console.log('***postId***', postId)
-        return createPostView(postId)
+        return { view: createPostView(postId) }
     })
 
     // user route
@@ -35,7 +36,7 @@ function _Router () {
         var { splats } = match
         var feedId = splats[0]
         console.log('**in route**', feedId)
-        return createFeedRoute(feedId)
+        return { view: createFeedRoute(feedId) }
     })
 
     return router

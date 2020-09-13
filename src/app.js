@@ -8,14 +8,22 @@ var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
 
 function App (sbot) {
-    // S(
-    //     sbot.messagesByType({ type: 'contact' }),
-    //     S.collect(function (err, msgs) {
-    //         if (err) return console.log('errrrrr', err)
-    //         console.log('contact msgs', msgs)
-    //     })
-    // )
 
+    gossip()
+
+    function gossip (cb) {
+        console.log('gossip', sbot.gossip)
+
+        // var peers = sbot.gossip.peers()
+        sbot.gossip.peers((err, res) => console.log('peers', err, res))
+
+        S(
+            sbot.gossip.changes(),
+            S.drain(function (ev) {
+                console.log('drain', ev)
+            })
+        )
+    }
 
     function getPubs (cb) {
         S(

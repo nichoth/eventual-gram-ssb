@@ -14,6 +14,6 @@ start(function (err, { sbot }) {
     subscribe(bus, state, app)
 
     bus.emit(evs.app.start, null)
-})
 
-Eventual.createElement(view, document.getElementById('content'))
+    Eventual.createElement(view, document.getElementById('content'))
+})
