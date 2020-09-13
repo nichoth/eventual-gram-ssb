@@ -138,6 +138,29 @@ sbot automatically adds the messages `pub` and `contact` it seems. Don't need to
 
 ## 9-12-2020
 
+Hoping that cypress uses an electron browser by default b/c then I can use ssb-keys to create a second feed, like int the test-browser command.
+
+cypress
+> Try running the tests in the examples folder or add your own test files to cypress/integration.
+
+> `describe` and it come from Mocha
+> `expect` comes from Chai
+
+> A solid test generally covers 3 phases:
+Set up the application state.
+Take an action.
+Make an assertion about the resulting application state.
+
+
+[eslint plugin](https://github.com/cypress-io/eslint-plugin-cypress)
+
+> Don’t try to start a web server from within Cypress scripts. Read about best practices here.
+
+```js
+{
+  "baseUrl": "http://localhost:8080"
+}
+```
 
 
 

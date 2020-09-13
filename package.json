@@ -22,7 +22,8 @@
     "sass-watch": "node-sass --watch src/view/style/main.scss --source-map-embed public/style.css",
     "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
-    "lint": "eslint . --config .eslintrc"
+    "lint": "eslint . --config .eslintrc",
+    "cy:open": "concurrently --kill-others \"npm run start\" \"cypress open\""
   },
   "keywords": [],
   "author": "Nick Thomas <nichoth@gmail.com>",
@@ -69,6 +70,7 @@
     "budo": "^11.6.4",
     "bundle-collapser": "^1.4.0",
     "concurrently": "^5.2.0",
+    "cypress": "^5.1.0",
     "electron": "^9.2.1",
     "electron-builder": "^22.8.0",
     "envify": "^4.1.0",

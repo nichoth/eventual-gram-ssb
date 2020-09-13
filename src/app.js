@@ -14,7 +14,8 @@ function App (sbot) {
     function gossip (cb) {
         console.log('gossip', sbot.gossip)
 
-        // var peers = sbot.gossip.peers()
+        // merge the peer.state.connected value with changes from
+        // gossip.changes
         sbot.gossip.peers((err, res) => console.log('peers', err, res))
 
         S(
@@ -25,11 +26,14 @@ function App (sbot) {
         )
     }
 
+    // can use msgs.pub.value.content.address.host to match this with
+    // peers[0].host, b/c the `peers` call has the connected state
     function getPubs (cb) {
         S(
             sbot.messagesByType({ type: 'pub' }),
             S.collect(function (err, msgs) {
                 if (err) return cb(err)
+                console.log('pubs here', msgs)
                 cb(null, msgs)
             })
         )

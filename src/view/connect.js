@@ -20,22 +20,7 @@ function connect (state, View) {
 
     function catcher (parsedUrl) {
         state.route.set(parsedUrl)
-    //     var match = router.match(parsedUrl.pathname)
-    //     var route = match ? match.action(match) : null
-        // var routeView = route ? route.view : null
-        // var events = (route.events || [])
-        // console.log('in here', events)
-        // events.forEach(ev => {
-        //     emit(ev, {})
-        // })
     }
-
-    // we're calling this once initially b/c the routes don't work very well
-    // var parsedUrl = {
-    //     pathname: window.location.pathname
-    // }
-    // console.log('pathname', parsedUrl.pathname)
-    // catcher(parsedUrl)
 
     class Connector extends Component {
         constructor(props) {

@@ -192,11 +192,25 @@ ul.feed {
 
 .pubs-route {
     padding: 1em;
+
+    .form-part {
+        margin-bottom: 0.5em;
+    }
+
+    .pubs-list {
+        list-style: none;
+        padding: 0;
+        li.pub {
+            margin-bottom: 0.5em;
+            border: 1px solid aliceblue;
+            padding: 1em;
+        }
+    }
 }
 
 .pubs {
     #invite {
-        width: 72em;
+        width: 94vw;
         padding: 0.8em;
     }
 }

@@ -2,6 +2,7 @@ import { html } from 'htm/preact'
 var evs = require('../../EVENTS')
 
 function pubsRoute ({ emit, pubs }) {
+    // @TODO should not call this on every render
     emit(evs.route.pubs, null)
 
     return html`<div class="pubs-route">
@@ -18,9 +19,11 @@ function pubsRoute ({ emit, pubs }) {
             <button type="submit">Join pub</button>
         </form>
 
-        <ul>
+        <ul class="pubs-list">
             ${pubs.list.map(function (pub) {
-                return html`<li>${pub.value.content.address.host}</li>`
+                return html`<li class="pub">
+                    ${pub.value.content.address.host}
+                </li>`
             })}
         </ul>
     </div>`
