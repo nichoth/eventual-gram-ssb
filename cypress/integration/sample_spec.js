@@ -41,7 +41,7 @@ describe('The app', () => {
     })
 })
 
-// how to get sbot in here?
+// Need to follow the feed2 and see if the image shows on the home page
 describe('a second feed', () => {
     it('should publish', () => {
         start(function (err, { sbot }) {
