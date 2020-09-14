@@ -42,6 +42,7 @@ describe('The app', () => {
 })
 
 // Need to follow the feed2 and see if the image shows on the home page
+// img needs to be a file like in the browser
 describe('a second feed', () => {
     it('should publish', () => {
         start(function (err, { sbot }) {
@@ -69,6 +70,10 @@ describe('a second feed', () => {
                                 return msg.value.author === feed.id
                             })
                             expect(post).to.exist
+
+                            _sbot.close(function (err) {
+                                expect(err).to.not.exist
+                            })
                         })
                     )
                 })

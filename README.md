@@ -162,5 +162,7 @@ Make an assertion about the resulting application state.
 }
 ```
 
+Attaching an `sbot` to the window doesn't work. Maybe cypress runs in a separate processes from the browser app?
+
 
 
