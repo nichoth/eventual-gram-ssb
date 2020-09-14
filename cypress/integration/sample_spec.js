@@ -49,6 +49,7 @@ describe('a second feed', () => {
             if (err) throw err
             var _sbot = sbot
             cy.visit('/')
+            console.log('bbbbbbbbbb', process.env.NODE_ENV)
             console.log('aaaaaaaaaaaaaaaaa')
             console.log('sboooooot', _sbot)
             var alice = ssbKeys.generate()
@@ -71,8 +72,9 @@ describe('a second feed', () => {
                             })
                             expect(post).to.exist
 
-                            _sbot.close(function (err) {
-                                expect(err).to.not.exist
+                            _sbot.close(function (end) {
+                                var err = (end && end !== true)
+                                expect(err).to.be.false
                             })
                         })
                     )

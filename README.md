@@ -163,11 +163,12 @@ Make an assertion about the resulting application state.
 ```
 
 --------------------------------------------------
+
 ## 9 - 14 - 2020
 
 Attaching an `sbot` to the window doesn't work. Maybe cypress runs in a separate processes from the browser app?
 
-Need to set env variables in the cypress tests. `NODE_ENV` should be `test`.
+[ ] Need to set env variables in the cypress tests. `NODE_ENV` should be `test`.
 
 
 
