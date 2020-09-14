@@ -12,7 +12,7 @@
     "dist": "electron-builder -c.snap.publish=github --mac --windows --linux",
     "release": "electron-builder --mac --windows --linux --publish always",
     "tron": "env $(cat .env | xargs) electron .",
-    "start": "npm run build-css && concurrently --kill-others \"node src/server.js\" \"npm run serve\" \"npm run sass-watch\"",
+    "open": "npm run build-css && concurrently --kill-others \"node src/server.js\" \"npm run serve\" \"npm run sass-watch\"",
     "serve": "budo index.js:bundle.js --pushstate --dir=public --live -- -p esmify -t babelify -t [ envify --NODE_ENV development ] -t uglifyify -dv",
     "build": "npm run build-js && npm run build-css",
     "build-js": "browserify -p esmify -p bundle-collapser/plugin index.js -t [ envify --NODE_ENV production ] -t babelify -g unassertify -g uglifyify -mc > public/bundle.js",
@@ -23,7 +23,8 @@
     "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
     "lint": "eslint . --config .eslintrc",
-    "cy:open": "concurrently --kill-others \"NODE_ENV=test npm run start\" \"cypress open\""
+    "cy:open": "concurrently --kill-others \"NODE_ENV=test npm run start\" \"cypress open\"",
+    "start": "env $(cat .env | xargs) npm run open"
   },
   "keywords": [],
   "author": "Nick Thomas <nichoth@gmail.com>",

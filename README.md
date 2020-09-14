@@ -1,5 +1,29 @@
 # eventual-gram ssb
 
+Start a dev server that automatically reloads on any change
+```
+$ npm start
+```
+
+Open a test GUI
+```
+npm run cy:open
+```
+
+Run some tests with no GUI
+```
+npm run test-browser
+```
+
+Make a new electron release
+```
+npm run release
+```
+
+Open electron with the built app
+```
+npm run tron
+```
 
 
 
@@ -168,7 +192,9 @@ Make an assertion about the resulting application state.
 
 Attaching an `sbot` to the window doesn't work. Maybe cypress runs in a separate processes from the browser app?
 
-[ ] Need to set env variables in the cypress tests. `NODE_ENV` should be `test`.
+[x] Need to set env variables in the cypress tests. `NODE_ENV` should be `test`.
+
+The best part about cypress is the GUI interface. Otherwise `tape-run` is preferable. 
 
 
 
