@@ -23,7 +23,7 @@
     "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
     "lint": "eslint . --config .eslintrc",
-    "cy:open": "concurrently --kill-others \"NODE_ENV=test npm run start\" \"cypress open\"",
+    "cy:open": "concurrently --kill-others \"NODE_ENV=test npm run open\" \"cypress open\"",
     "start": "env $(cat .env | xargs) npm run open"
   },
   "keywords": [],
