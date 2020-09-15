@@ -2,6 +2,10 @@ var S = require('pull-stream')
 var wsClient = require('pull-ws/client')
 var muxrpc = require('muxrpc')
 var manifest = require('./manifest.json')
+
+// manifest for testing
+manifest.alice = { publish: 'async' }
+
 var WS_URL = 'ws://localhost:' + (process.env.WS_PORT || '8000')
 
 function connectSbot ({ onClose } = {}, cb) {

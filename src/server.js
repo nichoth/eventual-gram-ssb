@@ -14,6 +14,13 @@ var caps = require('ssb-caps')
 var manifest = require('./manifest.json')
 var WS_PORT = process.env.WS_PORT || 8000
 
+
+
+// testing
+var Feed = require('ssb-feed')
+var keysAlice = require('../keys-alice.json')
+
+
 // @TODO check if global sbot is running and use that if possible
 function startSSB () {
     // var {
@@ -47,12 +54,6 @@ function startSSB () {
 
     var opts = {}
     opts.caps = caps
-    // if (process.env.NODE_ENV === 'development') {
-    //     // opts.caps = {
-    //     //     shs: SBOT_SHS,
-    //     //     sign: SBOT_SIGN
-    //     // }
-    // }
 
     var config = ssbConfigInject(appName, opts)
     var keyPath = path.join(config.path, 'secret')
@@ -93,6 +94,17 @@ function startSSB () {
         // for electron .fork
         if (process.send) process.send('ok')
     })
+
+
+    // testing
+    _sbot.alice = Feed(_sbot, keysAlice)
+    manifest.alice = {
+        publish: 'async'
+    }
+
+    console.log('_sbot.alice', _sbot.alice)
+
+
 
     ws({ server }, function onConnection (wsStream) {
         console.log('got ws connection')

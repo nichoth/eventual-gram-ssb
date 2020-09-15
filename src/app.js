@@ -8,11 +8,52 @@ var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
 
 
-
-
-
 function App (sbot) {
     gossip()
+
+
+
+    // testing
+    window.ev = window.ev || {}
+    window.ev.alice = sbot.alice
+    window.ev.alice._publish = function () {
+        document.createElement('canvas').toBlob(function (blob) {
+            var file = new File([blob], 'canvas.jpg', { type: blob.type })
+            var image = file
+            var text = 'foo'
+
+            var hasher = createHash('sha256')
+
+
+            S(
+                fileReader(image),
+                // fileReaderStream(image),
+                hasher,
+                sbot.blobs.add(function (err, _hash) {
+                    if (err) throw err
+                    var hash = '&' + hasher.digest
+                    
+                    window.ev.alice.publish({
+                        type: ts.post,
+                        text: text || '',
+                        mentions: [{
+                            link: hash,        // the hash given by blobs.add
+                        //   name: 'hello.txt', // optional, but recommended
+                        //   size: 12,          // optional, but recommended
+                        //   type: 'text/plain' // optional, but recommended
+                        }]
+                    }, function (err, res) {
+                        if (err) return console.log('err', err)
+                        console.log('res', res)
+                    })
+                })
+            )
+        }, 'image/jpeg')
+    }
+
+
+
+
 
     function gossip (cb) {
         console.log('gossip', sbot.gossip)
