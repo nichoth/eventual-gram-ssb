@@ -7,8 +7,11 @@ var toURL = require('ssb-serve-blobs/id-to-url')
 var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
 
-function App (sbot) {
 
+
+
+
+function App (sbot) {
     gossip()
 
     function gossip (cb) {

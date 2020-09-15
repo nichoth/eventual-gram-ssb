@@ -2,10 +2,16 @@ var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
 
+// for testing
+window.ev = window.ev || {}
+window.ev.evs = evs
+
+
+
 function subscribe (bus, state, app) {
     bus.on('*', (evName, ev) => {
-        console.log('* name', evName)
-        console.log('* event', ev)
+        console.log('* ev name', evName)
+        console.log('* ev data', ev)
     })
     
     bus.on(evs.ok.ok, ev => {
@@ -93,15 +99,6 @@ function subscribe (bus, state, app) {
             state.feeds.set(feeds)
         })
     })
-
-    // bus.on(evs.people.getAvatar, function (ev) {
-    //     var { userId } = ev
-    //     // bus, state, app
-    //     app.getAvatarById(userId, function (err, msgs) {
-    //         if (err) throw err
-    //         console.log('aaaaa msgs', err, msgs)
-    //     })
-    // })
 
     bus.on(evs.profile.setAvatar, function (ev) {
         var file = ev.target.files[0]

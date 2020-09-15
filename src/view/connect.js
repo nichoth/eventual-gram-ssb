@@ -1,26 +1,25 @@
-// var React = require('react')
-// var { Component, createElement } = React
 var { h, Component } = require('preact')
-// var h = createElement
-// import { html } from 'htm/preact';
 var Bus = require('@nichoth/events')
 var xtend = require('xtend')
 var catchRoutes = require('@nichoth/catch-routes')
-// var Router = require('./routes')
 
 function connect (state, View) {
-    // var router = Router()
     var bus = Bus({ memo: true })
 
     function emit () {
         return bus.emit.apply(bus, arguments)
     }
 
-    catchRoutes(catcher)
 
-    function catcher (parsedUrl) {
+    // for testing
+    window.ev = window.ev || {}
+    window.ev.emit = emit
+
+
+
+    catchRoutes(parsedUrl => {
         state.route.set(parsedUrl)
-    }
+    })
 
     class Connector extends Component {
         constructor(props) {
