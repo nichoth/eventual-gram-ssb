@@ -86,6 +86,10 @@ function App (sbot) {
         )
     }
 
+
+
+
+
     return {
         getProfile,
         getProfileById,
@@ -145,14 +149,6 @@ function App (sbot) {
             cb(null, msg.value.content.name)
         })
     }
-
-    // function postStream () {
-    //     return sbot.messagesByType({
-    //         type: ts.post,
-    //         // reverse: true,
-    //         live: true
-    //     })
-    // }
 
     function getUrlForPost () {
         return S(
@@ -266,7 +262,7 @@ function App (sbot) {
             // Catch(),
             S.collect(function (err, values) {
                 if (err) {
-                    // just return null so the avatar shows as a broken link
+                    // return null so the avatar shows as a broken link
                     return cb(null, null)
                 }
                 var blob = new Blob(values)
@@ -325,7 +321,7 @@ function App (sbot) {
                 var imageMsg = images[images.length - 1]
 
                 cb(err, {
-                    name: nameMsg ? nameMsg.value.content.name : '',
+                    name: nameMsg ? nameMsg.value.content.name : '' + id,
                     image: _.get(imageMsg, 'value.content.image', null)
                 })
             })

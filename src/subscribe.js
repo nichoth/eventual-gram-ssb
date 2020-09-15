@@ -51,7 +51,9 @@ function subscribe (bus, state, app) {
 
             var acc = {}
             authorIds.forEach(function (id) {
+                console.log('getting id', id)
                 app.getProfileById(id, function (err, person) {
+                    console.log('got profile', err, person)
                     if (err) return next(err)
                     var { name, image } = person
                     app.getUrlForHash(image, (err, imgUrl) => {
