@@ -103,8 +103,9 @@ test('a different feed', function (t) {
 })
 
 test('post2 shows on the home page', function (t) {
-    // attach to window
-    // fn that posts from feed2
+    // attach to window a fn that posts from feed2
+    // so you can visually look for the post
+    console.log('app', _app)
 })
 
 test('all done', function (t) {
