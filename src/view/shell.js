@@ -5,9 +5,7 @@ var evs = require('../EVENTS')
 function Shell (props) {
     var { emit } = props
     var { avatarUrl, me } = props
-    console.log('props', props)
-
-    // <img class="avatar" src="${avatarUrl}" />
+    console.log('props in shell', props)
 
     return html`<div class="shell">
         <div class="menu">

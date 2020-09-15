@@ -193,6 +193,7 @@ Make an assertion about the resulting application state.
 Attaching an `sbot` to the window doesn't work. Maybe cypress runs in a separate processes from the browser app?
 
 [x] Need to set env variables in the cypress tests. `NODE_ENV` should be `test`.
+[ ] need to make a post with an image
 
 The best part about cypress is the GUI interface. Otherwise `tape-run` is preferable. 
 
