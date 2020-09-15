@@ -19,7 +19,6 @@ function connect (state, View) {
     catchRoutes(catcher)
 
     function catcher (parsedUrl) {
-        console.log('in here', parsedUrl)
         state.route.set(parsedUrl)
     }
 

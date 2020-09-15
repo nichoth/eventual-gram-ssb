@@ -58,6 +58,8 @@ function App (sbot) {
         sbot.invite.accept(inviteCode, cb)
     }
 
+    // could pass in an sbot here,
+    // use the passed in one first, then the main once
     function newPost ({ image, text }, cb) {
         var hasher = createHash('sha256')
 
@@ -125,7 +127,10 @@ function App (sbot) {
 
     function messages (cb) {
         S(
-            sbot.messagesByType({ type: ts.post }),
+            sbot.messagesByType({
+                type: ts.post,
+                reverse: true
+            }),
             getUrlForPost(),
             S.collect(function (err, data) {
                 cb(err, data)

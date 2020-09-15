@@ -10,7 +10,6 @@ function Ev () {
     var router = Router()
 
     var View = function (props) {
-        console.log('index props', props)
         var { emit } = props
         var match = router.match(props.route.pathname)
         var route = match ? match.action(match) : null

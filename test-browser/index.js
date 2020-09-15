@@ -7,14 +7,17 @@ var App = require('../src/app')
 var ssbKeys = require('ssb-keys')
 var ssbFeed = require('ssb-feed')
 var S = require('pull-stream')
+var ts = require('../src/types')
 
 var _sbot
 var _view
 var _state
+var _app
 test('doesnt explode', function (t) {
     var { bus, state } = Eventual()
     start(function (err, { sbot }) {
         var app = App(sbot)
+        _app = app
         subscribe(bus, state, app)
         t.error(err)
         t.ok(sbot, 'return sbot')
@@ -74,25 +77,34 @@ test('a different feed', function (t) {
 
     publishAlice()
 
+    // need to put a blob in the store
+    // put the blobs hash in the message mentions
+
     // write to feed 2
     function publishAlice () {
         feed.publish({
-            type: 'post',
+            type: ts.post,
+            // mentions: [{ link: hash }],
             text: 'hello world, I am alice.'
         }, function (err, res) {
             t.error(err, 'should not return error')
 
             // check if msg 2 exists in feed 1
             S(
-                _sbot.messagesByType({ type: 'post' }),
+                _sbot.messagesByType({ type: ts.post }),
                 S.collect((err, msgs) => {
                     t.error(err, 'error')
                     var post = msgs.find(msg => msg.value.author === feed.id)
-                    t.ok(post, 'has post')
+                    t.ok(post, 'has post2 in feed1')
                 })
             )
         })
     }
+})
+
+test('post2 shows on the home page', function (t) {
+    // attach to window
+    // fn that posts from feed2
 })
 
 test('all done', function (t) {

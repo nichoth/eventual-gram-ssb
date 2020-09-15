@@ -54,16 +54,31 @@ describe('The app', () => {
 
 describe('a new post', () => {
     it('makes a new post', () => {
-        cy.visit('/new')
+
+        // publish blob without using the UI b/c of bug
+        document.createElement('canvas').toBlob(function (blob) {
+            var file = new File([blob], 'canvas.jpg', { type: blob.type })
+            var image = file
+            var text = 'hello i am bob'
+
+            // todo -- get the hash of the file,
+            // call sbot.blobs.add
+            _sbot.publish(evs.post.new, {
+                type: ts.post,
+                mentions: [{ link: hash }],
+                text
+            }, (err, res) => {
+
+            })
+        }, 'image/jpeg')
+
+
+
+
+        // bug -- when you go to this link
+        // cy.visit('/new')
             // .get('a.new-post-icon')
             // .click()
-
-        // var rm = _state.posts(function onChange (posts) {
-        //     expect(posts[0]).to.exist
-        //     expect(posts[0].value.content.mentions[0]).to.exist
-        //     expect(posts[0].value.content.text).to.equal('foo')
-        //     rm()
-        // })
 
         // cy.get('.new-post-icon').click();
         // cy.get('#file-input').click
