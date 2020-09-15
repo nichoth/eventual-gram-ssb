@@ -6,6 +6,9 @@ var toURL = require('ssb-serve-blobs/id-to-url')
 // var after = require('after')
 var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
+var _ = {
+    get: require('lodash/get')
+}
 
 
 function App (sbot) {
@@ -263,7 +266,8 @@ function App (sbot) {
             // Catch(),
             S.collect(function (err, values) {
                 if (err) {
-                    return cb(err)
+                    // just return null so the avatar shows as a broken link
+                    return cb(null, null)
                 }
                 var blob = new Blob(values)
                 var imageUrl = URL.createObjectURL(blob)
@@ -322,7 +326,7 @@ function App (sbot) {
 
                 cb(err, {
                     name: nameMsg ? nameMsg.value.content.name : '',
-                    image: imageMsg.value.content.image
+                    image: _.get(imageMsg, 'value.content.image', null)
                 })
             })
         )
