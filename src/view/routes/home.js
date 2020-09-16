@@ -7,6 +7,8 @@ function Home (props) {
 
     if (!props.posts) return null
 
+    var { followed } = props
+
     return html`<div class="route-home">
         <ul class="post-list">
             ${props.posts.map(post => {
@@ -18,6 +20,10 @@ function Home (props) {
                 var authorId = post.value.author
                 var author = (props.people[authorId] || {})
                 var postAvatar = (author.imgUrl || '')
+
+                var isFollowing = followed.find(followedId => {
+                    return followedId === authorId
+                })
 
                 return html`<li class="post">
                     <a href=${encodeURI('/' + post.key)}>
@@ -42,7 +48,7 @@ function Home (props) {
                         </div>
 
                         <${FollowIcon} authorId=${authorId}
-                            id=${props.me.id}
+                            id=${props.me.id} isFollowing=${isFollowing}
                         />
                     </div>
                 </li>`
@@ -54,9 +60,19 @@ function Home (props) {
 }
 
 function FollowIcon (props) {
-    var { authorId, id } = props
+    var { authorId, id, isFollowing, onFollow } = props
+    // if it's your own message
     if (authorId === id) return null
-    return html`<div class="follow-icon">*</div>`
+    if (isFollowing) {
+        return html`<div class="follow-icon">*</div>`
+    }
+
+    return html`<div class="follow-icon">
+        <button onClick=${ev => {
+            ev.preventDefault()
+            onFollow(authorId)
+        }}>*</button>
+    </div>`
 }
 
 module.exports = Home

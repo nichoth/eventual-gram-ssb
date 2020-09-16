@@ -119,6 +119,17 @@ button.edit {
         font-size: 3em;
         width: 100%;
         text-align: right;
+        & button {
+            font-size: 1em;
+            background-color: transparent;
+            border: none;
+            font-family: initial;
+            color: blue;
+            transition: color 0.2s;
+            &:hover {
+                color: cyan;
+            }
+        }
     }
 }
 
