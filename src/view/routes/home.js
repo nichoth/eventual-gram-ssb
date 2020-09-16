@@ -5,6 +5,8 @@ function Home (props) {
 
     if (!props.posts) return null
 
+    console.log('props here', props)
+
     return html`<div class="route-home">
         <ul class="post-list">
             ${props.posts.map(post => {
@@ -16,6 +18,8 @@ function Home (props) {
                 var authorId = post.value.author
                 var author = (props.people[authorId] || {})
                 var postAvatar = (author.imgUrl || '')
+
+                console.log('post', post)
 
                 return html`<li class="post">
                     <a href=${encodeURI('/' + post.key)}>
@@ -38,15 +42,25 @@ function Home (props) {
                                 <a href="/${authorId}">${author.name}</a>
                             </div>
                         </div>
-                        <div class="follow-icon">
-                            *
-                        </div>
+
+                        <${FollowIcon} authorId=${authorId}
+                            id=${props.me.id}
+                        />
                     </div>
                 </li>`
 
             })}
         </ul>
 
+    </div>`
+}
+
+function FollowIcon (props) {
+    var { authorId, id } = props
+    if (authorId === id) return null
+
+    return html`<div class="follow-icon">
+        *
     </div>`
 }
 
