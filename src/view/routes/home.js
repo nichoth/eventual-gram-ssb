@@ -58,10 +58,7 @@ function Home (props) {
 function FollowIcon (props) {
     var { authorId, id } = props
     if (authorId === id) return null
-
-    return html`<div class="follow-icon">
-        *
-    </div>`
+    return html`<div class="follow-icon">*</div>`
 }
 
 module.exports = Home

@@ -201,7 +201,7 @@ The best part about cypress is the GUI interface. Otherwise `tape-run` is prefer
 
 ------------------------------------------------------------
 
-## 9-25-2020
+## 9-15-2020
 
 Testing multiple feeds.
 
@@ -209,6 +209,12 @@ need a function on window that posts from feed 2
 
 Should have a button or something that lets you 'follow' the person.
 
+
+
+--------------------------------------------------------
+
+test from another feed
+call `window.ev.alice._publish`. `alice.publish` is a different method that is defined server-side. `_publish` is the one we have made client-side
 
 
 
