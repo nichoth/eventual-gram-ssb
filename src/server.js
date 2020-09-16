@@ -73,7 +73,7 @@ function startSSB () {
         .use(require('ssb-blobs'))
         .use(require('ssb-serve-blobs'))
         .use(require('ssb-invite'))
-        // .use(require('ssb-friends'))
+        .use(require('ssb-friends'))
         .call(null, config)
 
     // .use(require('ssb-private'))
@@ -102,7 +102,6 @@ function startSSB () {
         publish: 'async'
     }
 
-    console.log('_sbot.alice', _sbot.alice)
 
 
 

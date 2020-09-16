@@ -217,4 +217,11 @@ test from another feed
 call `window.ev.alice._publish`. `alice.publish` is a different method that is defined server-side. `_publish` is the one we have made client-side
 
 
+-----------------------------------------------------
+
+## 9-16-2020
+
+Need to have a list of people you are already following. I don't see a method in ssb that does exactly that though.
+
+
 

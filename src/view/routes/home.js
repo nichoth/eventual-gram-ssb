@@ -3,9 +3,9 @@ import { html } from 'htm/preact'
 function Home (props) {
     // var { emit } = props
 
-    if (!props.posts) return null
+    console.log('props in home', props)
 
-    console.log('props here', props)
+    if (!props.posts) return null
 
     return html`<div class="route-home">
         <ul class="post-list">
@@ -18,8 +18,6 @@ function Home (props) {
                 var authorId = post.value.author
                 var author = (props.people[authorId] || {})
                 var postAvatar = (author.imgUrl || '')
-
-                console.log('post', post)
 
                 return html`<li class="post">
                     <a href=${encodeURI('/' + post.key)}>

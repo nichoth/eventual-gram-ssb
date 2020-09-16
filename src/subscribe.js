@@ -1,6 +1,7 @@
 var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
+var S = require('pull-stream')
 
 // for testing
 window.ev = window.ev || {}
@@ -31,6 +32,9 @@ function subscribe (bus, state, app) {
                 if (err) return console.log('err profile', err)
                 state.avatarUrl.set(url)
                 state.me.set(profile)
+
+                // testing
+                getFollows()
             })
         })
 
@@ -51,9 +55,7 @@ function subscribe (bus, state, app) {
 
             var acc = {}
             authorIds.forEach(function (id) {
-                console.log('getting id', id)
                 app.getProfileById(id, function (err, person) {
-                    console.log('got profile', err, person)
                     if (err) return next(err)
                     var { name, image } = person
                     app.getUrlForHash(image, (err, imgUrl) => {
@@ -68,7 +70,24 @@ function subscribe (bus, state, app) {
             state.posts.set(posts)
         })
 
-        // app.liveUpdates(state)
+
+        // testing
+        function getFollows () {
+            // we don't use S.collect b/c the stream never finishes
+            S(
+                app.contacts(),
+                S.drain(function (msg) {
+                    var fromMe = msg.value.author === state.me().id
+                    if (!fromMe) return
+                    console.log('from me', msg)
+                    var followed = msg.value.content.contact
+                    console.log('followed', followed)
+                    var list = state.followed()
+                    list.unshift(followed)
+                    state.followed.set(list)
+                })
+            )
+        }
     })
 
     bus.on(evs.profile.save, function (newName) {

@@ -12,9 +12,6 @@ var _ = {
 
 
 function App (sbot) {
-    gossip()
-
-
 
     // testing ----------------------------------
     window.ev = window.ev || {}
@@ -59,18 +56,16 @@ function App (sbot) {
 
 
     function gossip (cb) {
-        console.log('gossip', sbot.gossip)
-
         // merge the peer.state.connected value with changes from
         // gossip.changes
-        sbot.gossip.peers((err, res) => console.log('peers', err, res))
+        // sbot.gossip.peers((err, res) => console.log('peers', err, res))
 
-        S(
-            sbot.gossip.changes(),
-            S.drain(function (ev) {
-                console.log('drain', ev)
-            })
-        )
+        // S(
+        //     sbot.gossip.changes(),
+        //     S.drain(function (ev) {
+        //         console.log('gossip changes drain', ev)
+        //     })
+        // )
     }
 
     // can use msgs.pub.value.content.address.host to match this with
@@ -101,7 +96,9 @@ function App (sbot) {
         getUserPosts,
         setAvatar,
         joinPub,
-        getPubs
+        getPubs,
+        follows,
+        contacts
         // getAvatarById
     }
 
@@ -356,6 +353,15 @@ function App (sbot) {
                 cb(null, posts)
             })
         )
+    }
+
+    // this returns a pull stream of the friend graph
+    function follows () {
+        return sbot.friends.stream()
+    }
+
+    function contacts (cb) {
+        return sbot.messagesByType({ type: 'contact' })
     }
 }
 

@@ -8,6 +8,7 @@ function State () {
             pathname: '/'
         }),  // required
         me: observ({}),
+        followed: observ([]),
         people: observ([]),
         avatarUrl: observ(null),
         posts: observ(null),
