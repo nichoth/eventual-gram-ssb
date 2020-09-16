@@ -38,6 +38,9 @@ function Home (props) {
                                 <a href="/${authorId}">${author.name}</a>
                             </div>
                         </div>
+                        <div class="follow-icon">
+                            *
+                        </div>
                     </div>
                 </li>`
 

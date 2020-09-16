@@ -85,8 +85,7 @@ button.edit {
     margin-bottom: 2em;
 
     .post-metadata {
-        display: inline-block;
-        max-width: 82%;
+        max-width: 80%;
 
         .author {
             overflow: hidden;
@@ -95,8 +94,6 @@ button.edit {
     }
 
     img {
-        // max-height: 80%;
-        // max-width: 100%;
         width: 100%;
         height: 340px;
         object-fit: cover;
@@ -116,6 +113,13 @@ button.edit {
 
 .post-attributes {
     height: 3em;
+    display: flex;
+
+    .follow-icon {
+        font-size: 3em;
+        width: 100%;
+        text-align: right;
+    }
 }
 
 .post-avatar {

@@ -16,17 +16,16 @@ function App (sbot) {
 
 
 
-    // testing
+    // testing ----------------------------------
     window.ev = window.ev || {}
     window.ev.alice = sbot.alice
-    window.ev.alice._publish = function () {
+    window.ev.alice._publish = function (text) {
         document.createElement('canvas').toBlob(function (blob) {
             var file = new File([blob], 'canvas.jpg', { type: blob.type })
             var image = file
-            var text = 'foo'
+            text = text || 'foo'
 
             var hasher = createHash('sha256')
-
 
             S(
                 fileReader(image),
@@ -38,7 +37,7 @@ function App (sbot) {
                     
                     window.ev.alice.publish({
                         type: ts.post,
-                        text: text || '',
+                        text: text,
                         mentions: [{
                             link: hash,        // the hash given by blobs.add
                         //   name: 'hello.txt', // optional, but recommended
@@ -53,6 +52,7 @@ function App (sbot) {
             )
         }, 'image/jpeg')
     }
+    // -------------------------------------------------------
 
 
 
