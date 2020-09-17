@@ -8,7 +8,8 @@ var EVENTS = namespace({
     app: ['start'],
     post: ['new'],
     feed: ['get'],
-    pub: ['join']
+    pub: ['join'],
+    follow: ['start']
 })
 
 module.exports = EVENTS

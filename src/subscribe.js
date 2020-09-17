@@ -72,6 +72,7 @@ function subscribe (bus, state, app) {
 
 
         // testing
+        // follows are like { from: id, to: id }
         function getFollows () {
             // we don't use S.collect b/c the stream never finishes
             S(
@@ -89,6 +90,7 @@ function subscribe (bus, state, app) {
             )
         }
     })
+
 
     bus.on(evs.profile.save, function (newName) {
         console.log('new Name', newName)
@@ -150,6 +152,17 @@ function subscribe (bus, state, app) {
         app.getPubs(function (err, pubs) {
             if (err) throw err
             state.pubs.list.set(pubs)
+        })
+    })
+
+    bus.on(evs.follow.start, function ({ id }) {
+        app.follow(id, function (err, res) {
+            if (err) throw err
+            var followed = res.value.content.contact
+            console.log('now following', err, res)
+            // need to update state
+            var list = state.followed()
+            list.unshift(followed)
         })
     })
 

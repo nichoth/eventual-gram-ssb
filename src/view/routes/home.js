@@ -1,3 +1,4 @@
+var evs = require('../../EVENTS')
 import { html } from 'htm/preact'
 
 function Home (props) {
@@ -7,7 +8,7 @@ function Home (props) {
 
     if (!props.posts) return null
 
-    var { followed } = props
+    var { followed, emit } = props
 
     return html`<div class="route-home">
         <ul class="post-list">
@@ -49,6 +50,7 @@ function Home (props) {
 
                         <${FollowIcon} authorId=${authorId}
                             id=${props.me.id} isFollowing=${isFollowing}
+                            onFollow=${emit(evs.follow.start)}
                         />
                     </div>
                 </li>`
@@ -70,7 +72,7 @@ function FollowIcon (props) {
     return html`<div class="follow-icon">
         <button onClick=${ev => {
             ev.preventDefault()
-            onFollow(authorId)
+            onFollow({ id: authorId })
         }}>*</button>
     </div>`
 }

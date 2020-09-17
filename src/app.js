@@ -97,8 +97,8 @@ function App (sbot) {
         setAvatar,
         joinPub,
         getPubs,
-        follows,
-        contacts
+        contacts,
+        follow
         // getAvatarById
     }
 
@@ -355,14 +355,19 @@ function App (sbot) {
         )
     }
 
-    // this returns a pull stream of the friend graph
-    function follows () {
-        return sbot.friends.stream()
-    }
-
+    // return a pull stream of all `contact` msgs
     function contacts (cb) {
         return sbot.messagesByType({ type: 'contact' })
     }
+
+    function follow (id, cb) {
+        sbot.publish({
+            type: 'contact',
+            contact: id,
+            following: true 
+        }, cb)
+    }
+
 }
 
 module.exports = App
