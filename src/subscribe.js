@@ -31,6 +31,7 @@ function subscribe (bus, state, app) {
             S(
                 app.getFollows(id),
                 S.collect(function (err, res) {
+                    if (err) throw err
                     state.followed.set(res)
                 })
             )
@@ -82,22 +83,22 @@ function subscribe (bus, state, app) {
 
         // testing
         // follows are like { from: id, to: id }
-        function getFollows () {
-            // we don't use S.collect b/c the stream never finishes
-            S(
-                app.contacts(),
-                S.drain(function (msg) {
-                    var fromMe = msg.value.author === state.me().id
-                    if (!fromMe) return
-                    console.log('from me', msg)
-                    var followed = msg.value.content.contact
-                    console.log('followed', followed)
-                    var list = state.followed()
-                    list.unshift(followed)
-                    state.followed.set(list)
-                })
-            )
-        }
+        // function getFollows () {
+        //     // we don't use S.collect b/c the stream never finishes
+        //     S(
+        //         app.contacts(),
+        //         S.drain(function (msg) {
+        //             var fromMe = msg.value.author === state.me().id
+        //             if (!fromMe) return
+        //             console.log('from me', msg)
+        //             var followed = msg.value.content.contact
+        //             console.log('followed', followed)
+        //             var list = state.followed()
+        //             list.unshift(followed)
+        //             state.followed.set(list)
+        //         })
+        //     )
+        // }
 
 
 
