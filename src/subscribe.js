@@ -25,16 +25,24 @@ function subscribe (bus, state, app) {
         app.getProfile(function (err, profile) {
             if (err) throw err
             var hash = profile.image
+            var { id } = profile
             if (!hash) return state.me.set(profile)
 
+            S(
+                app.getFollows(id),
+                S.collect(function (err, res) {
+                    state.followed.set(res)
+                })
+            )
+
             app.getUrlForHash(hash, function (err, url) {
+                // testing
+                // getFollows()
+
                 // if (err) throw err
                 if (err) return console.log('err profile', err)
                 state.avatarUrl.set(url)
                 state.me.set(profile)
-
-                // testing
-                getFollows()
             })
         })
 
@@ -71,6 +79,7 @@ function subscribe (bus, state, app) {
         })
 
 
+
         // testing
         // follows are like { from: id, to: id }
         function getFollows () {
@@ -89,6 +98,9 @@ function subscribe (bus, state, app) {
                 })
             )
         }
+
+
+
     })
 
 

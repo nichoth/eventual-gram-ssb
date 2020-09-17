@@ -98,7 +98,8 @@ function App (sbot) {
         joinPub,
         getPubs,
         contacts,
-        follow
+        follow,
+        getFollows
         // getAvatarById
     }
 
@@ -368,6 +369,35 @@ function App (sbot) {
         }, cb)
     }
 
+    function getFollows (myId) {
+        return createFollowsStream(myId)
+
+        function createFollowsStream (id) {
+            if (!sbot.links) {
+                return S.error(new Error('missing sbot.links'))
+            }
+
+            return S(
+                sbot.links({
+                    source: id,
+                    rel: 'contact',
+                    values: true,
+                    reverse: true
+                }),
+                S.map(function (msg) {
+                    return msg && msg.value && msg.value.content
+                }),
+                S.filter(function (content) {
+                    return content && content.type === 'contact'
+                }),
+                S.unique('contact'),
+                S.filter(function (content) {
+                    return content.following === true
+                }),
+                S.map('contact')
+            )
+        }
+    }
 }
 
 module.exports = App
