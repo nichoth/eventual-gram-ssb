@@ -65,8 +65,17 @@ function FollowIcon (props) {
     var { authorId, id, isFollowing, onFollow } = props
     // if it's your own message
     if (authorId === id) return null
+
     if (isFollowing) {
-        return html`<div class="follow-icon">*</div>`
+        // return html`<div class="follow-icon">*</div>`
+        return html`<div class="follow-icon">
+            <button title="You are already following this feed"
+                onClick=${ev => ev.preventDefault()}
+                disabled=${true}
+            >
+                *
+            </button>
+        </div>`
     }
 
     return html`<div class="follow-icon">

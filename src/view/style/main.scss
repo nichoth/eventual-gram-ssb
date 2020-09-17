@@ -129,6 +129,10 @@ button.edit {
             &:hover {
                 color: cyan;
             }
+            &:disabled {
+                color: black;
+                cursor: not-allowed;
+            }
         }
     }
 }
