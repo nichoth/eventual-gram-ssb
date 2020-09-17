@@ -223,5 +223,15 @@ call `window.ev.alice._publish`. `alice.publish` is a different method that is d
 
 Need to have a list of people you are already following. I don't see a method in ssb that does exactly that though.
 
+https://handbook.scuttlebutt.nz/guides/ssb-server/tutorial -- good thing. More documentation on ssb
+
+https://scuttlebot.io/docs/social/query-the-social-graph.html -- sbot.friends example. `friends.steam` You can see who follows whom
+
+more great [help from cel](https://viewer.scuttlebot.io/%25yV5uPldfAJR6SLEMP1dwl0%2BGy7upgksf1R565DKYiFM%3D.sha256) re: how to get a list of id's that you follow
+
+Was starting to look at ways of making an sbot plugin (a materialized DB view) b/c reducing the `contact` messages at runtime was taking much too long.
+
+Looking at the [source](https://github.com/ssbc/ssb-friends) of ssb.friends shows there is another method for getting your follows that must have been added after the [docs](https://scuttlebot.io/docs/social/query-the-social-graph.html) were written. [sbot.friens.isFollowing](https://github.com/ssbc/ssb-friends#isfollowingsource-dest-cb) seems to be what we need.
+
 
 
