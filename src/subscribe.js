@@ -152,9 +152,9 @@ function subscribe (bus, state, app) {
         })
     })
 
-    bus.on(evs.pub.join, function (invite) {
-        console.log('start joining a pub', invite)
-        app.joinPub(invite, function (err) {
+    bus.on(evs.pub.join, function (inviteCode) {
+        console.log('start joining a pub', inviteCode)
+        app.joinPub(inviteCode, function (err) {
             if (err) throw err
             console.log('pub joined', err)
         })

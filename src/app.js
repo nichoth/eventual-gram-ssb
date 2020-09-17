@@ -68,6 +68,8 @@ function App (sbot) {
     //     )
     // }
 
+
+
     // can use msgs.pub.value.content.address.host to match this with
     // peers[0].host, b/c the `peers` call has the connected state
     function getPubs (cb) {

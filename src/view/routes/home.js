@@ -44,7 +44,13 @@ function Home (props) {
                                 null
                             }
                             <div class="author">
-                                <a href="/${authorId}">${author.name}</a>
+                                <a href="/${authorId}">
+                                    ${author.name}
+                                </a>
+                                ${authorId === props.me.id ?
+                                    ' (you)' :
+                                    null
+                                }
                             </div>
                         </div>
 
