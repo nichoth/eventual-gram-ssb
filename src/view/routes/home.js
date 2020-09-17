@@ -70,7 +70,7 @@ function FollowIcon (props) {
     }
 
     return html`<div class="follow-icon">
-        <button onClick=${ev => {
+        <button title="follow" onClick=${ev => {
             ev.preventDefault()
             onFollow({ id: authorId })
         }}>*</button>
