@@ -2,8 +2,10 @@ var { h, Component } = require('preact')
 var Bus = require('@nichoth/events')
 var xtend = require('xtend')
 var catchRoutes = require('@nichoth/catch-routes')
+var Router = require('./routes')
 
 function connect (state, View) {
+    var router = Router()
     var bus = Bus({ memo: true })
 
     function emit () {
@@ -19,6 +21,14 @@ function connect (state, View) {
 
     catchRoutes(parsedUrl => {
         state.route.set(parsedUrl)
+
+        // in here do the emit route events
+        var match = router.match(parsedUrl.pathname)
+        var route = match ? match.action(match) : null
+        var events = (route.events || [])
+        events.forEach(ev => {
+            emit(ev, null)
+        })
     })
 
     class Connector extends Component {

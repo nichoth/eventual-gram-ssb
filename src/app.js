@@ -72,7 +72,11 @@ function App (sbot) {
 
     // can use msgs.pub.value.content.address.host to match this with
     // peers[0].host, b/c the `peers` call has the connected state
+    // and use `sbot.gossip.changes` to keep it up to date
+
+    // *this takes too long*
     function getPubs (cb) {
+        console.log('state getting pubs')
         S(
             sbot.messagesByType({ type: 'pub' }),
             S.collect(function (err, msgs) {

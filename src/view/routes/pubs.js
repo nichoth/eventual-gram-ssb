@@ -1,9 +1,10 @@
 import { html } from 'htm/preact'
 var evs = require('../../EVENTS')
+var get = require('lodash/get')
 
 function pubsRoute ({ emit, pubs }) {
     // @TODO should not call this on every render
-    emit(evs.route.pubs, null)
+    // emit(evs.route.pubs, null)
 
     return html`<div class="pubs-route">
         pubs
@@ -22,7 +23,7 @@ function pubsRoute ({ emit, pubs }) {
         <ul class="pubs-list">
             ${pubs.list.map(function (pub) {
                 return html`<li class="pub">
-                    ${pub.value.content.address.host}
+                    ${get(pub, 'value.content.address.host', null)}
                 </li>`
             })}
         </ul>

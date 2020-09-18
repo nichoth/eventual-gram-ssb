@@ -161,7 +161,7 @@ function subscribe (bus, state, app) {
     })
 
     // @TODO should not use .once
-    bus.once(evs.route.pubs, function () {
+    bus.on(evs.route.pubs, function () {
         app.getPubs(function (err, pubs) {
             if (err) throw err
             state.pubs.list.set(pubs)
