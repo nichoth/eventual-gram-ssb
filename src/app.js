@@ -53,20 +53,20 @@ function App (sbot) {
 
 
 
+    gossip()
 
+    function gossip (cb) {
+        // merge the peer.state.connected value with changes from
+        gossip.changes
+        sbot.gossip.peers((err, res) => console.log('peers', err, res))
 
-    // function gossip (cb) {
-    //     merge the peer.state.connected value with changes from
-    //     gossip.changes
-    //     sbot.gossip.peers((err, res) => console.log('peers', err, res))
-
-    //     S(
-    //         sbot.gossip.changes(),
-    //         S.drain(function (ev) {
-    //             console.log('gossip changes drain', ev)
-    //         })
-    //     )
-    // }
+        S(
+            sbot.gossip.changes(),
+            S.drain(function (ev) {
+                console.log('gossip changes drain', ev)
+            })
+        )
+    }
 
 
 
@@ -75,8 +75,12 @@ function App (sbot) {
     // and use `sbot.gossip.changes` to keep it up to date
 
     // *this takes too long*
+    // also renders too many pubs
+    // we need to know if we are connected or not and put connected pubs at
+    // the top of the list
+    // could have UI that lets you connect to pubs in the list (with invite)
     function getPubs (cb) {
-        console.log('state getting pubs')
+        console.log('start getting pubs')
         S(
             sbot.messagesByType({ type: 'pub' }),
             S.collect(function (err, msgs) {

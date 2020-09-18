@@ -240,3 +240,34 @@ Looking at the [source](https://github.com/ssbc/ssb-friends) of ssb.friends show
 Found out that cbglh has a [website](https://cblgh.org/four-nights-in-tornio/).
 
 
+----------------------------------------------------------------
+
+
+## 9 - 18- 2020
+Looking at how to publish an ssb log as a website
+https://github.com/noffle/ssb-webify
+https://git.scuttlebot.io/%25MeCTQrz9uszf9EZoTnKCeFeIedhnKWuB3JHW2l1g9NA%3D.sha256
+
+ssb viewer [render a message](https://git.scuttlebot.io/%25MeCTQrz9uszf9EZoTnKCeFeIedhnKWuB3JHW2l1g9NA%3D.sha256/blob/38c61a5069cfd7444fd36af69b49b22d92af5f4d/render.js#L408)
+
+* create a pull stream of the feed
+* pipe that into a render function
+
+[ssb-viewer](https://git.scuttlebot.io/%25MeCTQrz9uszf9EZoTnKCeFeIedhnKWuB3JHW2l1g9NA%3D.sha256/blob/38c61a5069cfd7444fd36af69b49b22d92af5f4d/index.js#L242) uses `sbot.createLogStream`
+
+we want [messages by type](https://scuttlebot.io/apis/scuttlebot/ssb.html#messagesbytype-source)
+
+or
+
+[createFeedStream](https://scuttlebot.io/apis/scuttlebot/ssb.html#messagesbytype-source) -- get all messages
+
+or
+
+[create user stream](https://scuttlebot.io/apis/scuttlebot/ssb.html#createuserstream-source) -- get all messages by you
+
+Will need to filter them in any case, either by user or by type
+
+
+[tonic](https://tonic.technology/)
+
+
