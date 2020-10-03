@@ -1,6 +1,8 @@
 # eventual-gram ssb
 
+The electron apps are in the "releases" link to the right ->
 
+--------------------------------------
 
 Start a dev server that automatically reloads on any change
 ```
