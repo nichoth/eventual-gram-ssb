@@ -27,6 +27,7 @@ npm run tron
 
 
 
+## notes
 ------------------------------------------------
 
 [css grid - auto-fill](https://rachelandrew.co.uk/archives/2016/04/12/flexible-sized-grids-with-auto-fill-and-minmax/)
@@ -269,5 +270,21 @@ Will need to filter them in any case, either by user or by type
 
 
 [tonic](https://tonic.technology/)
+
+
+------------------------------------------------
+
+# 9-19-2020
+ Today
+* use minimist to take appname as an argument in ssb-web
+* finish ssb-web so you can finish your website
+* use default appname of `ssb`
+
+
+
+
+
+
+
 
 

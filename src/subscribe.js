@@ -160,7 +160,6 @@ function subscribe (bus, state, app) {
         })
     })
 
-    // @TODO should not use .once
     bus.on(evs.route.pubs, function () {
         app.getPubs(function (err, pubs) {
             if (err) throw err
