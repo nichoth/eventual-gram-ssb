@@ -45,7 +45,7 @@ npm run tron
 ## 8-26-2020
 "Implementing a browser is no longer inside the realm of what you would do for fun"
 
-"we basically need to rebuild civilization, but within the real of stuff that at least someone would do for fun"
+"we basically need to rebuild civilization, but within the realm of stuff that at least someone would do for fun"
 
 
 ------------------------------------------------
