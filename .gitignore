@@ -182,3 +182,4 @@ node_modules
 
 bundle.js
 public/style.css
+dist/

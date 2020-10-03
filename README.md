@@ -1,5 +1,7 @@
 # eventual-gram ssb
 
+
+
 Start a dev server that automatically reloads on any change
 ```
 $ npm start
@@ -24,7 +26,6 @@ Open electron with the built app
 ```
 npm run tron
 ```
-
 
 
 ## notes
