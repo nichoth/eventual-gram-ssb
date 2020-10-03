@@ -50,7 +50,6 @@ describe('The app', () => {
 // describe('a new post', () => {
 //     it('makes a new post', () => {
 
-//         // publish blob without using the UI b/c of bug
 //         document.createElement('canvas').toBlob(function (blob) {
 //             var file = new File([blob], 'canvas.jpg', { type: blob.type })
 //             // var image = file
@@ -127,5 +126,11 @@ describe('a second feed', () => {
         }
 
         publishAlice()
+    })
+})
+
+describe('blurbur', () => {
+    it('does the thing', () => {
+        cy.visit('/')
     })
 })

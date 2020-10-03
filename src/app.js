@@ -127,6 +127,7 @@ function App (sbot) {
             // fileReaderStream(image),
             hasher,
             sbot.blobs.add(function (err, _hash) {
+                console.log('in blob.add', err, _hash)
                 if (err) throw err
                 var hash = '&' + hasher.digest
                 
