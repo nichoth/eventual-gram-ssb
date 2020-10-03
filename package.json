@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dist": "electron-builder -c.snap.publish=github --mac --windows --linux",
-    "release": "electron-builder --mac --windows --linux --publish always",
+    "release": "electron-builder --mac --windows --linux --publish=always",
     "tron": "env $(cat .env | xargs) electron .",
     "open": "npm run build-css && concurrently --kill-others \"node src/server.js\" \"npm run serve\" \"npm run sass-watch\"",
     "serve": "budo index.js:bundle.js --pushstate --dir=public --live -- -p esmify -t babelify -t [ envify --NODE_ENV development ] -t uglifyify -dv",
