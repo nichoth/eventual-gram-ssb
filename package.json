@@ -1,6 +1,6 @@
 {
   "name": "eventual-gram-ssb",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "ssb photo sharing",
   "main": "public/main.js",
   "husky": {
