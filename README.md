@@ -277,13 +277,33 @@ Will need to filter them in any case, either by user or by type
 
 ------------------------------------------------
 
-# 9-19-2020
+## 9-19-2020
  Today
 * use minimist to take appname as an argument in ssb-web
 * finish ssb-web so you can finish your website
 * use default appname of `ssb`
 
+--------------------------------------------------------
 
+## 10-4-2020
+* found [suggest-box](https://www.npmjs.com/package/suggest-box)
+* [ssb-suggest](https://www.npmjs.com/package/ssb-suggest)
+* [ssb-tags](https://www.npmjs.com/package/ssb-tags)
+* [scuttle-tag](https://www.npmjs.com/package/scuttle-tag)
+* [ssb-markdown](https://www.npmjs.com/package/ssb-markdown)
+
+In patchwork, they say [getChannelSuggestions](https://github.com/ssbc/patchwork/blob/33bda27b8cca77badcd0c336d1d6bf580c8ff077/lib/depject/suggest.js#L24)
+
+*Messages are stored as markdown*
+
+```js
+function suggester (word, cb) {
+    if (word[0] === '#') {
+        lookupTags(word, cb)
+    }
+    else cb(null)
+}
+```
 
 
 

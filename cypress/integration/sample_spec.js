@@ -132,5 +132,8 @@ describe('a second feed', () => {
 describe('blurbur', () => {
     it('does the thing', () => {
         cy.visit('/')
+        cy.window().then((win) => {
+            console.log('win', win)
+        })
     })
 })
