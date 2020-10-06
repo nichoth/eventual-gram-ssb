@@ -1,7 +1,7 @@
 var ssbKeys = require('ssb-keys')
 var ssbFeed = require('ssb-feed')
 var S = require('pull-stream')
-var start = require('../../src/start')
+// var start = require('../../src/start')
 var ts = require('../../src/types')
 var evs = require('../../src/EVENTS')
 // var subscribe = require('../../src/subscribe')
@@ -33,6 +33,7 @@ describe('My First Test', () => {
 // })
 
 var _sbot
+var emit
 
 describe('The app', () => {
     it('loads the home page', () => {
@@ -40,58 +41,51 @@ describe('The app', () => {
     })
 
     it('starts', () => {
-        start(function (err, { sbot }) {
-            expect(err).to.not.exist
-            _sbot = sbot
+        cy.window().then(win => {
+            console.log('win app', win.theApp)
+            emit = win.theApp.emit
+            _sbot = win.theApp.sbot
         })
     })
 })
 
-// describe('a new post', () => {
-//     it('makes a new post', () => {
+describe('a new post', () => {
+    it('makes a new post', () => {
 
-//         document.createElement('canvas').toBlob(function (blob) {
-//             var file = new File([blob], 'canvas.jpg', { type: blob.type })
-//             // var image = file
-//             var text = 'hello i am bob'
+        document.createElement('canvas').toBlob(function (blob) {
+            var file = new File([blob], 'canvas.jpg', { type: blob.type })
+            var text = 'hello i am bob'
 
-//             // todo -- get the hash of the file,
-//             // call sbot.blobs.add
-//             _sbot.publish(evs.post.new, {
-//                 type: ts.post,
-//                 mentions: [{ link: hash }],
-//                 text
-//             }, (err, res) => {
-//                 console.log('in here', err, res)
-//             })
-//         }, 'image/jpeg')
+            var ev = { image: file, text }
+            emit(evs.post.new, ev)
+        }, 'image/jpeg')
+
+        cy.visit('/')
 
 
+        // bug -- when you go to this link
+        // cy.visit('/new')
+            // .get('a.new-post-icon')
+            // .click()
 
+        // cy.get('.new-post-icon').click();
+        // cy.get('#file-input').click
 
-//         // bug -- when you go to this link
-//         // cy.visit('/new')
-//             // .get('a.new-post-icon')
-//             // .click()
-
-//         // cy.get('.new-post-icon').click();
-//         // cy.get('#file-input').click
-
-//         // document.createElement('canvas').toBlob(function (blob) {
-//         //     var file = new File([blob], 'canvas.jpg', { type: blob.type })
-//         //     var image = file
-//         //     var text = 'foo'
-//         //     // _view.emit(evs.post.new, { image, text })
-//         // }, 'image/jpeg')
-//     })
-// })
+        // document.createElement('canvas').toBlob(function (blob) {
+        //     var file = new File([blob], 'canvas.jpg', { type: blob.type })
+        //     var image = file
+        //     var text = 'foo'
+        //     // _view.emit(evs.post.new, { image, text })
+        // }, 'image/jpeg')
+    })
+})
 
 // Need to follow the feed2 and see if the image shows on the home page
 // img needs to be a file like in the browser
 describe('a second feed', () => {
     it('should publish', () => {
         cy.visit('/')
-        console.log('bbbbbbbbbb', process.env.NODE_ENV)
+        console.log('env', process.env.NODE_ENV)
         console.log('sboooooot', _sbot)
         var alice = ssbKeys.generate()
         var feed = ssbFeed(_sbot, alice)
@@ -129,11 +123,11 @@ describe('a second feed', () => {
     })
 })
 
-describe('blurbur', () => {
-    it('does the thing', () => {
-        cy.visit('/')
-        cy.window().then((win) => {
-            console.log('win', win)
-        })
-    })
-})
+// describe('blurbur', () => {
+//     it('does the thing', () => {
+//         cy.visit('/')
+//         cy.window().then((win) => {
+//             console.log('win', win)
+//         })
+//     })
+// })

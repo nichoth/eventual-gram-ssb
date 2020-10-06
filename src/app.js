@@ -13,7 +13,7 @@ var _ = {
 
 function App (sbot) {
 
-    // testing ----------------------------------
+    // ----------------- testing ----------------------------------
     window.ev = window.ev || {}
     window.ev.alice = sbot.alice
     window.ev.alice._publish = function (text) {
@@ -57,8 +57,10 @@ function App (sbot) {
 
     function gossip (cb) {
         // merge the peer.state.connected value with changes from
-        gossip.changes
-        sbot.gossip.peers((err, res) => console.log('peers', err, res))
+        // gossip.changes
+        sbot.gossip.peers((err, res) => {
+            console.log('peers', err, res)
+        })
 
         S(
             sbot.gossip.changes(),
@@ -118,8 +120,17 @@ function App (sbot) {
     }
 
     // could pass in an sbot here,
-    // use the passed in one first, then the main once
+    // use the passed in one first, then the main one
     function newPost ({ image, text }, cb) {
+
+
+
+        // todo
+        // in here, parse the message and look for hashtags
+        // create the hashtag and apply it to the message
+
+
+
         var hasher = createHash('sha256')
 
         S(

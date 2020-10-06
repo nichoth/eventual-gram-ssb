@@ -305,9 +305,53 @@ function suggester (word, cb) {
 }
 ```
 
+--------------------------------------------------------
+
+## 10-5-2020
+See [scuttle-tag/getSuggestions](https://github.com/ssbc/scuttle-tag/blob/master/async/getSuggestions.js)
+
+Found [ssb-marked](https://www.npmjs.com/package/ssb-marked)
+
+### suggesting hashtags
+
+### creating html from markdown
+Should have just a hashtag (#inktober) in the markdown. It gets tranformed to html
+with a link in its place. 
+
+Links in patchwork are like `<a href="#inktober">#inktober</a>`. Just the hashtag
+
+#### ssb-marked
+Is there a token for hashtags?
+
+```js
+var marked = require('ssb-marked')
+var text = 'foo bar #hashtag [ok woo](/ok-now)'
+
+var out = marked(text)
+console.log('out', out)
+```
+
+```
+out <p>foo bar <a href="#hashtag">#hashtag</a> <a href="/ok-now">ok woo</a></p>
+```
+
+`ssb-marked` already has a transformation for hashtags into links built in.
+That was easy. I was getting ready to dig into the lexer and renderer, but no need. Now just need to get the suggestions working.
+
+Actually, still need to create the hashtags in the database and apply them to the post.
+
+#### ssb-suggest
+It looks like ssb-suggest is just for usernames. Should try [suggest-box](https://www.npmjs.com/package/suggest-box) + [scuttle-tag/getSuggestions](https://github.com/ssbc/scuttle-tag/blob/master/async/getSuggestions.js).
+
+scuttle-tag and suggest-box both work per-word, so that's good
+
+suggest-box gets the latest word from the textarea, can pass the word to `scuttle-tag.getSuggestions`
 
 
+-------------------------------------------------------------
 
+## 10-6-2020
+Need a way to get all the tags in a message. Then you can create them before publishing. 
 
 
 

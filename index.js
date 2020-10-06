@@ -13,6 +13,14 @@ start(function (err, { sbot }) {
 
     subscribe(bus, state, app)
 
+    // ------- for testing -----------------------------
+    window.theApp = {}
+    window.theApp.emit = function (name, data) {
+        bus.emit(name, data || null)
+    }
+    window.theApp.sbot = sbot
+    // ------------------------------------------------------
+
     bus.emit(evs.app.start, null)
 
     Eventual.createElement(view, document.getElementById('content'))
