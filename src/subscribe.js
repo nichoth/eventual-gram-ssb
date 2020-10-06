@@ -2,6 +2,7 @@ var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
 var S = require('pull-stream')
+var hashtag = require('hashtag')
 
 // for testing
 window.ev = window.ev || {}
@@ -115,6 +116,11 @@ function subscribe (bus, state, app) {
 
     bus.on(evs.post.new, function ({ image, text }) {
         console.log('*new post*', image, text)
+
+        // TODO
+        // create tags before publishing the message
+        var { tags } = hashtag.parse(text)
+
         app.newPost({ image, text }, function (err, res) {
             if (err) throw err
             var posts = (state.posts() || [])
