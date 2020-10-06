@@ -120,6 +120,11 @@ function subscribe (bus, state, app) {
         // TODO
         // create tags before publishing the message
         var { tags } = hashtag.parse(text)
+        tags.forEach(function (tag) {
+            tag.async.create({}, function (err, res) {
+                console.log('create a tag', err, res)
+            })
+        })
 
         app.newPost({ image, text }, function (err, res) {
             if (err) throw err
