@@ -10,12 +10,12 @@ var _ = {
     get: require('lodash/get')
 }
 var hashtag = require('hashtag')
-var Stag = require('scuttle-tag')
-var parallel = require('run-parallel')
+// var Stag = require('scuttle-tag')
+// var parallel = require('run-parallel')
 
 
 function App (sbot) {
-    var stag = Stag(sbot)
+    // var stag = Stag(sbot)
 
     // ----------------- testing ----------------------------------
     window.ev = window.ev || {}
@@ -57,7 +57,7 @@ function App (sbot) {
 
 
 
-    gossip()
+    // gossip()
 
     function gossip (cb) {
         // merge the peer.state.connected value with changes from
