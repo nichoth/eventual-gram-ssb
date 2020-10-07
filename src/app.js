@@ -9,7 +9,7 @@ var fileReader = require('pull-file-reader')
 var _ = {
     get: require('lodash/get')
 }
-var hashtag = require('hashtag')
+// var hashtag = require('hashtag')
 // var Stag = require('scuttle-tag')
 // var parallel = require('run-parallel')
 
@@ -59,20 +59,20 @@ function App (sbot) {
 
     // gossip()
 
-    function gossip (cb) {
-        // merge the peer.state.connected value with changes from
-        // gossip.changes
-        sbot.gossip.peers((err, res) => {
-            console.log('peers', err, res)
-        })
+    // function gossip (cb) {
+    //     // merge the peer.state.connected value with changes from
+    //     // gossip.changes
+    //     sbot.gossip.peers((err, res) => {
+    //         console.log('peers', err, res)
+    //     })
 
-        S(
-            sbot.gossip.changes(),
-            S.drain(function (ev) {
-                console.log('gossip changes drain', ev)
-            })
-        )
-    }
+    //     S(
+    //         sbot.gossip.changes(),
+    //         S.drain(function (ev) {
+    //             console.log('gossip changes drain', ev)
+    //         })
+    //     )
+    // }
 
 
 
