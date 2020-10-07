@@ -12,12 +12,12 @@ var ts = require('../src/types')
 var _sbot
 var _view
 var _state
-var _app
+// var _app
 test('doesnt explode', function (t) {
     var { bus, state } = Eventual()
     start(function (err, { sbot }) {
         var app = App(sbot)
-        _app = app
+        // _app = app
         subscribe(bus, state, app)
         t.error(err)
         t.ok(sbot, 'return sbot')
@@ -102,14 +102,10 @@ test('a different feed', function (t) {
     }
 })
 
-test('post2 shows on the home page', function (t) {
-    // attach to window a fn that posts from feed2
-    // so you can visually look for the post
-    console.log('app', _app)
-})
-
 test('all done', function (t) {
+    console.log('in here')
     _sbot.close(function (err) {
+        console.log('cb')
         t.error(err, 'no error on close')
         t.end()
     })

@@ -9,9 +9,13 @@ var fileReader = require('pull-file-reader')
 var _ = {
     get: require('lodash/get')
 }
+var hashtag = require('hashtag')
+var Stag = require('scuttle-tag')
+var parallel = require('run-parallel')
 
 
 function App (sbot) {
+    var stag = Stag(sbot)
 
     // ----------------- testing ----------------------------------
     window.ev = window.ev || {}
@@ -111,7 +115,8 @@ function App (sbot) {
         getPubs,
         contacts,
         follow,
-        getFollows
+        getFollows,
+        // createTags
         // getAvatarById
     }
 
@@ -119,15 +124,52 @@ function App (sbot) {
         sbot.invite.accept(inviteCode, cb)
     }
 
-    // could pass in an sbot here,
-    // use the passed in one first, then the main one
+    // function createTags (text, cb) {
+    //     var { tags } = hashtag.parse(text)
+    //     if (!tags.length) return cb(null)
+
+    //     parallel(tags.map(function (tag) {
+    //         return function (_cb) {
+    //             stag.async.create({}, function (err, res) {
+    //                 _cb(err, res)
+    //             })
+    //         }
+    //     }), function (err, res) {
+    //         console.log('create tags', err, res)
+    //         cb(err, res)
+    //     })
+
+    //     // then apply the tags to the post
+    // }
+
+    // function nameTags (tags, names, cb) {
+    //     parallel(tags.map(function (tag, i) {
+    //         return function (_cb) {
+    //             // todo: need to get tag names
+    //             stag.async.name({ tag, name: names[i] }, _cb)
+    //         }
+    //     }), cb)
+    // }
+
+    // function applyTags (tags, msgId, cb) {
+    //     parallel(tags.map(function (tagId) {
+    //         return function (_cb) {
+    //             stag.async.apply({
+    //                 tag: tagId,
+    //                 message: msgId,
+    //                 tagged: true
+    //             }, _cb)
+    //         }
+    //     }), cb)
+    // }
+
     function newPost ({ image, text }, cb) {
-
-
-
         // todo
         // in here, parse the message and look for hashtags
         // create the hashtag and apply it to the message
+
+
+        // do createTags, nameTags, and applyTags
 
 
 
