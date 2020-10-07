@@ -16,7 +16,6 @@ var _state
 test('doesnt explode', function (t) {
     var { bus, state } = Eventual()
     start(function (err, { sbot }) {
-        // console.log('sbot', sbot)
         var app = App(sbot)
         // _app = app
         subscribe(bus, state, app)
@@ -76,10 +75,8 @@ test('a different feed', function (t) {
     var alice = ssbKeys.generate()
     var feed = ssbFeed(_sbot, alice)
 
+    // this is something attached to `window`
     publishAlice()
-
-    // need to put a blob in the store
-    // put the blobs hash in the message mentions
 
     // write to feed 2
     function publishAlice () {
@@ -103,10 +100,13 @@ test('a different feed', function (t) {
     }
 })
 
+test('tags', function (t) {
+    // todo
+    t.end()
+})
+
 test('all done', function (t) {
-    console.log('in here')
     _sbot.close(function (err) {
-        console.log('cb')
         t.error(err, 'no error on close')
         t.end()
     })
