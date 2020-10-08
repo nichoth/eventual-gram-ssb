@@ -9,13 +9,14 @@ var fileReader = require('pull-file-reader')
 var _ = {
     get: require('lodash/get')
 }
-// var hashtag = require('hashtag')
-// var Stag = require('scuttle-tag')
-// var parallel = require('run-parallel')
+var hashtag = require('hashtag')
+var Stag = require('scuttle-tag')
+var parallel = require('run-parallel')
+var watch = require('mutant')
 
 
 function App (sbot) {
-    // var stag = Stag(sbot)
+    var stag = Stag(sbot)
 
     // ----------------- testing ----------------------------------
     window.ev = window.ev || {}
@@ -57,6 +58,7 @@ function App (sbot) {
 
 
 
+    // **this takes a long time**
     // gossip()
 
     // function gossip (cb) {
@@ -100,6 +102,10 @@ function App (sbot) {
 
 
 
+    getAllTags(function (err, res) {
+        console.log('got all tags', err, res)
+    })
+
 
     return {
         getProfile,
@@ -116,7 +122,10 @@ function App (sbot) {
         contacts,
         follow,
         getFollows,
-        // createTags
+        createTags,
+        nameTags,
+        applyTags,
+        getAllTags
         // getAvatarById
     }
 
@@ -124,44 +133,67 @@ function App (sbot) {
         sbot.invite.accept(inviteCode, cb)
     }
 
-    // function createTags (text, cb) {
-    //     var { tags } = hashtag.parse(text)
-    //     if (!tags.length) return cb(null)
+    function getAllTags (cb) {
+        var tags = stag.obs.getAllTags()
+        console.log('tags', tags())
+        watch(tags, function onChange (_tags) {
+            console.log('aaaaa', _tags)
+            cb(null, _tags)
+        })
+        // cb(null, tags())
+        // tags(function onChange (_tags) {
+        //     console.log('woooo', _tags)
+        //     // cb(null, _tags)
+        // })
 
-    //     parallel(tags.map(function (tag) {
-    //         return function (_cb) {
-    //             stag.async.create({}, function (err, res) {
-    //                 _cb(err, res)
-    //             })
-    //         }
-    //     }), function (err, res) {
-    //         console.log('create tags', err, res)
-    //         cb(err, res)
-    //     })
+        // S(
+        //     sbot.messagesByType({ type: 'about' }),
+        //     S.collect(function (err, msgs) {
+        //         // { type: 'about', about: tag, name }
+        //         if (err) return cb(err)
+        //         // need to filter the msgs by ones that have { tag }
+        //     })
+        // )
+    }
 
-    //     // then apply the tags to the post
-    // }
+    function createTags (tags, cb) {
+        // var { tags } = hashtag.parse(text)
+        if (!tags.length) return cb(null)
 
-    // function nameTags (tags, names, cb) {
-    //     parallel(tags.map(function (tag, i) {
-    //         return function (_cb) {
-    //             // todo: need to get tag names
-    //             stag.async.name({ tag, name: names[i] }, _cb)
-    //         }
-    //     }), cb)
-    // }
+        parallel(tags.map(function (tag) {
+            return function (_cb) {
+                stag.async.create({}, function (err, res) {
+                    _cb(err, res)
+                })
+            }
+        }), function (err, res) {
+            console.log('create tags', err, res)
+            cb(err, res)
+        })
 
-    // function applyTags (tags, msgId, cb) {
-    //     parallel(tags.map(function (tagId) {
-    //         return function (_cb) {
-    //             stag.async.apply({
-    //                 tag: tagId,
-    //                 message: msgId,
-    //                 tagged: true
-    //             }, _cb)
-    //         }
-    //     }), cb)
-    // }
+        // then apply the tags to the post
+    }
+
+    function nameTags (tags, names, cb) {
+        parallel(tags.map(function (tag, i) {
+            return function (_cb) {
+                // todo: need to get tag names
+                stag.async.name({ tag, name: names[i] }, _cb)
+            }
+        }), cb)
+    }
+
+    function applyTags (tags, msgId, cb) {
+        parallel(tags.map(function (tagId) {
+            return function (_cb) {
+                stag.async.apply({
+                    tag: tagId,
+                    message: msgId,
+                    tagged: true
+                }, _cb)
+            }
+        }), cb)
+    }
 
     function newPost ({ image, text }, cb) {
         // todo

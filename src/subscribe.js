@@ -2,6 +2,8 @@ var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
 var S = require('pull-stream')
+var hashtag = require('hashtag')
+var series = require('run-series')
 
 // for testing
 window.ev = window.ev || {}
@@ -117,10 +119,39 @@ function subscribe (bus, state, app) {
         console.log('*new post*', image, text)
 
         // TODO
-        // create tags before publishing the message
-        // app.createTags(text, function (err, res) {
-        //     console.log('in create tags', err, res)
-        // })
+        var { tags } = hashtag.parse(text)
+        // first find existing tags
+        app.getAllTags(function (err, allTags) {
+            if (err) throw err
+            // find any existing tag names that match in the list `tags`
+            // if there's a match, apply that tag to this message
+            // app.applyTags(tagObjs, msgId, function (err, res) {
+            //     console.log('tags applied', err, res)
+            // })
+
+            // for any without a match, create and name the tag,
+            // then apply the tag to this message
+            // app.createTags(tags, function (err, _tags) {
+            //     if (err) throw err
+            //     console.log('created tags', err, _tags)
+            //     app.nameTags({ tags: _tags, names: tags }, (err, tagObjs) => {
+            //         console.log('named tags', err, tagObjs)
+            //     })
+            // })
+        })
+
+        // do the tags
+        app.createTags(tags, function (err, _tags) {
+            if (err) throw err
+            console.log('created tags', err, _tags)
+            app.nameTags({ tags: _tags, names: tags }, (err, tagObjs) => {
+                console.log('named tags', err, tagObjs)
+                // need msgID here
+                app.applyTags(tagObjs, msgId, function (err, res) {
+                    console.log('tags applied', err, res)
+                })
+            })
+        })
 
         app.newPost({ image, text }, function (err, res) {
             if (err) throw err

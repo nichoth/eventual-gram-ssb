@@ -102,6 +102,9 @@ test('a different feed', function (t) {
 
 test('tags', function (t) {
     // todo
+    // publish a message containing tags
+    // then publish another message with the same tags
+    // the same tag should be applied to multiple messages
     t.end()
 })
 

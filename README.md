@@ -351,7 +351,33 @@ suggest-box gets the latest word from the textarea, can pass the word to `scuttl
 -------------------------------------------------------------
 
 ## 10-6-2020
-Need a way to get all the tags in a message. Then you can create them before publishing. 
+Need a way to get all the tags in a message. Then you can create them before publishing. See [hashtag](https://www.npmjs.com/package/hashtag) on npm.
+
+[scuttle-tag getSuggestions in the wild](https://github.com/ssbc/patchwork/blob/33bda27b8cca77badcd0c336d1d6bf580c8ff077/lib/depject/tag/async/suggest.js#L16)
+
+Stumbled on [ssb-msg-content](https://github.com/ssbc/ssb-msg-content). that's helpful.
+
+
+
+## 10-7-2020
+
+Saw [this moxie video](https://www.youtube.com/watch?v=Nj3YFprqAr8)
+
+**On new post**
+First check if the tags exists
+  * need to get all the existing tags
+  * get the 'about' messages for the existing tags
+  * check if the inputted tag names are the same as existing 'about' messages
+    - if so, use the existing tag
+    - if not the same as any existing 'about' message, create a new tag & name the tag
+
+
+
+Looking up what the 'about' messages look lkke
+```js
+{ type: 'about', about: tag, name }
+```
+
 
 
 
