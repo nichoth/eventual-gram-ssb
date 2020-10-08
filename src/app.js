@@ -112,14 +112,14 @@ function App (sbot) {
     createTags(['my-tag'], function (err, res) {
         // res is an array of tag objects
         console.log('tags created', err, res)
-        getAllTags(function (err, _res) {
-            console.log('**got all tags**', err, _res)
+        // getAllTags(function (err, _res) {
+        //     console.log('**got all tags**', err, _res)
+        // })
+        getTagsWithNames(function (err, tags) {
+            console.log('**here** tags with names', err, tags)
         })
     })
 
-    getTagsWithNames(function (err, tags) {
-        console.log('**here** tags with names', err, tags)
-    })
 
 
 
@@ -216,13 +216,13 @@ function App (sbot) {
                     stag.async.name({
                         tag: resCreate.key,
                         name: tag
-                    }, function (err, _res) {
+                    }, function (err, resName) {
                         if (err) throw err
-                        console.log('**in here**', _res, resCreate)
+                        console.log('**in here**', resName, resCreate)
                         var withName = xtend(resCreate, {
                             value: xtend(resCreate.value, {
                                 content: xtend(resCreate.value.content, {
-                                    name: _res.value.content.name
+                                    name: resName.value.content.name
                                 })
                             })
                         })
