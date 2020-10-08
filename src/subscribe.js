@@ -3,7 +3,7 @@ var xtend = require('xtend')
 var after = require('after')
 var S = require('pull-stream')
 var hashtag = require('hashtag')
-var series = require('run-series')
+// var series = require('run-series')
 
 // for testing
 window.ev = window.ev || {}
@@ -121,10 +121,12 @@ function subscribe (bus, state, app) {
         // TODO
         var { tags } = hashtag.parse(text)
         // first find existing tags
-        app.getAllTags(function (err, allTags) {
-            if (err) throw err
+        // app.getAllTags(function (err, allTags) {
+        //     if (err) throw err
             // find any existing tag names that match in the list `tags`
+            // need to get the about msgs for the tags
             // if there's a match, apply that tag to this message
+            // (need to publish the message first)
             // app.applyTags(tagObjs, msgId, function (err, res) {
             //     console.log('tags applied', err, res)
             // })
@@ -137,7 +139,14 @@ function subscribe (bus, state, app) {
             //     app.nameTags({ tags: _tags, names: tags }, (err, tagObjs) => {
             //         console.log('named tags', err, tagObjs)
             //     })
+            //     app.applyTags(tagObjs, msgId, function (err, res) {
+            //         console.log('tags applied', err, res)
+            //     })
             // })
+        // })
+
+        app.getAllTags(function (err, allTags) {
+            if (err) throw err
         })
 
         // do the tags
@@ -154,6 +163,7 @@ function subscribe (bus, state, app) {
         })
 
         app.newPost({ image, text }, function (err, res) {
+            console.log('new post', err, res)
             if (err) throw err
             var posts = (state.posts() || [])
             posts.unshift(res)

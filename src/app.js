@@ -12,11 +12,16 @@ var _ = {
 var hashtag = require('hashtag')
 var Stag = require('scuttle-tag')
 var parallel = require('run-parallel')
-var watch = require('mutant')
-
+var series = require('run-series')
+var watch = require('mutant/watch')
+var getContent = require('ssb-msg-content')
+var xtend = require('xtend')
 
 function App (sbot) {
     var stag = Stag(sbot)
+
+    console.log('sbot', sbot)
+
 
     // ----------------- testing ----------------------------------
     window.ev = window.ev || {}
@@ -102,9 +107,25 @@ function App (sbot) {
 
 
 
-    getAllTags(function (err, res) {
-        console.log('got all tags', err, res)
+
+
+    createTags(['my-tag'], function (err, res) {
+        // res is an array of tag objects
+        console.log('tags created', err, res)
+        getAllTags(function (err, _res) {
+            console.log('**got all tags**', err, _res)
+        })
     })
+
+    getTagsWithNames(function (err, tags) {
+        console.log('**here** tags with names', err, tags)
+    })
+
+
+
+
+
+
 
 
     return {
@@ -125,7 +146,8 @@ function App (sbot) {
         createTags,
         nameTags,
         applyTags,
-        getAllTags
+        getAllTags,
+        getTagsWithNames
         // getAvatarById
     }
 
@@ -133,41 +155,91 @@ function App (sbot) {
         sbot.invite.accept(inviteCode, cb)
     }
 
-    function getAllTags (cb) {
-        var tags = stag.obs.getAllTags()
-        console.log('tags', tags())
-        watch(tags, function onChange (_tags) {
-            console.log('aaaaa', _tags)
-            cb(null, _tags)
-        })
-        // cb(null, tags())
-        // tags(function onChange (_tags) {
-        //     console.log('woooo', _tags)
-        //     // cb(null, _tags)
-        // })
+    function getTagsWithNames (cb) {
+        getAllTags(function (err, _tags) {
+            if (err) throw err
 
-        // S(
-        //     sbot.messagesByType({ type: 'about' }),
-        //     S.collect(function (err, msgs) {
-        //         // { type: 'about', about: tag, name }
-        //         if (err) return cb(err)
-        //         // need to filter the msgs by ones that have { tag }
-        //     })
-        // )
+            S(
+                sbot.messagesByType({ type: 'about' }),
+                S.map(function (aboutMsg) {
+                    var tag = _tags.find(tagMsg => {
+                        return tagMsg.key === getContent(aboutMsg).about
+                    })
+                    if (!tag) return null
+                    return xtend(tag, {
+                        value: xtend(tag.value, {
+                            content: xtend(tag.value.content, {
+                                name: getContent(aboutMsg).name
+                            })
+                        })
+                    })
+                }),
+                S.filter(tag => _.get(tag, 'value.content.name', null)),
+                S.collect(function (err, tagsWithNames) {
+                    cb(err, tagsWithNames)
+                })
+            )
+        })
+    }
+
+    function getAllTags (cb) {
+        // ## tag example ##
+        // key: "%ia0w9Wxv3gQkj7oeiVD/aVur+CyKlg6HKjLt9Gy/rok=.sha256"
+        // timestamp: 1602137064102
+        // value:
+        // author: "@JBB7E7zUDjscW1lgUuescqbO/kcUfYfXlwwgY3guAeI=.ed25519"
+        // content: {type: "tag", version: 1}
+        // hash: "sha256"
+        // previous: "%nIjVsKkW6D+eK0soFJekMdEUESP0yonRVVkLGbDRTSw=.sha256"
+        // sequence: 29
+        // signature: "a8u4DQFnpMq6PaCTIgFjd5mTIBu1+BoShwPzJujcCOUG4KtRwsArNwKug4n0C5oCWoIeTJq0UQMQYoKlww5dDg==.sig.ed25519"
+        // timestamp: 1602137064101
+
+        S(
+            sbot.messagesByType({ type: 'tag' }),
+            S.collect(function (err, msgs) {
+                if (err) return cb(err)
+                cb(null, msgs)
+            })
+        )
     }
 
     function createTags (tags, cb) {
-        // var { tags } = hashtag.parse(text)
         if (!tags.length) return cb(null)
+        console.log('create tags')
 
         parallel(tags.map(function (tag) {
+            // in here, series of create & name
+            return function (_cb) {
+                stag.async.create({}, function (err, resCreate) {
+                    if (err) throw err
+                    stag.async.name({
+                        tag: resCreate.key,
+                        name: tag
+                    }, function (err, _res) {
+                        if (err) throw err
+                        console.log('**in here**', _res, resCreate)
+                        var withName = xtend(resCreate, {
+                            value: xtend(resCreate.value, {
+                                content: xtend(resCreate.value.content, {
+                                    name: _res.value.content.name
+                                })
+                            })
+                        })
+
+                        _cb(null, withName)
+                    })
+                })
+                // create,
+                // name
+            }
+            
             return function (_cb) {
                 stag.async.create({}, function (err, res) {
                     _cb(err, res)
                 })
             }
         }), function (err, res) {
-            console.log('create tags', err, res)
             cb(err, res)
         })
 

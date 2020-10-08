@@ -21,6 +21,7 @@ function Home (props) {
                 var authorId = post.value.author
                 var author = (props.people[authorId] || {})
                 var postAvatar = (author.imgUrl || '')
+                console.log('postAvatar', postAvatar)
 
                 var isFollowing = followed.find(followedId => {
                     return followedId === authorId

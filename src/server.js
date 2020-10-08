@@ -70,6 +70,8 @@ function startSSB () {
         .use(require('ssb-gossip'))
         .use(require('ssb-replicate'))
         .use(require('ssb-backlinks'))
+        // .use(require('scuttle-tag'))
+        .use(require('ssb-tags'))
         .use(require('ssb-blobs'))
         .use(require('ssb-serve-blobs'))
         .use(require('ssb-invite'))
