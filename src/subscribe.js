@@ -123,26 +123,29 @@ function subscribe (bus, state, app) {
         // first find existing tags
         // app.getAllTags(function (err, allTags) {
         //     if (err) throw err
-            // find any existing tag names that match in the list `tags`
-            // need to get the about msgs for the tags
-            // if there's a match, apply that tag to this message
-            // (need to publish the message first)
-            // app.applyTags(tagObjs, msgId, function (err, res) {
-            //     console.log('tags applied', err, res)
-            // })
+        //     find any existing tag names that match in the list `tags`
+        //     need to get the about msgs for the tags
+        //     if there's a match, apply that tag to this message
+        //     (need to publish the message first)
+        //     app.applyTags(tagObjs, msgId, function (err, res) {
+        //         console.log('tags applied', err, res)
+        //     })
 
-            // for any without a match, create and name the tag,
-            // then apply the tag to this message
-            // app.createTags(tags, function (err, _tags) {
-            //     if (err) throw err
-            //     console.log('created tags', err, _tags)
-            //     app.nameTags({ tags: _tags, names: tags }, (err, tagObjs) => {
-            //         console.log('named tags', err, tagObjs)
-            //     })
-            //     app.applyTags(tagObjs, msgId, function (err, res) {
-            //         console.log('tags applied', err, res)
-            //     })
-            // })
+        //     for any without a match, create and name the tag,
+        //     then apply the tag to this message
+        //     app.createTags(tags, function (err, _tags) {
+        //         if (err) throw err
+        //         console.log('created tags', err, _tags)
+        //         app.nameTags({
+        //            tags: _tags,
+        //            names: tags
+        //        }, (err, tagObjs) => {
+        //             console.log('named tags', err, tagObjs)
+        //         })
+        //         app.applyTags(tagObjs, msgId, function (err, res) {
+        //             console.log('tags applied', err, res)
+        //         })
+        //     })
         // })
 
         app.getAllTags(function (err, allTags) {
@@ -155,10 +158,11 @@ function subscribe (bus, state, app) {
             console.log('created tags', err, _tags)
             app.nameTags({ tags: _tags, names: tags }, (err, tagObjs) => {
                 console.log('named tags', err, tagObjs)
+                // todo
                 // need msgID here
-                app.applyTags(tagObjs, msgId, function (err, res) {
-                    console.log('tags applied', err, res)
-                })
+                // app.applyTags(tagObjs, msgId, function (err, res) {
+                //     console.log('tags applied', err, res)
+                // })
             })
         })
 

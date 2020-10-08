@@ -9,11 +9,11 @@ var fileReader = require('pull-file-reader')
 var _ = {
     get: require('lodash/get')
 }
-var hashtag = require('hashtag')
+// var hashtag = require('hashtag')
 var Stag = require('scuttle-tag')
 var parallel = require('run-parallel')
-var series = require('run-series')
-var watch = require('mutant/watch')
+// var series = require('run-series')
+// var watch = require('mutant/watch')
 var getContent = require('ssb-msg-content')
 var xtend = require('xtend')
 
@@ -192,7 +192,7 @@ function App (sbot) {
         // hash: "sha256"
         // previous: "%nIjVsKkW6D+eK0soFJekMdEUESP0yonRVVkLGbDRTSw=.sha256"
         // sequence: 29
-        // signature: "a8u4DQFnpMq6PaCTIgFjd5mTIBu1+BoShwPzJujcCOUG4KtRwsArNwKug4n0C5oCWoIeTJq0UQMQYoKlww5dDg==.sig.ed25519"
+        // signature: "a8u4DQFnpMq6..."
         // timestamp: 1602137064101
 
         S(
@@ -229,14 +229,6 @@ function App (sbot) {
 
                         _cb(null, withName)
                     })
-                })
-                // create,
-                // name
-            }
-            
-            return function (_cb) {
-                stag.async.create({}, function (err, res) {
-                    _cb(err, res)
                 })
             }
         }), function (err, res) {
