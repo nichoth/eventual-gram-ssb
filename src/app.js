@@ -2,7 +2,6 @@ var S = require('pull-stream')
 var getAvatar = require('ssb-avatar')
 var ts = require('./types')
 var toURL = require('ssb-serve-blobs/id-to-url')
-// var xtend = require('xtend')
 // var after = require('after')
 var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
@@ -147,7 +146,8 @@ function App (sbot) {
         nameTags,
         applyTags,
         getAllTags,
-        getTagsWithNames
+        getTagsWithNames,
+        tagPost
         // getAvatarById
     }
 
@@ -155,10 +155,8 @@ function App (sbot) {
         sbot.invite.accept(inviteCode, cb)
     }
 
-    function tagPost (text, cb) {
-        var tags = hashtag(text).filter(function (node) {
-            return node.type === 'tag'
-        })
+    function tagPost (text, msgId, cb) {
+        var tags = hashtag.parse(text).tags
 
         if (!tags.length) return cb(null, null)
 
@@ -275,6 +273,7 @@ function App (sbot) {
     }
 
     function nameTags (tags, names, cb) {
+        console.log('in name', tags)
         parallel(tags.map(function (tag, i) {
             return function (_cb) {
                 // todo: need to get tag names

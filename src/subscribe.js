@@ -153,22 +153,28 @@ function subscribe (bus, state, app) {
         })
 
         // do the tags
-        app.createTags(tags, function (err, _tags) {
-            if (err) throw err
-            console.log('created tags', err, _tags)
-            app.nameTags({ tags: _tags, names: tags }, (err, tagObjs) => {
-                console.log('named tags', err, tagObjs)
-                // todo
-                // need msgID here
-                // app.applyTags(tagObjs, msgId, function (err, res) {
-                //     console.log('tags applied', err, res)
-                // })
-            })
-        })
+        // app.createTags(tags, function (err, _tags) {
+        //     if (err) throw err
+        //     console.log('created tags', err, _tags)
+        //     app.nameTags(_tags, tags, (err, tagObjs) => {
+        //         console.log('named tags', err, tagObjs)
+        //         // todo
+        //         // need msgID here
+        //         // app.applyTags(tagObjs, msgId, function (err, res) {
+        //         //     console.log('tags applied', err, res)
+        //         // })
+        //     })
+        // })
+
 
         app.newPost({ image, text }, function (err, res) {
             console.log('new post', err, res)
             if (err) throw err
+
+            app.tagPost(text, res.key, function (err, res) {
+                console.log('tagged post', err, res)
+            })
+
             var posts = (state.posts() || [])
             posts.unshift(res)
             state.posts.set(posts)
