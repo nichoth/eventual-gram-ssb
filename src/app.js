@@ -9,7 +9,7 @@ var fileReader = require('pull-file-reader')
 var _ = {
     get: require('lodash/get')
 }
-// var hashtag = require('hashtag')
+var hashtag = require('hashtag')
 var Stag = require('scuttle-tag')
 var parallel = require('run-parallel')
 // var series = require('run-series')
@@ -155,7 +155,42 @@ function App (sbot) {
         sbot.invite.accept(inviteCode, cb)
     }
 
+    function tagPost (text, cb) {
+        var tags = hashtag(text).filter(function (node) {
+            return node.type === 'tag'
+        })
+
+        if (!tags.length) return cb(null, null)
+
+        getTagsWithNames(function (err, existingTags) {
+            if (err) throw err
+            var _tags = tags.map(function (tag) {
+                var existingTag = existingTags.find(function ({ name }) {
+                    return name === tag
+                })
+                if (!existingTag) return tag
+                return existingTag
+            })
+
+            var createThese = _tags.filter(tag => typeof tag === 'string')
+            var applyThese = _tags.filter(tag => typeof tag === 'object')
+            applyTags(applyThese, msgId, function (err, res) {
+                console.log('tags applied', err, res)
+            })
+            createTags(createThese, function (err, res) {
+                console.log('created', err, res)
+                applyTags(res, msgId, function (err, res) {
+                    console.log('applied new tags', err, res)
+                })
+            })
+        })
+
+    }
+
+    // todo -- cache this for real
+    var oldTags
     function getTagsWithNames (cb) {
+        if (oldTags) return cb(null, oldTags)
         getAllTags(function (err, _tags) {
             if (err) throw err
 
@@ -176,6 +211,7 @@ function App (sbot) {
                 }),
                 S.filter(tag => _.get(tag, 'value.content.name', null)),
                 S.collect(function (err, tagsWithNames) {
+                    oldTags = tagsWithNames
                     cb(err, tagsWithNames)
                 })
             )
@@ -248,10 +284,10 @@ function App (sbot) {
     }
 
     function applyTags (tags, msgId, cb) {
-        parallel(tags.map(function (tagId) {
+        parallel(tags.map(function ({ key }) {
             return function (_cb) {
                 stag.async.apply({
-                    tag: tagId,
+                    tag: key,
                     message: msgId,
                     tagged: true
                 }, _cb)
