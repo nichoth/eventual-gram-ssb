@@ -1,16 +1,12 @@
 var evs = require('../../EVENTS')
 import { html } from 'htm/preact'
 import { Component } from 'preact'
-
-// import Markup from 'preact-markup';
-// import Markdown from 'preact-markdown';
-// var preactHtml = require('preact-html')
 var marked = require('ssb-marked')
 
 class PostText extends Component {
     shouldComponentUpdate() {
         // do not re-render via diff:
-        return false;
+        return false
     }
 
     componentDidMount() {

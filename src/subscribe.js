@@ -2,7 +2,7 @@ var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
 var S = require('pull-stream')
-var hashtag = require('hashtag')
+// var hashtag = require('hashtag')
 // var series = require('run-series')
 
 // for testing
@@ -119,7 +119,8 @@ function subscribe (bus, state, app) {
         console.log('*new post*', image, text)
 
         // TODO
-        var { tags } = hashtag.parse(text)
+        // var { tags } = hashtag.parse(text)
+
         // first find existing tags
         // app.getAllTags(function (err, allTags) {
         //     if (err) throw err
