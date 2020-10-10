@@ -1,9 +1,30 @@
 var evs = require('../../EVENTS')
 import { html } from 'htm/preact'
+import { Component } from 'preact'
+
+// import Markup from 'preact-markup';
+// import Markdown from 'preact-markdown';
+// var preactHtml = require('preact-html')
+var marked = require('ssb-marked')
+
+class PostText extends Component {
+    shouldComponentUpdate() {
+        // do not re-render via diff:
+        return false;
+    }
+
+    componentDidMount() {
+        if (!this.props.text) return
+        this.base.innerHTML = marked(this.props.text)
+    }
+
+    render (props) {
+        if (!props.text) return null
+        return html`<div class="post-text"></div>`
+    }
+}
 
 function Home (props) {
-    // var { emit } = props
-
     console.log('props in home', props)
 
     if (!props.posts) return null
@@ -21,16 +42,16 @@ function Home (props) {
                 var authorId = post.value.author
                 var author = (props.people[authorId] || {})
                 var postAvatar = (author.imgUrl || '')
-                console.log('postAvatar', postAvatar)
+                // console.log('postAvatar', postAvatar)
+                // console.log('post', post)
 
                 var isFollowing = followed.find(followedId => {
                     return followedId === authorId
                 })
 
                 return html`<li class="post">
-                    <a href=${encodeURI('/' + post.key)}>
-                        <img src=${props.postUrls[hash]} />
-                    </a>
+                    <img src=${props.postUrls[hash]} />
+
                     <div class="post-attributes">
                         <a class="avatar-link" href="/${authorId}">
                             <div class="post-avatar">
@@ -38,12 +59,7 @@ function Home (props) {
                             </div>
                         </a>
                         <div class="post-metadata">
-                            ${post.value.content.text ?
-                                html`<div class="post-text">
-                                    ${post.value.content.text}
-                                </div>` :
-                                null
-                            }
+                            <${PostText} text=${post.value.content.text} />
                             <div class="author">
                                 <a href="/${authorId}">
                                     ${author.name}

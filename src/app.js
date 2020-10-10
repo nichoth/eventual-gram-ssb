@@ -2,7 +2,6 @@ var S = require('pull-stream')
 var getAvatar = require('ssb-avatar')
 var ts = require('./types')
 var toURL = require('ssb-serve-blobs/id-to-url')
-// var after = require('after')
 var createHash = require('multiblob/util').createHash
 var fileReader = require('pull-file-reader')
 var _ = {
@@ -11,8 +10,6 @@ var _ = {
 var hashtag = require('hashtag')
 var Stag = require('scuttle-tag')
 var parallel = require('run-parallel')
-// var series = require('run-series')
-// var watch = require('mutant/watch')
 var getContent = require('ssb-msg-content')
 var xtend = require('xtend')
 
@@ -35,7 +32,6 @@ function App (sbot) {
 
             S(
                 fileReader(image),
-                // fileReaderStream(image),
                 hasher,
                 sbot.blobs.add(function (err, _hash) {
                     if (err) throw err
@@ -86,6 +82,7 @@ function App (sbot) {
     // peers[0].host, b/c the `peers` call has the connected state
     // and use `sbot.gossip.changes` to keep it up to date
 
+    getPubs((err, res) => console.log('got pubs', err, res))
     // *this takes too long*
     // also renders too many pubs
     // we need to know if we are connected or not and put connected pubs at
@@ -108,16 +105,17 @@ function App (sbot) {
 
 
 
-    createTags(['my-tag'], function (err, res) {
-        // res is an array of tag objects
-        console.log('tags created', err, res)
-        // getAllTags(function (err, _res) {
-        //     console.log('**got all tags**', err, _res)
-        // })
-        getTagsWithNames(function (err, tags) {
-            console.log('**here** tags with names', err, tags)
-        })
-    })
+    // for testing
+    // createTags(['my-tag'], function (err, res) {
+    //     // res is an array of tag objects
+    //     console.log('tags created', err, res)
+    //     // getAllTags(function (err, _res) {
+    //     //     console.log('**got all tags**', err, _res)
+    //     // })
+    //     getTagsWithNames(function (err, tags) {
+    //         console.log('**tags with names**', err, tags)
+    //     })
+    // })
 
 
 
@@ -243,7 +241,6 @@ function App (sbot) {
         console.log('create tags')
 
         parallel(tags.map(function (tag) {
-            // in here, series of create & name
             return function (_cb) {
                 stag.async.create({}, function (err, resCreate) {
                     if (err) throw err
@@ -252,7 +249,7 @@ function App (sbot) {
                         name: tag
                     }, function (err, resName) {
                         if (err) throw err
-                        console.log('**in here**', resName, resCreate)
+                        console.log('**create & name res**', resName, resCreate)
                         var withName = xtend(resCreate, {
                             value: xtend(resCreate.value, {
                                 content: xtend(resCreate.value.content, {
