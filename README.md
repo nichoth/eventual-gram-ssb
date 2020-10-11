@@ -360,7 +360,6 @@ Stumbled on [ssb-msg-content](https://github.com/ssbc/ssb-msg-content). that's h
 
 
 ## 10-7-2020
-
 Saw [this moxie video](https://www.youtube.com/watch?v=Nj3YFprqAr8)
 
 **On new post**
@@ -379,5 +378,9 @@ Looking up what the 'about' messages look lkke
 ```
 
 
+## 10-11-2020
 
+Want to look at flumeviews & start making a DB view of the tags that we need. But should get autocomplete working first.
+
+`ssb-suggest` looks like it's only for usernames. Could use `suggest-box` though.
 

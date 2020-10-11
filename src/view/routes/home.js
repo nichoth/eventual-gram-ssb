@@ -5,7 +5,6 @@ var marked = require('ssb-marked')
 
 class PostText extends Component {
     shouldComponentUpdate() {
-        // do not re-render via diff:
         return false
     }
 
@@ -22,7 +21,6 @@ class PostText extends Component {
 
 function Home (props) {
     console.log('props in home', props)
-
     if (!props.posts) return null
 
     var { followed, emit } = props

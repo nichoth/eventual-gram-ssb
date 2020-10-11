@@ -1,6 +1,25 @@
 import { html } from 'htm/preact'
 import { useState } from 'preact/hooks'
+import { Component } from 'preact'
 var evs = require('../../EVENTS')
+
+class TextPlace extends Component {
+    componentDidMount () {
+        console.log('this.el', this.el)
+    }
+
+    render () {
+        return html`<div className="text-input">
+            <textarea ref=${el => this.el = el}
+                id="text" name="text" oninput=${test}><//>
+        </div>`
+    }
+}
+
+function test (ev) {
+    var val = ev.srcElement.value
+    console.log('input', ev, val)
+}
 
 function FilePreview (props) {
     var { selectedFile } = props
@@ -10,14 +29,13 @@ function FilePreview (props) {
         props.nevermind()
     }
 
+    // TODO -- autocomplete here
     return html`<form class="file-preview" onSubmit=${props.savePost}>
         <div class="image-preview">
             <img src=${URL.createObjectURL(selectedFile)} />
         </div>
 
-        <div className="text-input">
-            <textarea id="text" name="text"><//>
-        </div>
+        <${TextPlace} />
 
         <div className="controls">
             <button onClick=${nevermind}>Nevermind</button>

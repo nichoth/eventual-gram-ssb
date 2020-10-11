@@ -1,9 +1,5 @@
 {
-    "plugins": [
-        ["module-resolver", {
-            "root": ["."]
-        }]
-    ],
+    "plugins": [],
     "presets": [
         ["@babel/preset-env", {
             "targets": {
