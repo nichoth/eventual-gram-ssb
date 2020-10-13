@@ -23,7 +23,8 @@ S(
             }),
             // theres probably only 1 'about' msg per tag
             S.reduce(function (acc, _msg) {
-                acc[_msg.content.name] = (acc[_msg.content.name] || []).concat([msg.key])
+                acc[_msg.content.name] = (acc[_msg.content.name] || [])
+                    .concat([msg.key])
                 return acc
             }, {}, function (err, res) {
                 console.log('done', err, res)
