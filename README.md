@@ -384,3 +384,11 @@ Want to look at flumeviews & start making a DB view of the tags that we need. Bu
 
 `ssb-suggest` looks like it's only for usernames. Could use `suggest-box` though.
 
+
+-----------------------------------------------------
+
+## 10-12-2020
+Writing a flumeview for tags
+
+https://handbook.scuttlebutt.nz/guides/ssb-server/tutorial
+
