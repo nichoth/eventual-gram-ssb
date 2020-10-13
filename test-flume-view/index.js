@@ -1,41 +1,75 @@
-var Sbot = require('./test-server')
+var _Sbot = require('./test-server')
 var Obv = require('obv')
+var Reduce = require('flumeview-reduce')
 
-var sbot = Sbot()
+var { Sbot, config } = _Sbot()
 
-console.log('flume use', sbot._flumeUse)
+// where is this view mounted to sbot?
+// console.log('**sbot**', sbot.testtest)
+// sbot.testtest.get(function (err, res) {
+//     console.log('**get**', err, res)
+// })
 
-sbot._flumeUse('test', function (opts, name) {
-    // var { get, stream, since, filename } = opts
-    console.log('aaaaaa', arguments)
+var ssbPlugin = {
+    name: 'aaaaa',
+    version:  require('../package.json').version,
+    manifest: {
+    },
+    init: init
+}
+var sbot = Sbot.use(ssbPlugin)(config)
+console.log('**sbot aaaaa**', sbot.aaaaa)
+sbot.close()
 
-    return {
-        methods: {
-            get: 'async',
-            stream: 'source',
-            value: 'sync'
-        },
-        since: Obv(),
-        value: function (cb) {
-
-        },
-        destroy: function (cb) {
-
-        },
-        get: function (opts, cb) {
-
-        },
-        stream: function (opts) {
-
-        },
-        createSink: function (cb) {
-
-        },
-        close: function (cb) {
-
-        }
+function init (sbot) {
+    var initState = {}
+    function reducer (acc, val) {
+        console.log('in reducer', acc, val)
+        return acc
     }
-})
+    function mapper (msg) {
+        return msg
+    }
+    var view = sbot._flumeUse('woooo', Reduce(1, reducer, mapper, initState))
+    console.log('**view**', view)
+    return view
+}
+
+
+
+// ---------------------------------------------------------
+// this is a 'from scratch' flumeview
+// sbot._flumeUse('test', function (opts, name) {
+//     // var { get, stream, since, filename } = opts
+//     console.log('aaaaaa', arguments)
+
+//     return {
+//         methods: {
+//             get: 'async',
+//             stream: 'source',
+//             value: 'sync'
+//         },
+//         since: Obv(),
+//         value: function (cb) {
+
+//         },
+//         destroy: function (cb) {
+
+//         },
+//         get: function (opts, cb) {
+
+//         },
+//         stream: function (opts) {
+
+//         },
+//         createSink: function (cb) {
+
+//         },
+//         close: function (cb) {
+
+//         }
+//     }
+// })
 
 
 
