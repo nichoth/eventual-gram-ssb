@@ -1,4 +1,3 @@
-var S = require('pull-stream')
 var Sbot = require('./test-server')
 var Obv = require('obv')
 
@@ -7,7 +6,7 @@ var sbot = Sbot()
 console.log('flume use', sbot._flumeUse)
 
 sbot._flumeUse('test', function (opts, name) {
-    var { get, stream, since, filename } = opts
+    // var { get, stream, since, filename } = opts
     console.log('aaaaaa', arguments)
 
     return {
