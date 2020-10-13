@@ -392,3 +392,23 @@ Writing a flumeview for tags
 
 https://handbook.scuttlebutt.nz/guides/ssb-server/tutorial
 
+Try `flumeUse` with a view
+
+see https://github.com/flumedb/flumeview-hashtable/blob/master/test/simple.js
+
+`_flumeeUse(name, flumeview)`
+
+
+---------------------------------------------------------
+## 10-13-2020
+
+https://github.com/ssbc/ssb-db#db_flumeuse-view
+
+https://github.com/flumedb/flumedb#flumedbusename-createflumeview--self
+
+try publishing after adding a flumeView
+
+
+
+
+

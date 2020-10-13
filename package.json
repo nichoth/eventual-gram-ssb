@@ -41,6 +41,7 @@
     "muxrpc": "^6.5.0",
     "observ": "^0.2.0",
     "observ-struct": "^6.0.0",
+    "obv": "0.0.1",
     "preact": "^10.4.7",
     "pull-file-reader": "^1.0.2",
     "pull-stream": "^3.6.14",

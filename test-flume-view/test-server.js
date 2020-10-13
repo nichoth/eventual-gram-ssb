@@ -43,7 +43,7 @@ function startSSB () {
         // .use(require('ssb-master'))
         // .use(require('ssb-db'))
         // .use(require('ssb-plugins'))
-        // // .use(require('ssb-ws'))
+        // .use(require('ssb-ws'))
         // .use(require('ssb-gossip'))
         // .use(require('ssb-replicate'))
         // .use(require('ssb-backlinks'))
