@@ -409,6 +409,7 @@ https://github.com/flumedb/flumedb#flumedbusename-createflumeview--self
 try publishing after adding a flumeView
 
 
+## 10-14-2020
+[flumeview-reduce](https://github.com/flumedb/flumeview-reduce#flumeviewreduceversion-reduce-map-codec-initialstate--flumeview)
 
-
-
+need to use a store with flumeview-reduce, that way it will save the state

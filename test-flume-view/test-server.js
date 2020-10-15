@@ -8,11 +8,13 @@ var ssbConfigInject = require('ssb-config/inject')
 var caps = require('ssb-caps')
 
 function startSSB () {
-    var appName = 'ssb-ev-TEST-' + Math.random()
+    // var appName = 'ssb-ev-TEST-' + Math.random()
+    var appName = 'ssb-ev-TEST'
 
     process.on('exit', function () {
-        rimraf.sync(path.join(home, '.' + appName))
-        console.log('deleted', appName)
+        // rimraf.sync(path.join(home, '.' + appName))
+        // console.log('deleted', appName)
+        console.log('exit')
     })
     
     console.log('app name', appName)
