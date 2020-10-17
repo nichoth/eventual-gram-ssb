@@ -1,6 +1,6 @@
 var _Sbot = require('./test-server')
-var Obv = require('obv')
-var Reduce = require('flumeview-reduce')
+// var Obv = require('obv')
+// var Reduce = require('flumeview-reduce')
 var S = require('pull-stream')
 var codec = require('flumecodec')
 var createReduce = require('flumeview-reduce/inject')
@@ -34,12 +34,6 @@ console.log('**sbot aaaaa**', sbot.aaaaa)
 // need to use the store `flume-reduce/store/fs`
 // see https://github.com/flumedb/flumeview-reduce#stores
 
-// sbot.publish({
-//     type: 'post',
-//     text: 'Hello, world!'
-// }, function (err, msg) {
-//     // console.log('**post publish**', err, msg)
-
 S(
     sbot.aaaaa.stream({ live: true }),
     S.drain(function (msg) {
@@ -47,31 +41,19 @@ S(
     })
 )
 
-process.nextTick(() => sbot.publish({
+sbot.publish({
     type: 'post',
     text: 'Hello, world!'
 }, function (err, msg) {
     // console.log('**post 2', err, msg)
     sbot.aaaaa.get(function (err, data) {
-        console.log('**get2**', err, msg)
+        console.log('**get2**', err, data)
     })
-}))
+})
 
-//     sbot.aaaaa.get(function (err, data) {
-//         console.log('**get**', err, data)
-//     })
-// })
-
-// sbot.publish({
-//     type: 'post',
-//     text: 'Hello, world!'
-// }, function (err, msg) {
-//     // console.log('**post 2', err, msg)
-//     sbot.aaaaa.get(function (err, data) {
-//         console.log('**get2**', err, data)
-//     })
-// })
-
+sbot.aaaaa.get(function (err, res) {
+    console.log('**get**', err, res)
+})
 
 // note _flumeUse is called *inside* `init`
 function init (sbot) {
@@ -92,8 +74,17 @@ function init (sbot) {
     //     Reduce(1, reducer, mapper, codec.json, initState))
 
     var Reduce = createReduce(Store)
+
+    // view state is saved at ~/app-name/ok.json
+    // b/c that's what we named it in `_flumeUse`
+    // var dir = path.dirname(log.filename)
+    // state = Store(dir, name, codec)
+    // https://github.com/flumedb/flumeview-reduce/blob/master/inject.js#L90
     var view = sbot._flumeUse('ok',
         Reduce(1, reducer, mapper, codec.json, initState))
+
+    // Note this saves to ~/.ssb-ev-TEST/flume/ok.json
+    // the path comes from the log path that is used by ssb
 
     console.log('**view**', view)
     view.since.once(val => console.log('woooo', val))
@@ -101,84 +92,3 @@ function init (sbot) {
 }
 
 
-
-// ---------------------------------------------------------
-// this is a 'from scratch' flumeview
-// sbot._flumeUse('test', function (opts, name) {
-//     // var { get, stream, since, filename } = opts
-//     console.log('aaaaaa', arguments)
-
-//     return {
-//         methods: {
-//             get: 'async',
-//             stream: 'source',
-//             value: 'sync'
-//         },
-//         since: Obv(),
-//         value: function (cb) {
-
-//         },
-//         destroy: function (cb) {
-
-//         },
-//         get: function (opts, cb) {
-
-//         },
-//         stream: function (opts) {
-
-//         },
-//         createSink: function (cb) {
-
-//         },
-//         close: function (cb) {
-
-//         }
-//     }
-// })
-
-
-
-// you just want a map of tag name to [msgKeys]
-// could be 'name' to tagObj { messages, key, etc }
-
-// S(
-//     sbot.messagesByType({ type: 'tag' }),
-
-//     S.asyncMap(function (msg, cb) {
-//         // get the names of the tag
-//         S(
-//             sbot.links({
-//                 rel: 'about',
-//                 dest: msg.key
-//             }),
-//             S.asyncMap(function (msg, cb) {
-//                 sbot.get(msg.key, cb)
-//             }),
-//             // theres probably only 1 'about' msg per tag
-//             S.reduce(function (acc, _msg) {
-//                 acc[_msg.content.name] = (acc[_msg.content.name] || [])
-//                     .concat([msg.key])
-//                 return acc
-//             }, {}, function (err, res) {
-//                 console.log('done', err, res)
-//                 cb(null, res)
-//             })
-//         )
-//     }),
-
-//     S.reduce(function (acc, __msg) {
-//         console.log('here', __msg)
-//         // a map of tag name to tag object key(s)
-//         Object.keys(__msg).forEach(key => {
-//             acc[key] = (acc[key] || []).concat(__msg[key])
-//         })
-//         return acc
-//     }, {}, function (err, res) {
-//         console.log('all done', err, res)
-//     })
-
-//     // S.collect(function (err, msgs) {
-//     //     // this is a message per tag
-//     //     console.log('collection', err, msgs)
-//     // })
-// )

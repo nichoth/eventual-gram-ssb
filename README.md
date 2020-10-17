@@ -413,3 +413,14 @@ try publishing after adding a flumeView
 [flumeview-reduce](https://github.com/flumedb/flumeview-reduce#flumeviewreduceversion-reduce-map-codec-initialstate--flumeview)
 
 need to use a store with flumeview-reduce, that way it will save the state
+
+---------------------------------------
+
+## 10-17-2020
+I forgot what I wanted to make a PR for. I think it was in the flumeview docs,
+I con't remember where though.
+
+The PR was for the `store` docs in flumeview-reduce.
+
+
+
