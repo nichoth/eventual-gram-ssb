@@ -55,23 +55,23 @@ sbot.aaaaa.get(function (err, res) {
     console.log('**get**', err, res)
 })
 
+// don't need to get a stream of posts anywhere, the view is always up to date
+// what about if you start the app for the first time with an existing log?
+
 // note _flumeUse is called *inside* `init`
 function init (sbot) {
     var initState = { foo: 0 }
     function reducer (acc, val) {
+        console.log('**in reducer**', acc, val)
         acc.foo = acc.foo + 1
-        // console.log('**in reducer**', acc, val)
         return acc
     }
     function mapper (msg) {
-        // console.log('**in map**', msg)
         return msg
     }
 
     // the thing returned by flumeview-reduce is at sbot.aaaaa b/c we return
     // it from here
-    // var view = sbot._flumeUse('woooo',
-    //     Reduce(1, reducer, mapper, codec.json, initState))
 
     var Reduce = createReduce(Store)
 
