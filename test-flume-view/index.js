@@ -46,6 +46,7 @@ sbot.publish({
     text: 'Hello, world!'
 }, function (err, msg) {
     // console.log('**post 2', err, msg)
+    if (err) throw err
     sbot.aaaaa.get(function (err, data) {
         console.log('**get2**', err, data)
     })

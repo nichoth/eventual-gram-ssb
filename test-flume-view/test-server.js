@@ -1,7 +1,7 @@
 
 var sbot = require('ssb-server')
-var rimraf = require('rimraf')
-var home = require('user-home')
+// var rimraf = require('rimraf')
+// var home = require('user-home')
 var path = require('path')
 var ssbKeys = require('ssb-keys')
 var ssbConfigInject = require('ssb-config/inject')
@@ -27,20 +27,20 @@ function startSSB () {
     config.logging.level = 'notice'
 
     var _sbot = sbot
-        // .use(require('ssb-master'))
-        // .use(require('ssb-db'))
-        // .use(require('ssb-plugins'))
-        // .use(require('ssb-ws'))
-        // .use(require('ssb-gossip'))
-        // .use(require('ssb-replicate'))
-        // .use(require('ssb-backlinks'))
-        // .use(require('scuttle-tag'))
-        // .use(require('ssb-tags'))
-        // .use(require('ssb-blobs'))
-        // .use(require('ssb-serve-blobs'))
-        // .use(require('ssb-invite'))
-        // .use(require('ssb-friends'))
-        // .call(null, config)
+    // .use(require('ssb-master'))
+    // .use(require('ssb-db'))
+    // .use(require('ssb-plugins'))
+    // .use(require('ssb-ws'))
+    // .use(require('ssb-gossip'))
+    // .use(require('ssb-replicate'))
+    // .use(require('ssb-backlinks'))
+    // .use(require('scuttle-tag'))
+    // .use(require('ssb-tags'))
+    // .use(require('ssb-blobs'))
+    // .use(require('ssb-serve-blobs'))
+    // .use(require('ssb-invite'))
+    // .use(require('ssb-friends'))
+    // .call(null, config)
 
     return { Sbot: _sbot, config }
 }
