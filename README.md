@@ -422,5 +422,13 @@ I con't remember where though.
 
 The PR was for the `store` docs in flumeview-reduce.
 
+---------------------------------------------------
+
+## 10-18-2020
+Do the flume view exploration:
+```
+$ node test-flume-view/index.js 
+```
+
 
 

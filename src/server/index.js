@@ -11,14 +11,14 @@ var ssbKeys = require('ssb-keys')
 var ssbConfigInject = require('ssb-config/inject')
 // var caps = require('./caps.json')
 var caps = require('ssb-caps')
-var manifest = require('./manifest.json')
+var manifest = require('../manifest.json')
 var WS_PORT = process.env.WS_PORT || 8000
 
 
 
 // testing
 var Feed = require('ssb-feed')
-var keysAlice = require('../keys-alice.json')
+var keysAlice = require('../../keys-alice.json')
 
 
 // @TODO check if global sbot is running and use that if possible
