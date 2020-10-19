@@ -443,3 +443,12 @@ $ node test-flume-view/index.js
 "Scuttlebutt peers make requests to each other using an RPC protocol. Typical requests include asking for the latest messages in a particular feed or requesting a blob"
 
 [scuttle-testbot](https://github.com/ssbc/scuttle-testbot)
+
+-----------------------------------------------------------
+
+## 10-19-2020
+
+[permissions](https://github.com/ssb-js/secret-stack/blob/main/src/core.ts#L109) in `secret-stack`
+
+
+
