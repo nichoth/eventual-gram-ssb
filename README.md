@@ -425,10 +425,21 @@ The PR was for the `store` docs in flumeview-reduce.
 ---------------------------------------------------
 
 ## 10-18-2020
-Do the flume view exploration:
+Run the flume view exploration:
 ```
 $ node test-flume-view/index.js 
 ```
 
+### how does replication work?
 
+[ssb-replicate legacy confusion](https://github.com/ssbc/ssb-replicate/issues/1)
+"you do need ssb-replicate to be installed first"
 
+"peers replicate by calling `createHistoryStream({id, seq})` for every feed to be replicated."
+
+[protocol guide](https://ssbc.github.io/scuttlebutt-protocol-guide/#createHistoryStream)
+"The RPC procedure `createHistoryStream` is how peers ask each other for a list of messages in a particular feed."
+
+"Scuttlebutt peers make requests to each other using an RPC protocol. Typical requests include asking for the latest messages in a particular feed or requesting a blob"
+
+[scuttle-testbot](https://github.com/ssbc/scuttle-testbot)
