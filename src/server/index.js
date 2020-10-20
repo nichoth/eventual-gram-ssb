@@ -30,7 +30,6 @@ function startSSB () {
     //     NODE_ENV
     // } = process.env
 
-    // use dev database
     var appName = 'ssb-ev'
 
     if (process.env.APP_NAME) {
@@ -38,6 +37,7 @@ function startSSB () {
     }
 
     console.log('node env', process.env.NODE_ENV)
+    // use dev database
     if (process.env.NODE_ENV === 'development' && !process.env.APP_NAME) {
         appName = 'ssb-ev-DEV'
     } else if (process.env.NODE_ENV === 'test') {
@@ -61,6 +61,8 @@ function startSSB () {
     // error, warning, notice, or info (Defaults to notice)
     config.logging.level = 'notice'
 
+    var tags = require('./tags')
+
     // these are the plugins on the ssb-server readme exmple
     var _sbot = sbot
         // .use(require('ssb-db'))
@@ -71,11 +73,13 @@ function startSSB () {
         .use(require('ssb-replicate'))
         .use(require('ssb-backlinks'))
         // .use(require('scuttle-tag'))
-        .use(require('ssb-tags'))
+        // .use(require('ssb-tags'))
         .use(require('ssb-blobs'))
         .use(require('ssb-serve-blobs'))
         .use(require('ssb-invite'))
         .use(require('ssb-friends'))
+        .use(require('./tags'))
+        // .use(require('./foo'))
         .call(null, config)
 
     // .use(require('ssb-private'))
@@ -91,11 +95,28 @@ function startSSB () {
         console.log('req pathname', pathname)
     }).listen(WS_PORT, function (err) {
         if (err) throw err
-        console.log('listening on ' + WS_PORT)
+        console.log('**listening on ' + WS_PORT)
 
         // for electron .fork
         if (process.send) process.send('ok')
     })
+
+
+    // console.log('sbot', _sbot)
+    // console.log('sbot.aaaaa', _sbot.aaaaa)
+
+
+    // _sbot.publish({
+    //     type: 'post',
+    //     text: 'Hello, world!'
+    // }, function (err, msg) {
+    //     console.log('**post 2', err, msg)
+    //     if (err) throw err
+    //     // sbot.tags.get(function (err, data) {
+    //     //     console.log('**get2**', err, data)
+    //     // })
+    // })
+
 
 
     // testing

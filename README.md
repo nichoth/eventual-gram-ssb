@@ -447,8 +447,9 @@ $ node test-flume-view/index.js
 -----------------------------------------------------------
 
 ## 10-19-2020
+[permissions](https://github.com/ssb-js/secret-stack/blob/main/src/core.ts#L109) in `secret-stack` and associated [gh issue](https://github.com/ssbc/ssb-server/issues/736)
 
-[permissions](https://github.com/ssb-js/secret-stack/blob/main/src/core.ts#L109) in `secret-stack`
 
-
+## 10-20-2020
+Tags index doesn't work with the app-name `ssb-ev-DEV`, but it does with `ssb-ev`. I think there is no content in the dev env. I'm not sure though why they would be different
 
