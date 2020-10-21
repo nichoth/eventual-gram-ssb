@@ -453,3 +453,5 @@ $ node test-flume-view/index.js
 ## 10-20-2020
 Tags index doesn't work with the app-name `ssb-ev-DEV`, but it does with `ssb-ev`. I think there is no content in the dev env. I'm not sure though why they would be different
 
+How are records append to the log when replicating? If we wanted to replicate by say fetching log entries via http request, how would that work?
+
