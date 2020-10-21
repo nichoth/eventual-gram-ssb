@@ -22,8 +22,8 @@ function createTagsView ({ postType }) {
         var Reduce = createReduce(Store)
 
         function reducer (acc, { tags, key }) {
-            // console.log('**in reducer** acc', acc)
             console.log('**in reducer tags**', tags)
+            // make a list of messages that have this tag
             tags.forEach(function (tag) {
                 acc[tag] = acc[tag] || []
                 acc[tag].push(key)
@@ -31,7 +31,6 @@ function createTagsView ({ postType }) {
             return acc
         }
         function mapper (msg) {
-            // console.log('in map', msg)
             if (msg.value.content.type === postType) {
                 var tokens = hashtag.parse(msg.value.content.text || '')
                 var tags = tokens.tags
