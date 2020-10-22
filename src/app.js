@@ -292,20 +292,10 @@ function App (sbot) {
     }
 
     function newPost ({ image, text }, cb) {
-        // todo
-        // in here, parse the message and look for hashtags
-        // create the hashtag and apply it to the message
-
-
-        // do createTags, nameTags, and applyTags
-
-
-
         var hasher = createHash('sha256')
 
         S(
             fileReader(image),
-            // fileReaderStream(image),
             hasher,
             sbot.blobs.add(function (err, _hash) {
                 console.log('in blob.add', err, _hash)

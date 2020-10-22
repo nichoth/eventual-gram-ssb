@@ -455,3 +455,55 @@ Tags index doesn't work with the app-name `ssb-ev-DEV`, but it does with `ssb-ev
 
 How are records append to the log when replicating? If we wanted to replicate by say fetching log entries via http request, how would that work?
 
+
+## 10-21-2020
+Copying some stuff from patchwork: https://viewer.scuttlebot.io/%25f9pa8FparL%2FzQNwo%2B6qG9IBH4nxBfjeGgAAuIqdjtHg%3D.sha256
+
+> Totally agreed, it’s unfortunate. I can share some of my data from reversing experiments.  
+The ssb-ebt flavor of domnics ebt implementation also as a comparsion to plumtree section which also has some helpful pointers of what it is doing.  
+The gist is this:  
+open a duplex muxrpc stream to send arbitrary JSON objects between client and server.
+each side sends their vector clock, a list of all the feeds they store and up to which sequence they have, as a giant json object like this:{ "@feed1":23, "@feed2":42, "@feed3":-120, ... }. Notice the negative there? that should be interepretated as dont send me newer messages of that feed, all the other feeds should be interpreted as send me updates eagerly. Also, the comparison section suggest to leave out entries in that object when a feed didn’t change.
+send new messages of each feed where the other party has less then the host.  
+update the vector clocks once you get new messages for a feed
+this is basically it for the wire protocol. The rest is lots of local state about the vector clocks of all the peers the host was in contact with and one or more heuristics for electing which feed to get from which peer.  
+My personal gripe: this way of having messages and vector clocks on the same channel glued the current weird signing format in even more. Adding a new one like bamboo or gabbygrove, we will have to re-evaluate this and I’d propose to just do the vector clock exchanges and having one channel per format or somehow framing it differently. Anyways it feels like a breaking change. Adding and option just to do the vector exchanges should hopefully be a simple start, though.  
+Another problem: this is a distributed system with lots of state. If you happen to re-install your ssb identity because you only backed up the secret there is no clear way to reset your state across the network. One could think of a new message type for this but it currently isn’t implemented.  
+HTH
+
+-----------------------------------------
+
+Read about [earthstar](https://github.com/earthstar-project/earthstar/blob/master/docs/overview.md) today. Looks very cool. It's nice to break down ssb and related things into their core comonents.
+
+What is ssb really? 
+* a merkle dag (or many; each feed is a merkle dag i think. Each markle-dag in this case is a different DB view)
+* a DB (flumeDB)
+* public/private key pair for identity
+* append only log of different merkle trees
+
+## earthstar
+Need a tutorial -- a well written intro/how to use it document
+
+see https://github.com/earthstar-project/earthstar/blob/master/src/readme-example.ts -- the comments are good
+
+[syncing](https://github.com/earthstar-project/earthstar/blob/master/docs/syncing.md)
+
+-------------------------------------
+
+## 10-22-2020
+
+Reading about [pigeon protocol](https://tildegit.org/PigeonProtocolConsortium/Protocol-Spec). Seems cool
+
+discovered [gemini](https://gemini.circumlunar.space/docs/faq.html) protocol
+
+read about [agregore](https://github.com/AgregoreWeb/agregore-browser) browser
+
+
+
+
+
+
+
+
+
+
