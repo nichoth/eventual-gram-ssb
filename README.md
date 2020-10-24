@@ -514,6 +514,17 @@ What is radicle? I don't understand how it changes git/github.
 
 It seems that radicle uses a 'local-first' approach with issues/project metadata in addition to the source code (git files).
 
+-----------------------------------------
+
+### hypercore
+```
+The Hypercore Protocol consists of three things:
+
+An append-only log structure (Hypercore) designed for fast, secure replication between peers in peer-to-peer networks. Hypercore is our core primitive.
+A DHT implementation that works well in home networks (Hyperswarm). We mainly use this for discovering and replicating Hypercores.
+A few higher-level data structures built on top of Hypercores (Hyperdrive, Hypertrie), for constructing filesystems and kv-stores.
+```
+
 
 
 
