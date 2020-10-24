@@ -498,6 +498,24 @@ discovered [gemini](https://gemini.circumlunar.space/docs/faq.html) protocol
 
 read about [agregore](https://github.com/AgregoreWeb/agregore-browser) browser
 
+------------------------------------------------
+
+## 10-24-2020
+Read about [radicle](https://radicle.xyz/) today. A [nice article](https://radicle.xyz/radicle-link.html)
+
+From the article:
+> Radicle Link extends Git with peer-to-peer network discovery. Taking inspiration from Secure Scuttlebutt,
+
+Which is ironic, because I thought peer discovery was the weak point in the ssb system. It depends heavily on pub servers, and just maintains a simple list of peer (server) addresses to try to connect to.
+
+What is radicle? I don't understand how it changes git/github.
+
+> returning to a fully distributed model
+
+It seems that radicle uses a 'local-first' approach with issues/project metadata in addition to the source code (git files).
+
+
+
 
 
 
