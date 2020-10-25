@@ -14,16 +14,10 @@ function Ev () {
         var match = router.match(props.route.pathname)
         var route = match ? match.action(match) : null
         var routeView = route ? route.view : null
-        // var events = (route.events || [])
-        // events.forEach(ev => {
-        //     emit(ev, null)
-        // })
 
-        return html`<div>
-            <${Shell} emit=${emit} ...${props}>
-                <${routeView} emit=${emit} ...${props} />
-            <//>
-        </div>`
+        return html`<${Shell} emit=${emit} ...${props}>
+            <${routeView} emit=${emit} ...${props} />
+        <//>`
     }
 
     var { bus, view } = connect(state, View)

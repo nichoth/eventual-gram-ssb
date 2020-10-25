@@ -18,7 +18,6 @@ function connect (state, View) {
     window.ev.emit = emit
 
 
-
     catchRoutes(parsedUrl => {
         state.route.set(parsedUrl)
 
