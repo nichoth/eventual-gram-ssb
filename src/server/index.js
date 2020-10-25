@@ -63,7 +63,6 @@ function startSSB () {
 
     // these are the plugins on the ssb-server readme exmple
     var _sbot = sbot
-        // .use(require('ssb-db'))
         // .use(require('ssb-plugins'))
         .use(require('ssb-master'))
         // // .use(require('ssb-ws'))
