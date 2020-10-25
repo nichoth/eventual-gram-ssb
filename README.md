@@ -525,11 +525,27 @@ A DHT implementation that works well in home networks (Hyperswarm). We mainly us
 A few higher-level data structures built on top of Hypercores (Hyperdrive, Hypertrie), for constructing filesystems and kv-stores.
 ```
 
+Reading about [hyperswarm](https://pfrazee.hashbase.io/blog/hyperswarm) now.
 
+Hyperswarm is a kademlia DHT. Includes a way to **holepunch** nats. (This means direct p2p connections, not using a pub server)
 
+Devices join topics by listing their IP so that other devices can establish connections.
 
+Hyperswarm would be used by an application to find peers and connect
 
+### hyperspace
+> Hyperspace is a lightweight service that provides remote access to Hypercores/Hyperswarm, and nothing more
 
+> the server keeps a long-running Hyperswarm node online for you
+
+### hyperswarm
+[hyperswarm](https://pfrazee.hashbase.io/blog/hyperswarm) 
+> Hyperswarm is a stack of networking modules for finding peers and creating reliable connections. Users join the swarm for a “topic” and query periodically for other peers who are in the topic. When ready to connect, Hyperswarm helps create a socket between them using either UTP or TCP.
+> Hyperswarm uses a Kademlia DHT to track peers and arrange connections. The DHT itself includes mechanisms to holepunch NATs. For LAN-based discovery, we currently use multicast DNS.
+
+[article about dat-photos](https://medium.com/blue-link-labs/building-a-decentralized-peer-to-peer-photos-app-with-beaker-and-dat-c8a470202b4c)
+
+> The Photos app takes advantage of Beaker’s DatArchive API, which has methods for reading and writing the user’s filesystem 
 
 
 

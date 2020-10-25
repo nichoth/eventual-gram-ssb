@@ -34,7 +34,10 @@ function Home (props) {
                 if (!hash) return null
 
                 var authorId = post.value.author
-                var author = (props.people[authorId] || {})
+                var author = (props.people[authorId] || {
+                    id: authorId,
+                    name: authorId
+                })
                 var postAvatar = (author.imgUrl || '')
                 // console.log('postAvatar', postAvatar)
                 // console.log('post', post)

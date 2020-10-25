@@ -76,7 +76,7 @@ function startSSB () {
         .use(require('ssb-serve-blobs'))
         .use(require('ssb-invite'))
         .use(require('ssb-friends'))
-        .use(require('./tags')({ postType: 'post' }))
+        // .use(require('./tags')({ postType: 'post' }))
         .call(null, config)
 
     // .use(require('ssb-private'))
