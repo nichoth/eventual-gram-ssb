@@ -32,7 +32,7 @@
   "dependencies": {
     "@nichoth/catch-routes": "^1.0.3",
     "@nichoth/events": "^1.1.2",
-    "@nichoth/ssb-tags": "0.0.6",
+    "@nichoth/ssb-tags": "0.0.7",
     "after": "^0.8.2",
     "filereader-pull-stream": "^1.0.0",
     "flumecodec": "0.0.1",

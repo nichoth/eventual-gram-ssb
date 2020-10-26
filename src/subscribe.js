@@ -2,8 +2,7 @@ var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
 var S = require('pull-stream')
-// var hashtag = require('hashtag')
-// var series = require('run-series')
+
 
 // for testing
 window.ev = window.ev || {}
@@ -52,6 +51,7 @@ function subscribe (bus, state, app) {
         app.messages(function (err, msgs) {
             if (err) throw err
             var posts = msgs.map(([hash, url, post]) => post)
+            console.log('postssss', posts)
             var urls = msgs.reduce(function (acc, [hash, url, post]) {
                 acc[hash] = url
                 return acc
@@ -116,65 +116,11 @@ function subscribe (bus, state, app) {
     })
 
     bus.on(evs.post.new, function ({ image, text }) {
-        console.log('*new post*', image, text)
-
-        // TODO
-        // var { tags } = hashtag.parse(text)
-
-        // first find existing tags
-        // app.getAllTags(function (err, allTags) {
-        //     if (err) throw err
-        //     find any existing tag names that match in the list `tags`
-        //     need to get the about msgs for the tags
-        //     if there's a match, apply that tag to this message
-        //     (need to publish the message first)
-        //     app.applyTags(tagObjs, msgId, function (err, res) {
-        //         console.log('tags applied', err, res)
-        //     })
-
-        //     for any without a match, create and name the tag,
-        //     then apply the tag to this message
-        //     app.createTags(tags, function (err, _tags) {
-        //         if (err) throw err
-        //         console.log('created tags', err, _tags)
-        //         app.nameTags({
-        //            tags: _tags,
-        //            names: tags
-        //        }, (err, tagObjs) => {
-        //             console.log('named tags', err, tagObjs)
-        //         })
-        //         app.applyTags(tagObjs, msgId, function (err, res) {
-        //             console.log('tags applied', err, res)
-        //         })
-        //     })
-        // })
-
-        app.getAllTags(function (err, allTags) {
-            if (err) throw err
-        })
-
-        // do the tags
-        // app.createTags(tags, function (err, _tags) {
-        //     if (err) throw err
-        //     console.log('created tags', err, _tags)
-        //     app.nameTags(_tags, tags, (err, tagObjs) => {
-        //         console.log('named tags', err, tagObjs)
-        //         // todo
-        //         // need msgID here
-        //         // app.applyTags(tagObjs, msgId, function (err, res) {
-        //         //     console.log('tags applied', err, res)
-        //         // })
-        //     })
-        // })
-
+        console.log('*new post start*', image, text)
 
         app.newPost({ image, text }, function (err, res) {
-            console.log('new post', err, res)
+            console.log('new post created', err, res)
             if (err) throw err
-
-            app.tagPost(text, res.key, function (err, res) {
-                console.log('tagged post', err, res)
-            })
 
             var posts = (state.posts() || [])
             posts.unshift(res)
