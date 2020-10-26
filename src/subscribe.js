@@ -42,6 +42,7 @@ function subscribe (bus, state, app) {
                 // getFollows()
 
                 // if (err) throw err
+                console.log('url for hash', err, url)
                 if (err) return console.log('err profile', err)
                 state.avatarUrl.set(url)
                 state.me.set(profile)
@@ -143,17 +144,14 @@ function subscribe (bus, state, app) {
 
     bus.on(evs.profile.setAvatar, function (ev) {
         var file = ev.target.files[0]
-        console.log('file', file)
-
-        // bus, state, app
 
         var { id } = state.me()
         app.setAvatar({ file, id }, function (err, { imageUrl, hash }) {
             if (err) throw err
+            state.avatarUrl.set(imageUrl)
             state.me.set(xtend(state.me(), {
                 image: hash
             }))
-            state.avatarUrl.set(imageUrl)
         })
     })
 

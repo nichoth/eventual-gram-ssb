@@ -460,7 +460,7 @@ function App (sbot) {
             var { id } = res
 
             getAvatar(sbot, id, id, function (err, profile) {
-                // console.log('profile', profile)
+                console.log('profile', profile)
                 cb(err, profile)
             })
         })
@@ -481,9 +481,10 @@ function App (sbot) {
                     type: 'about',
                     about: id,
                     image: hash
-                }, cb)
-
-                cb(null, { imageUrl, hash })
+                }, function (err, res) {
+                    if (err) return cb(err)
+                    cb(null, { imageUrl, hash })
+                })
             })
         )
     }
