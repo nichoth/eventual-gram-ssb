@@ -249,7 +249,8 @@ function App (sbot) {
     //                     name: tag
     //                 }, function (err, resName) {
     //                     if (err) throw err
-    //                     console.log('**create & name res**', resName, resCreate)
+    //                     console.log('**create & name res**', resName,
+    //                         resCreate)
     //                     var withName = xtend(resCreate, {
     //                         value: xtend(resCreate.value, {
     //                             content: xtend(resCreate.value.content, {
