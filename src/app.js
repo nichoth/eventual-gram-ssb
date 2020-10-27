@@ -7,11 +7,6 @@ var fileReader = require('pull-file-reader')
 var _ = {
     get: require('lodash/get')
 }
-// var hashtag = require('hashtag')
-// var Stag = require('scuttle-tag')
-// var parallel = require('run-parallel')
-// var getContent = require('ssb-msg-content')
-// var xtend = require('xtend')
 
 function App (sbot) {
     // var stag = Stag(sbot)
@@ -139,158 +134,12 @@ function App (sbot) {
         getPubs,
         contacts,
         follow,
-        getFollows,
-        // createTags,
-        // nameTags,
-        // applyTags,
-        // getAllTags,
-        // getTagsWithNames,
-        // tagPost
-        // getAvatarById
+        getFollows
     }
 
     function joinPub (inviteCode, cb) {
         sbot.invite.accept(inviteCode, cb)
     }
-
-    // function tagPost (text, msgId, cb) {
-    //     var tags = hashtag.parse(text).tags
-
-    //     if (!tags.length) return cb(null, null)
-
-    //     getTagsWithNames(function (err, existingTags) {
-    //         if (err) throw err
-    //         var _tags = tags.map(function (tag) {
-    //             var existingTag = existingTags.find(function ({ name }) {
-    //                 return name === tag
-    //             })
-    //             if (!existingTag) return tag
-    //             return existingTag
-    //         })
-
-    //         var createThese = _tags.filter(tag => typeof tag === 'string')
-    //         var applyThese = _tags.filter(tag => typeof tag === 'object')
-    //         applyTags(applyThese, msgId, function (err, res) {
-    //             console.log('tags applied', err, res)
-    //         })
-    //         createTags(createThese, function (err, res) {
-    //             console.log('created', err, res)
-    //             applyTags(res, msgId, function (err, res) {
-    //                 console.log('applied new tags', err, res)
-    //             })
-    //         })
-    //     })
-
-    // }
-
-    // todo -- cache this for real
-    // var oldTags
-    // function getTagsWithNames (cb) {
-    //     if (oldTags) return cb(null, oldTags)
-    //     getAllTags(function (err, _tags) {
-    //         if (err) throw err
-
-    //         S(
-    //             sbot.messagesByType({ type: 'about' }),
-    //             S.map(function (aboutMsg) {
-    //                 var tag = _tags.find(tagMsg => {
-    //                     return tagMsg.key === getContent(aboutMsg).about
-    //                 })
-    //                 if (!tag) return null
-    //                 return xtend(tag, {
-    //                     value: xtend(tag.value, {
-    //                         content: xtend(tag.value.content, {
-    //                             name: getContent(aboutMsg).name
-    //                         })
-    //                     })
-    //                 })
-    //             }),
-    //             S.filter(tag => _.get(tag, 'value.content.name', null)),
-    //             S.collect(function (err, tagsWithNames) {
-    //                 oldTags = tagsWithNames
-    //                 cb(err, tagsWithNames)
-    //             })
-    //         )
-    //     })
-    // }
-
-    // function getAllTags (cb) {
-    //     // ## tag example ##
-    //     // key: "%ia0w9Wxv3gQkj7oeiVD/aVur+CyKlg6HKjLt9Gy/rok=.sha256"
-    //     // timestamp: 1602137064102
-    //     // value:
-    //     // author: "@JBB7E7zUDjscW1lgUuescqbO/kcUfYfXlwwgY3guAeI=.ed25519"
-    //     // content: {type: "tag", version: 1}
-    //     // hash: "sha256"
-    //     // previous: "%nIjVsKkW6D+eK0soFJekMdEUESP0yonRVVkLGbDRTSw=.sha256"
-    //     // sequence: 29
-    //     // signature: "a8u4DQFnpMq6..."
-    //     // timestamp: 1602137064101
-
-    //     S(
-    //         sbot.messagesByType({ type: 'tag' }),
-    //         S.collect(function (err, msgs) {
-    //             if (err) return cb(err)
-    //             cb(null, msgs)
-    //         })
-    //     )
-    // }
-
-    // function createTags (tags, cb) {
-    //     if (!tags.length) return cb(null)
-    //     console.log('create tags')
-
-    //     parallel(tags.map(function (tag) {
-    //         return function (_cb) {
-    //             stag.async.create({}, function (err, resCreate) {
-    //                 if (err) throw err
-    //                 stag.async.name({
-    //                     tag: resCreate.key,
-    //                     name: tag
-    //                 }, function (err, resName) {
-    //                     if (err) throw err
-    //                     console.log('**create & name res**', resName,
-    //                         resCreate)
-    //                     var withName = xtend(resCreate, {
-    //                         value: xtend(resCreate.value, {
-    //                             content: xtend(resCreate.value.content, {
-    //                                 name: resName.value.content.name
-    //                             })
-    //                         })
-    //                     })
-
-    //                     _cb(null, withName)
-    //                 })
-    //             })
-    //         }
-    //     }), function (err, res) {
-    //         cb(err, res)
-    //     })
-
-    //     // then apply the tags to the post
-    // }
-
-    // function nameTags (tags, names, cb) {
-    //     console.log('in name', tags)
-    //     parallel(tags.map(function (tag, i) {
-    //         return function (_cb) {
-    //             // todo: need to get tag names
-    //             stag.async.name({ tag, name: names[i] }, _cb)
-    //         }
-    //     }), cb)
-    // }
-
-    // function applyTags (tags, msgId, cb) {
-    //     parallel(tags.map(function ({ key }) {
-    //         return function (_cb) {
-    //             stag.async.apply({
-    //                 tag: key,
-    //                 message: msgId,
-    //                 tagged: true
-    //             }, _cb)
-    //         }
-    //     }), cb)
-    // }
 
     function newPost ({ image, text }, cb) {
         var hasher = createHash('sha256')
