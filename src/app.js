@@ -77,7 +77,8 @@ function App (sbot) {
     // peers[0].host, b/c the `peers` call has the connected state
     // and use `sbot.gossip.changes` to keep it up to date
 
-    getPubs((err, res) => console.log('got pubs', err, res))
+    // getPubs((err, res) => console.log('got pubs', err, res))
+
     // *this takes too long*
     // also renders too many pubs
     // we need to know if we are connected or not and put connected pubs at

@@ -23,12 +23,20 @@ function subscribe (bus, state, app) {
     bus.on(evs.app.start, (ev) => {
         console.log('***start***', ev)
 
+        console.log('**getting profile**')
         app.getProfile(function (err, profile) {
-            console.log('got profile', err, profile)
+            console.log('**got profile**', err, profile)
             if (err) throw err
             var hash = profile.image
             var { id } = profile
             if (!hash) return state.me.set(profile)
+
+            app.getUrlForHash(hash, function (err, url) {
+                console.log('**got profile avatar**', err, url)
+                if (err) return console.log('err profile', err)
+                state.avatarUrl.set(url)
+                state.me.set(profile)
+            })
 
             S(
                 app.getFollows(id),
@@ -37,13 +45,6 @@ function subscribe (bus, state, app) {
                     state.followed.set(res)
                 })
             )
-
-            app.getUrlForHash(hash, function (err, url) {
-                console.log('url for hash', err, url)
-                if (err) return console.log('err profile', err)
-                state.avatarUrl.set(url)
-                state.me.set(profile)
-            })
         })
 
         app.messages(function (err, msgs) {
