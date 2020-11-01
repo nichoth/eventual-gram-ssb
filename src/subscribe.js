@@ -24,6 +24,7 @@ function subscribe (bus, state, app) {
         console.log('***start***', ev)
 
         app.getProfile(function (err, profile) {
+            console.log('got profile', err, profile)
             if (err) throw err
             var hash = profile.image
             var { id } = profile
@@ -38,10 +39,6 @@ function subscribe (bus, state, app) {
             )
 
             app.getUrlForHash(hash, function (err, url) {
-                // testing
-                // getFollows()
-
-                // if (err) throw err
                 console.log('url for hash', err, url)
                 if (err) return console.log('err profile', err)
                 state.avatarUrl.set(url)

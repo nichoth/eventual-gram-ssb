@@ -4,9 +4,14 @@ The electron apps are in the "releases" link to the right ->
 
 --------------------------------------
 
-Start a dev server that automatically reloads on any change
+Start a dev server that automatically reloads on any change, with the `NODE_ENV` env variable set to 'development', which gives an `appName` of `ssb-ev-DEV`: 
 ```
 $ npm start
+```
+
+Start the dev server, with no env variables set (defaults to appName of `ssb-ev`:
+```
+npm run open
 ```
 
 Open a test GUI
