@@ -552,7 +552,23 @@ Hyperswarm would be used by an application to find peers and connect
 
 > The Photos app takes advantage of Beaker’s DatArchive API, which has methods for reading and writing the user’s filesystem 
 
+--------------------------------------------------------
 
+11-1-2020
+Getting the gossip was slowing down everything for some reason. It made getting the avatar much slower in this case.
+
+-----------------------------------------------
+
+## 11-4-2020
+Reading about arj's project ssb-browser -- %urkKJmW7VXq8mF1VPK2f5LFYjKOxvxPegPRT0Z4R2VU=.sha256
+
+> Time for the next installment of #ssb-show-and-tell. I just made a release of [ssb-browser-core](https://github.com/arj03/ssb-browser-core) and [ssb-browser-demo](https://github.com/arj03/ssb-browser-demo) that now supports rooms. I've been talking on and off with [@andrestaltz](@QlCTpvY7p9ty2yOFrv1WU1AE88aoQc4Y7wYal7PFc+w=.ed25519) for the last month or so about rooms and wanted to put it into browser so I could see how it really works. With this it is much easier for two browsers to sync directly. The only thing left for easier onboarding was partial replication so I implemented the current version to see two browsers syncing like this:
+
+> ![browsers-partial-sync.jpg](&4qRjdG6n8boGHNQ/+4DWHPDyf6FqFPCiRmvuhk1AivY=.sha256)
+
+> I'm currently working on a better design for partial replication so this is mostly a tech demo.
+
+> Besides these changes I switched from [flumelog-aligned-offset](https://github.com/flumedb/flumelog-aligned-offset) to [async-flumelog](https://github.com/flumedb/async-flumelog) as I could never get aligned offset completely stable. It has some nice performance improvements compared to normal [flumelog-offset](https://github.com/flumedb/async-flumelog#benchmarks). Lastly jitdb now loads indexes lazily so startup is better and memory usage also improved because of this.
 
 
 
