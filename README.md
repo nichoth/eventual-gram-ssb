@@ -570,6 +570,45 @@ Reading about arj's project ssb-browser -- %urkKJmW7VXq8mF1VPK2f5LFYjKOxvxPegPRT
 
 > Besides these changes I switched from [flumelog-aligned-offset](https://github.com/flumedb/flumelog-aligned-offset) to [async-flumelog](https://github.com/flumedb/async-flumelog) as I could never get aligned offset completely stable. It has some nice performance improvements compared to normal [flumelog-offset](https://github.com/flumedb/async-flumelog#benchmarks). Lastly jitdb now loads indexes lazily so startup is better and memory usage also improved because of this.
 
+---------------------------------------------------
+
+## 11-7-2020
+Watched [this video](https://www.youtube.com/watch?v=nOSB177SfEM&feature=youtu.be&t=380) by arj. It doesn't go into detail about the ssb-browser system, it's quite a high level video in general.
+
+Also, [the blog post](https://people.iola.dk/arj/2020/02/18/secure-scuttlebutt-in-a-browser/) about ssb-browser. Links to [random-access-web](https://github.com/random-access-storage/random-access-web)
+
+Found this [ssb-web-extension](https://github.com/powersource/ssb-webextension-demo/) demo
+
+[a video demo of ssb-browser](https://hooktube.com/watch?v=E8pnc2N1XHo&feature=youtu.be)
+
+* https://github.com/ssbc/ssb-ooo
+* https://github.com/arj03/ssb-get-thread
+* https://github.com/powersource/ssb-webextension-demo/
+* https://github.com/arj03/ssb-browser-core
+* https://github.com/arj03/ssb-browser-demo
+* https://github.com/arj03/ssb-partial-replication
+* https://hooktube.com/watch?v=E8pnc2N1XHo&feature=youtu.be
+* [blog article about ssb-browser](https://people.iola.dk/arj/2020/02/18/secure-scuttlebutt-in-a-browser/)
+* [HOW TO SETUP A PUB FOR SSB BROWSER](https://people.iola.dk/arj/2020/03/04/how-to-setup-a-pub-for-ssb-browser/)
+* https://github.com/random-access-storage/random-access-web
+* [a great article -- ink and switch](https://www.inkandswitch.com/local-first.html)
+
+## 11-8-2020
+This list comes from https://www.inkandswitch.com/local-first.html
+* Alexei Baboulevitch’s Data Laced with History
+* Martin Kleppmann’s Convergence vs Consensus (slides)
+* Shapiro et al.’s comprehensive survey
+* Attiya et al.’s formal specification of collaborative text editing
+* Gomes et al.’s formal verification of CRDTs
+
+* https://github.com/automerge/automerge
+* https://github.com/automerge/hypermerge
+
+https://people.iola.dk/arj/2020/02/18/secure-scuttlebutt-in-a-browser/
+Read this great blog post
+
+
+
 
 
 
