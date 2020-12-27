@@ -2,6 +2,10 @@
 
 The electron apps are in the "releases" link to the right ->
 
+------------------------------------
+
+[public pubs](https://github.com/ssbc/ssb-server/wiki/pub-servers#public-pubs)
+
 --------------------------------------
 
 Start a dev server that automatically reloads on any change, with the `NODE_ENV` env variable set to 'development', which gives an `appName` of `ssb-ev-DEV`: 

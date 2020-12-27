@@ -227,7 +227,26 @@ function App (sbot) {
     //         S.drain(function ([hash, url, post]) {
     //             console.log('post in here', post)
 
+<<<<<<< Updated upstream
     //             var authorId = post.value.author
+=======
+                sbot.blobs.has(hash, function (err, res) {
+                    if (!res) {
+                        console.log('miss', err, res)
+
+                        S(
+                            sbot.blobs.get(hash),
+                            S.collect(function (err, res) {
+                                console.log('blobs.get', err, res)
+                            })
+                        )
+
+                        sbot.blobs.want(hash, {}, function(err, res) {
+                            console.log('want cb', err, res)
+                        })
+                    }
+                })
+>>>>>>> Stashed changes
 
     //             if (!state().people[authorId]) {
     //                 getProfileById(authorId, function (err, { name }) {
@@ -351,6 +370,7 @@ function App (sbot) {
             S.collect(function (err, msgs) {
                 var nameMsgs = msgs.filter(msg => msg.value.content.name)
                 var nameMsg = nameMsgs[nameMsgs.length - 1]
+<<<<<<< Updated upstream
                 var images = msgs.filter(msg => msg.value.content.image)
                 var imageMsg = images[images.length - 1]
 
@@ -358,6 +378,9 @@ function App (sbot) {
                     name: nameMsg ? nameMsg.value.content.name : '' + id,
                     image: _.get(imageMsg, 'value.content.image', null)
                 })
+=======
+                cb(err, { name: nameMsg.value.content.name })
+>>>>>>> Stashed changes
             })
         )
     }
