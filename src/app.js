@@ -8,6 +8,9 @@ var _ = {
     get: require('lodash/get')
 }
 
+// this file just uses the given `sbot` and returns/cb's with response
+// state for the app is set is `subscribe`
+
 function App (sbot) {
     console.log('sbot', sbot)
 
