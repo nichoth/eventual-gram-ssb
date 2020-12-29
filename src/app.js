@@ -8,9 +8,10 @@ var _ = {
     get: require('lodash/get')
 }
 
-function App (sbot) {
-    // var stag = Stag(sbot)
+// this file just uses the given `sbot` and returns/cb's with response
+// state for the app is set is `subscribe`
 
+function App (sbot) {
     console.log('sbot', sbot)
 
 

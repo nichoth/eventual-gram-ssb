@@ -11,6 +11,7 @@ function Ev () {
 
     var View = function (props) {
         var { emit } = props
+        // route match
         var match = router.match(props.route.pathname)
         var route = match ? match.action(match) : null
         var routeView = route ? route.view : null
