@@ -9,8 +9,6 @@ var _ = {
 }
 
 function App (sbot) {
-    // var stag = Stag(sbot)
-
     console.log('sbot', sbot)
 
 
