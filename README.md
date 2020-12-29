@@ -609,9 +609,9 @@ This list comes from https://www.inkandswitch.com/local-first.html
 * https://github.com/automerge/hypermerge
 
 https://people.iola.dk/arj/2020/02/18/secure-scuttlebutt-in-a-browser/
-Read this great blog post
+Read this great blog post today
 
-
+watched the [arj video](https://hooktube.com/watch?v=E8pnc2N1XHo&feature=youtu.be)
 
 
 
