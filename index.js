@@ -15,6 +15,7 @@ start(function (err, { sbot }) {
 
     // ------- for testing -----------------------------
     window.theApp = {}
+    window.theApp.state = state
     window.theApp.emit = function (name, data) {
         bus.emit(name, data || null)
     }

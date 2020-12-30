@@ -50,7 +50,7 @@ function New (props) {
 
     function chooseFile (ev) {
         var file = ev.target.files[0]
-        // console.log('file', file)
+        console.log('****file****', file)
         setSelectedFile(file)
     }
 
@@ -70,7 +70,11 @@ function New (props) {
 
     return html`<div class="new-post">
         <input id="file-input" type="file" accept="image/*"
-            onChange=${chooseFile} />
+            onChange=${(ev) => {
+                console.log('aaaaaaaaa')
+                chooseFile(ev)
+            }}
+        />
 
         ${selectedFile ?
             html`<${FilePreview} selectedFile=${selectedFile} 

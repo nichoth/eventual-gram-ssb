@@ -12,26 +12,7 @@ describe('My First Test', () => {
     })
 })
 
-// describe('My First Test', () => {
-//     it('Visits the Kitchen Sink', () => {
-//         cy.visit('https://example.cypress.io')
-//     })
-
-//     it('clicking "type" navigates to a new url', () => {
-//         cy.visit('https://example.cypress.io')
-    
-//         cy.contains('type').click()
-    
-//         // Should be on a new URL which includes '/commands/actions'
-//         cy.url().should('include', '/commands/actions')
-
-//         // Get an input, type into it and verify that the value has been updated
-//         cy.get('.action-email')
-//             .type('fake@email.com')
-//             .should('have.value', 'fake@email.com')
-//     })
-// })
-
+// from application code
 var _sbot
 var emit
 
@@ -42,6 +23,7 @@ describe('The app', () => {
 
     it('starts', () => {
         cy.window().then(win => {
+            // from the application code
             console.log('win app', win.theApp)
             emit = win.theApp.emit
             _sbot = win.theApp.sbot
@@ -51,25 +33,41 @@ describe('The app', () => {
 
 describe('a new post', () => {
     it('makes a new post', () => {
+        cy.visit('/new').then(() => {
 
-        document.createElement('canvas').toBlob(function (blob) {
-            var file = new File([blob], 'canvas.jpg', { type: blob.type })
-            var text = 'hello i am bob'
+            cy.fixture('iguana.jpg').as('iguana')
+            cy.get('#file-input').then(function (el) {
+                const blob = Cypress.Blob.base64StringToBlob(this.iguana,
+                    'image/jpg')
 
-            var ev = { image: file, text }
-            emit(evs.post.new, ev)
-        }, 'image/jpeg')
+                const file = new File([blob], 'images/logo.png',
+                    { type: 'image/jpg' })
 
-        cy.visit('/')
+                const list = new DataTransfer()
+                list.items.add(file)
 
+                el[0].files = list.files
+                el[0].dispatchEvent(new Event('change', { bubbles: true }))
 
-        // bug -- when you go to this link
-        // cy.visit('/new')
-            // .get('a.new-post-icon')
-            // .click()
+                window.el0 = el[0]
+
+                console.log('el 0', el[0])
+            })
+
+            cy.get('button[type=submit]')
+                .click()
+
+        })
+
+        //     .get('a.new-post-icon')
+        //     .click()
 
         // cy.get('.new-post-icon').click();
-        // cy.get('#file-input').click
+        // cy.get('#file-input').click()
+
+
+
+
 
         // document.createElement('canvas').toBlob(function (blob) {
         //     var file = new File([blob], 'canvas.jpg', { type: blob.type })
@@ -82,46 +80,51 @@ describe('a new post', () => {
 
 // Need to follow the feed2 and see if the image shows on the home page
 // img needs to be a file like in the browser
-describe('a second feed', () => {
-    it('should publish', () => {
-        cy.visit('/')
-        console.log('env', process.env.NODE_ENV)
-        console.log('sboooooot', _sbot)
-        var alice = ssbKeys.generate()
-        var feed = ssbFeed(_sbot, alice)
 
-        function publishAlice () {
-            feed.publish({
-                type: ts.post,
-                text: 'hello world, I am alice.'
-            }, function (err, res) {
-                expect(err).to.not.exist
+// describe('a second feed', () => {
+//     it('should publish', () => {
+//         cy.visit('/')
+//         console.log('env', process.env.NODE_ENV)
+//         console.log('sboooooot', _sbot)
+//         var alice = ssbKeys.generate()
+//         var feed = ssbFeed(_sbot, alice)
 
-                // check if msg 2 exists in feed 1
-                S(
-                    _sbot.messagesByType({ type: ts.post }),
-                    S.collect((err, msgs) => {
-                        expect(err).to.not.exist
-                        var post = msgs.find(msg => {
-                            return msg.value.author === feed.id
-                        })
-                        expect(post).to.exist
-                        expect(post.value.author).to.equal(alice.id)
-                        expect(post.value.content.text).to.equal(
-                            'hello world, I am alice.')
+//         console.log('**feed**', feed)
 
-                        _sbot.close(function (end) {
-                            var err = (end && end !== true)
-                            expect(err).to.be.false
-                        })
-                    })
-                )
-            })
-        }
+//         function publishAlice () {
+//             feed.publish({
+//                 type: ts.post,
+//                 text: 'hello world, I am alice.'
+//             }, function (err, res) {
+//                 console.log('**in here**', err, res)
 
-        publishAlice()
-    })
-})
+//                 expect(err).to.not.exist
+
+//                 // check if msg 2 exists in feed 1
+//                 S(
+//                     _sbot.messagesByType({ type: ts.post }),
+//                     S.collect((err, msgs) => {
+//                         expect(err).to.not.exist
+//                         var post = msgs.find(msg => {
+//                             return msg.value.author === feed.id
+//                         })
+//                         expect(post).to.exist
+//                         expect(post.value.author).to.equal(alice.id)
+//                         expect(post.value.content.text).to.equal(
+//                             'hello world, I am alice.')
+
+//                         _sbot.close(function (end) {
+//                             var err = (end && end !== true)
+//                             expect(err).to.be.false
+//                         })
+//                     })
+//                 )
+//             })
+//         }
+
+//         publishAlice()
+//     })
+// })
 
 // describe('blurbur', () => {
 //     it('does the thing', () => {
