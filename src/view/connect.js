@@ -13,7 +13,6 @@ function connect (state, View) {
     }
 
 
-    // for testing -----------
     // for testing ------------
     window.ev = window.ev || {}
     window.ev.emit = emit
