@@ -15,6 +15,7 @@ describe('My First Test', () => {
 // from application code
 var _sbot
 var emit
+var state
 
 describe('The app', () => {
     it('loads the home page', () => {
@@ -27,6 +28,7 @@ describe('The app', () => {
             console.log('win app', win.theApp)
             emit = win.theApp.emit
             _sbot = win.theApp.sbot
+            state = win.theApp.state
         })
     })
 })
@@ -49,32 +51,12 @@ describe('a new post', () => {
                 el[0].files = list.files
                 el[0].dispatchEvent(new Event('change', { bubbles: true }))
 
-                window.el0 = el[0]
-
                 console.log('el 0', el[0])
+
+                cy.get('button[type=submit]')
+                    .click()
             })
-
-            cy.get('button[type=submit]')
-                .click()
-
         })
-
-        //     .get('a.new-post-icon')
-        //     .click()
-
-        // cy.get('.new-post-icon').click();
-        // cy.get('#file-input').click()
-
-
-
-
-
-        // document.createElement('canvas').toBlob(function (blob) {
-        //     var file = new File([blob], 'canvas.jpg', { type: blob.type })
-        //     var image = file
-        //     var text = 'foo'
-        //     // _view.emit(evs.post.new, { image, text })
-        // }, 'image/jpeg')
     })
 })
 
