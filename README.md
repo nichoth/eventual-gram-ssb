@@ -620,7 +620,8 @@ Should have `view`, `app`, `subscribe`
 watched the [arj video](https://hooktube.com/watch?v=E8pnc2N1XHo&feature=youtu.be)
 
 
-
+## 12-29-2020
+Rewriting the app structure
 
 
 

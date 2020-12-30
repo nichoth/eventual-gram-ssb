@@ -4,9 +4,10 @@ var after = require('after')
 var S = require('pull-stream')
 
 
-// for testing
+// for testing ---------------
 window.ev = window.ev || {}
 window.ev.evs = evs
+// ---------------------------
 
 
 
