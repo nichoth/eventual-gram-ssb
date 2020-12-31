@@ -130,6 +130,7 @@ function subscribe (bus, state, app) {
 
     bus.on(evs.feed.get, function (feedId) {
         console.log('**get feed**', feedId)
+        console.log('**feed if***', feedId)
 
         if (state.feeds()[feedId]) return
 

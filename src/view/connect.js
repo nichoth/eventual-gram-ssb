@@ -25,7 +25,7 @@ function connect (state, View) {
         // in here do the emit route events
         var match = router.match(parsedUrl.pathname)
         var route = match ? match.action(match) : null
-        var events = (route.events || [])
+        var events = (route ? route.events : [])
         events.forEach(ev => {
             emit(ev, null)
         })

@@ -32,12 +32,12 @@ function _Router () {
     })
 
     // user route
-    router.addRoute('/*', (match) => {
-        var { splats } = match
-        var feedId = splats[0]
-        console.log('**in route**', feedId)
-        return { view: createFeedRoute(feedId) }
-    })
+    // router.addRoute('/*', (match) => {
+    //     var { splats } = match
+    //     var feedId = splats[0]
+    //     console.log('**in route**', feedId)
+    //     return { view: createFeedRoute(feedId) }
+    // })
 
     return router
 }
