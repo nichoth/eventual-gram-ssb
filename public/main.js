@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-const {  fork } = require('child_process');
+const { fork } = require('child_process')
 // var path = require('path')
 
 function createWindow () {
@@ -13,7 +13,7 @@ function createWindow () {
   })
 
   // console.log('env', process.env.NODE_ENV)
-  var server = fork(require.resolve('../src/server.js'))
+  var server = fork(require.resolve('../src/server/index.js'))
 
   // var appName
   // if (process.env.NODE_ENV === 'development') {
@@ -71,3 +71,4 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
