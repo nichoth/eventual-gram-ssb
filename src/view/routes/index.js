@@ -1,7 +1,7 @@
 var Router = require('ruta3')
 var Home = require('./home')
 var New = require('./new')
-var createFeedRoute = require('./feed')
+// var createFeedRoute = require('./feed')
 var createPostView = require('./post')
 var Pubs = require('./pubs')
 var evs = require('../../EVENTS')
