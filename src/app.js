@@ -380,6 +380,7 @@ function App (sbot) {
     // }
 
     function getUserPosts (feedId, cb) {
+        console.log('** in here**', feedId)
         S(
             sbot.createUserStream({ id: feedId }),
             S.collect(function (err, msgs) {
