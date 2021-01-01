@@ -119,7 +119,7 @@ function subscribe (bus, state, app) {
         console.log('*new post start*', image, text)
 
         app.newPost({ image, text }, function (err, res) {
-            console.log('new post created', err, res)
+            // console.log('new post created', err, res)
             if (err) throw err
 
             var posts = (state.posts() || [])
@@ -148,10 +148,10 @@ function subscribe (bus, state, app) {
         var { id } = state.me()
         app.setAvatar({ file, id }, function (err, { imageUrl, hash }) {
             if (err) throw err
-            state.avatarUrl.set(imageUrl)
             state.me.set(xtend(state.me(), {
                 image: hash
             }))
+            state.avatarUrl.set(imageUrl)
         })
     })
 

@@ -12,7 +12,6 @@ var _ = {
 // state for the app is set is `subscribe`
 
 function App (sbot) {
-    console.log('sbot', sbot)
 
 
     // ----------------- testing ----------------------------------
@@ -150,8 +149,8 @@ function App (sbot) {
             fileReader(image),
             hasher,
             sbot.blobs.add(function (err, _hash) {
-                console.log('in blob.add', err, hasher.digest, _hash)
-                console.log('sbot', sbot)
+                // console.log('in blob.add', err, hasher.digest, _hash)
+                // console.log('sbot', sbot)
                 if (err) throw err
                 var hash = '&' + hasher.digest
                 
@@ -166,7 +165,7 @@ function App (sbot) {
                     }]
                 }, function (err, res) {
                     if (err) return cb(err)
-                    console.log('made new post', err, res)
+                    // console.log('made new post', err, res)
                     cb.apply(null, arguments)
                 })
             })

@@ -17,7 +17,7 @@
     "build": "npm run build-js && npm run build-css",
     "build-js": "browserify -p esmify -p bundle-collapser/plugin index.js -t [ envify --NODE_ENV production ] -t [ babelify ] -g unassertify -g uglifyify -mc > public/bundle.js",
     "test": "tape test/{**/*,*}.js",
-    "test-browser": "concurrently --kill-others \"NODE_ENV=\"test\" node src/server.js\" \"browserify -t babelify test-browser/index.js | htmlify test-browser/index.html | tape-run --input html | tap-spec\"",
+    "test-browser": "concurrently --kill-others \"NODE_ENV=\"test\" node src/server/index.js\" \"browserify --debug -t babelify test-browser/index.js | htmlify test-browser/index.html | tape-run --input html | tap-spec\"",
     "build-css": "node-sass --output-style=compressed src/view/style/main.scss > public/style.css",
     "sass-watch": "node-sass --watch src/view/style/main.scss --source-map-embed public/style.css",
     "preversion": "npm run lint && npm test",

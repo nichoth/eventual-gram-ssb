@@ -58,7 +58,8 @@ test('set profile', function (t) {
 test('set avatar', function (t) {
     t.plan(1)
     var rm = _state(function onChange(state) {
-        t.ok(_state().me.image, 'has a file hash')
+        console.log('state', state)
+        t.ok(state.me.image, 'has a file hash')
         rm()
     })
 
