@@ -51,10 +51,13 @@ describe('a new post', () => {
                 el[0].files = list.files
                 el[0].dispatchEvent(new Event('change', { bubbles: true }))
 
-                console.log('el 0', el[0])
-
                 cy.get('button[type=submit]')
                     .click()
+
+                cy.visit('/').then(() => {
+                    cy.get('.post')
+                        .should('exist')
+                })
             })
         })
     })
