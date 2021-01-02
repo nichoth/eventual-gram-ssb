@@ -78,7 +78,6 @@ test('a different feed', function (t) {
     var alice = ssbKeys.generate()
     var feed = ssbFeed(_sbot, alice)
 
-    // this is something attached to `window`
     publishAlice()
 
     // write to feed 2
