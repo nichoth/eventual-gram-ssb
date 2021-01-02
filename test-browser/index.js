@@ -31,6 +31,8 @@ test('doesnt explode', function (t) {
 test('make a new post', function (t) {
     t.plan(2)
     var file
+
+    // listen for state change here
     var rm = _state.posts(function onChange (posts) {
         t.ok(posts[0].value.content.mentions[0], 'should set the state')
         t.equal(posts[0].value.content.text, 'foo', 'should set text')
@@ -85,7 +87,7 @@ test('a different feed', function (t) {
             type: ts.post,
             // mentions: [{ link: hash }],
             text: 'hello world, I am alice.'
-        }, function (err, res) {
+        }, function (err) {
             t.error(err, 'should not return error')
 
             // check if msg 2 exists in feed 1
@@ -94,7 +96,7 @@ test('a different feed', function (t) {
                 S.collect((err, msgs) => {
                     t.error(err, 'error')
                     var post = msgs.find(msg => msg.value.author === feed.id)
-                    t.ok(post, 'has post2 in feed1')
+                    t.ok(post, 'has post2 in sbot')
                 })
             )
         })
