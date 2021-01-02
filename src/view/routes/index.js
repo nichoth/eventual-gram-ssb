@@ -32,6 +32,7 @@ function _Router () {
     })
 
     // user route
+    // this is ok b/c it is last in the list of routes
     // router.addRoute('/*', (match) => {
     //     var { splats } = match
     //     var feedId = splats[0]

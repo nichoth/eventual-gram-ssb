@@ -42,7 +42,7 @@ describe('a new post', () => {
                 const blob = Cypress.Blob.base64StringToBlob(this.iguana,
                     'image/jpg')
 
-                const file = new File([blob], 'images/logo.png',
+                const file = new File([blob], 'images/iguana.jpg',
                     { type: 'image/jpg' })
 
                 const list = new DataTransfer()
@@ -51,12 +51,14 @@ describe('a new post', () => {
                 el[0].files = list.files
                 el[0].dispatchEvent(new Event('change', { bubbles: true }))
 
-                cy.get('button[type=submit]')
-                    .click()
+                cy.get('#text').type('foo blob').then(() => {
+                    cy.get('button[type=submit]')
+                        .click()
 
-                cy.visit('/').then(() => {
-                    cy.get('.post')
-                        .should('exist')
+                    cy.visit('/').then(() => {
+                        cy.get('.post .post-text')
+                            .should('contain', 'foo blob')
+                    })
                 })
             })
         })
