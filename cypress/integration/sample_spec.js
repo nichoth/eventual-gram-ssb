@@ -28,23 +28,19 @@ describe('The app', () => {
     })
 })
 
+// i think the _sbot on window might be weird, like it's running
+// in a different process from the main tests
+
+// could make a function that runs in the server file if the 
+// process === 'test', and adds a message to sbot
+
 describe('a new post', () => {
     it('makes a new post', () => {
         cy.visit('/new').then(() => {
 
             cy.fixture('iguana.jpg').as('iguana')
             cy.get('#file-input').then(function (el) {
-                const blob = Cypress.Blob.base64StringToBlob(this.iguana,
-                    'image/jpg')
-
-                const file = new File([blob], 'images/iguana.jpg',
-                    { type: 'image/jpg' })
-
-                const list = new DataTransfer()
-                list.items.add(file)
-
-                el[0].files = list.files
-                el[0].dispatchEvent(new Event('change', { bubbles: true }))
+                fileUpload.call(this, 'iguana', 'iguana.jpg', el[0])
 
                 cy.get('#text').type('foo blob').then(() => {
                     cy.get('button[type=submit]')
@@ -60,12 +56,28 @@ describe('a new post', () => {
     })
 })
 
+function fileUpload (name, fileName, el) {
+    cy.fixture(fileName).as(name)
+    const blob = Cypress.Blob.base64StringToBlob(this[name], 'image/jpg')
+    const file = new File([blob], 'images/'+ fileName, { type: 'image/jpg' })
+
+    const list = new DataTransfer()
+    list.items.add(file)
+
+    el.files = list.files
+    el.dispatchEvent(new Event('change', { bubbles: true }))
+}
+
+// describe('set your avatar', () => {
+//     it('clicks', () => {
+//         cy.visit('/').then(() => {
+//             // click the avatar space
+//         })
+//     })
+// })
+
 
 //     // after(() => {
 //     //     // runs once after all tests in the block
-//     //     _sbot.close(function (end) {
-//     //         var err = (end && end !== true)
-//     //         expect(err).to.be.false
-//     //     })
 //     // })
 // })

@@ -89,7 +89,7 @@ test('a different feed', function (t) {
         }, function (err) {
             t.error(err, 'should not return error')
 
-            // check if msg 2 exists in feed 1
+            // check if msg 2 exists in sbot
             S(
                 _sbot.messagesByType({ type: ts.post }),
                 S.collect((err, msgs) => {
