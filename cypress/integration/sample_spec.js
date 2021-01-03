@@ -65,44 +65,44 @@ describe('a new post', () => {
     })
 })
 
-// Need to follow the feed2 and see if the image shows on the home page
+// Need to follow feed2 and see if the image shows on the home page
 
 describe('a second feed', () => {
     it('should publish', () => {
-        // console.log('env', process.env.NODE_ENV)
         console.log('sboooooot', _sbot)
         var alice = ssbKeys.generate()
         var feed = ssbFeed(_sbot, alice)
 
         console.log('**feed**', feed)
 
-        publishAlice()
+        _sbot.whoami(function (err, info) {
+            console.log('ccccccccc', err, info)
+        })
 
-        function publishAlice () {
-            () => cy.visit('/')
+        console.log('aaaaaa')
 
-            feed.publish({
-                type: ts.post,
-                text: 'hello world, I am alice.'
-            }, function (err, res) {
-                console.log('**in here**', err, res)
+        feed.publish({
+            type: ts.post,
+            text: 'hello world, I am alice.'
+        }, function (err, res) {
+            console.log('**in here**', err, res)
+            console.log('bbbbbbbb')
 
-                // check if msg 2 exists in feed 1
-                S(
-                    _sbot.messagesByType({ type: ts.post }),
-                    S.collect((err, msgs) => {
-                        expect(err).to.not.exist
-                        var post = msgs.find(msg => {
-                            return msg.value.author === feed.id
-                        })
-                        expect(post).to.exist
-                        expect(post.value.author).to.equal(alice.id)
-                        expect(post.value.content.text).to.equal(
-                            'hello world, I am alice.')
+            // check if msg 2 exists in feed 1
+            S(
+                _sbot.messagesByType({ type: ts.post }),
+                S.collect((err, msgs) => {
+                    expect(err).to.not.exist
+                    var post = msgs.find(msg => {
+                        return msg.value.author === feed.id
                     })
-                )
-            })
-        }
+                    expect(post).to.exist
+                    expect(post.value.author).to.equal(alice.id)
+                    expect(post.value.content.text).to.equal(
+                        'hello world, I am alice.')
+                })
+            )
+        })
     })
 
     // after(() => {
