@@ -8,9 +8,9 @@
 
 // from application code
 // these are weird though
-var _sbot
-var emit
-var state
+// var _sbot
+// var emit
+// var state
 
 describe('The app', () => {
     it('loads the home page', () => {
@@ -21,9 +21,9 @@ describe('The app', () => {
         cy.window().then(win => {
             // from the application code
             console.log('win app', win.theApp)
-            emit = win.theApp.emit
-            _sbot = win.theApp.sbot
-            state = win.theApp.state
+            // emit = win.theApp.emit
+            // _sbot = win.theApp.sbot
+            // state = win.theApp.state
         })
     })
 })
@@ -68,13 +68,14 @@ function fileUpload (name, fileName, el) {
     el.dispatchEvent(new Event('change', { bubbles: true }))
 }
 
-// describe('set your avatar', () => {
-//     it('clicks', () => {
-//         cy.visit('/').then(() => {
-//             // click the avatar space
-//         })
-//     })
-// })
+describe('set your avatar', () => {
+    it('clicks', () => {
+        cy.visit('/').then(() => {
+            // click the avatar space
+            cy.get('#avatar-label').click()
+        })
+    })
+})
 
 
 //     // after(() => {
