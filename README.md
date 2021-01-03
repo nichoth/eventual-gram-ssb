@@ -623,6 +623,14 @@ watched the [arj video](https://hooktube.com/watch?v=E8pnc2N1XHo&feature=youtu.b
 ## 12-29-2020
 Rewriting the app structure
 
+--------------------------------------------------
+
+## 1-2-2021
+
+I think the best thing to do is to keep any tests that require us to call `sbot` functions in the `tape-run` version, because cypress is weird with the rpc sbot calls. It's like any interaction in cypress has to be done through the DOM.
+
+
+
 
 
 

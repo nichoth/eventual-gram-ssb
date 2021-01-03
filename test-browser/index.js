@@ -95,7 +95,7 @@ test('a different feed', function (t) {
                 S.collect((err, msgs) => {
                     t.error(err, 'error')
                     var post = msgs.find(msg => msg.value.author === feed.id)
-                    t.ok(post, 'has post2 in sbot')
+                    t.ok(post, 'should have post2 in sbot')
                 })
             )
         })

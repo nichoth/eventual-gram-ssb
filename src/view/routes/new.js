@@ -71,7 +71,6 @@ function New (props) {
     return html`<div class="new-post">
         <input id="file-input" type="file" accept="image/*"
             onChange=${(ev) => {
-                console.log('aaaaaaaaa')
                 chooseFile(ev)
             }}
         />

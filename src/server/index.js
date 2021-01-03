@@ -36,6 +36,10 @@ function startSSB () {
         appName += ('-' + process.env.APP_NAME)
     }
 
+    if (process.env.NODE_ENV === 'test') {
+        // could add mock data here
+    }
+
     console.log('node env', process.env.NODE_ENV)
     // use dev database
     if (process.env.NODE_ENV === 'development' && !process.env.APP_NAME) {
