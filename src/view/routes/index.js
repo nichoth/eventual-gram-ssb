@@ -1,7 +1,7 @@
 var Router = require('ruta3')
 var Home = require('./home')
 var New = require('./new')
-// var createFeedRoute = require('./feed')
+var createFeedRoute = require('./feed')
 var createPostView = require('./post')
 var Pubs = require('./pubs')
 var evs = require('../../EVENTS')
@@ -20,6 +20,12 @@ function _Router () {
         return { view: Pubs, events: [evs.route.pubs] }
     })
 
+    router.addRoute('/@*', function (match) {
+        var { splats } = match
+        var userId = '@' + splats[0]
+        return { view: createFeedRoute(userId) }
+    })
+
     // encoded percent sign
     // post route
     router.addRoute('/%25*', function (match) {
@@ -30,15 +36,6 @@ function _Router () {
         console.log('***postId***', postId)
         return { view: createPostView(postId) }
     })
-
-    // user route
-    // this is ok b/c it is last in the list of routes
-    // router.addRoute('/*', (match) => {
-    //     var { splats } = match
-    //     var feedId = splats[0]
-    //     console.log('**in route**', feedId)
-    //     return { view: createFeedRoute(feedId) }
-    // })
 
     return router
 }

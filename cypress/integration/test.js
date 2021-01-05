@@ -52,6 +52,7 @@ describe('a new post', () => {
                     })
                 })
             })
+
         })
     })
 })
