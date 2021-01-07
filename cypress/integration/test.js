@@ -32,7 +32,7 @@ describe('The app', () => {
 // in a different process from the main tests
 
 // could make a function that runs in the server file if the 
-// process === 'test', and adds a message to sbot
+// process.env === 'test', and adds a message to sbot
 
 describe('a new post', () => {
     it('makes a new post', () => {
