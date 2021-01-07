@@ -11,10 +11,16 @@ window.ev.evs = evs
 
 
 
-function subscribe (bus, state, app) {
+function subscribe (bus, state, app, setRoute) {
     bus.on('*', (evName, ev) => {
         console.log('* ev name', evName)
         console.log('* ev data', ev)
+    })
+
+    // should do the routes differently
+    bus.on(evs.route.change, ev => {
+        console.log('route ev', ev)
+        setRoute(ev)
     })
     
     bus.on(evs.ok.ok, ev => {

@@ -21,9 +21,9 @@ function Ev () {
         <//>`
     }
 
-    var { bus, view } = connect(state, View)
+    var { bus, view, setRoute } = connect(state, View)
 
-    return { bus, view, state }
+    return { bus, view, state, setRoute }
 }
 
 Ev.createElement = function (EventualView, el) {

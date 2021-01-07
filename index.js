@@ -4,14 +4,14 @@ var start = require('./src/start')
 var App = require('./src/app')
 var evs = require('./src/EVENTS')
 
-var { bus, view, state } = Eventual()
+var { bus, view, state, setRoute } = Eventual()
 
 start(function (err, { sbot }) {
     if (err) throw err
     window.sbot = sbot
     var app = App(sbot)
 
-    subscribe(bus, state, app)
+    subscribe(bus, state, app, setRoute)
 
     // ------- for testing -----------------------------
     window.theApp = {}

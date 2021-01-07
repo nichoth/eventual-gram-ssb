@@ -19,7 +19,7 @@ function connect (state, View) {
     // ------------------------
 
 
-    catchRoutes(parsedUrl => {
+    var { setRoute } = catchRoutes(parsedUrl => {
         state.route.set(parsedUrl)
 
         // in here do the emit route events
@@ -49,7 +49,7 @@ function connect (state, View) {
         }
     }
 
-    return { bus, view: Connector }
+    return { bus, view: Connector, setRoute }
 }
 
 module.exports = connect
