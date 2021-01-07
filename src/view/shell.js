@@ -40,7 +40,7 @@ function AvatarInput (props) {
 // onSave
 // name
 function EditableField (props) {
-    var { name, onSave } = props
+    var { name, onSave, id } = props
     var [isEditing, setEditing] = useState(false)
 
     function save (ev) {
@@ -62,7 +62,8 @@ function EditableField (props) {
     // pencil emoji
     if (!isEditing) {
         return html`<span class="user-name">
-            ${name} <button class="edit" onClick=${edit} title="edit">
+            <a href="${'/' + id}">${name}</a>
+            <button class="edit" onClick=${edit} title="edit">
                 ✏
             </button>
         </span>`

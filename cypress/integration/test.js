@@ -52,6 +52,22 @@ describe('a new post', () => {
                     })
                 })
             })
+
+        })
+    })
+})
+
+describe('avatar', () => {
+    it('can set a new avatar', () => {
+        cy.visit('/').then(() => {
+
+            cy.fixture('hotdognalds.jpg').as('hotdognalds')
+            cy.get('#avatar-input').then(function (el) {
+                fileUpload.call(this, 'hotdognalds', 'hotdognalds.jpg', el[0])
+
+                cy.get('img.avatar')
+                    .should('have.attr', 'src')
+            })
         })
     })
 })
@@ -68,14 +84,14 @@ function fileUpload (name, fileName, el) {
     el.dispatchEvent(new Event('change', { bubbles: true }))
 }
 
-describe('set your avatar', () => {
-    it('clicks', () => {
-        cy.visit('/').then(() => {
-            // click the avatar space
-            cy.get('#avatar-label').click()
-        })
-    })
-})
+// describe('set your avatar', () => {
+//     it('clicks', () => {
+//         cy.visit('/').then(() => {
+//             // click the avatar space
+//             cy.get('#avatar-label').click()
+//         })
+//     })
+// })
 
 
 //     // after(() => {

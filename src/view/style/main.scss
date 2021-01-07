@@ -126,6 +126,7 @@ button.edit {
 .post-attributes {
     height: 3em;
     display: flex;
+    margin-top: 0.5em;
 
     .follow-icon {
         font-size: 3em;
@@ -253,3 +254,26 @@ ul.feed {
 }
 
 // ----------------------------------------------------------
+
+// --------------- profile info ---------------------
+
+.feed-route {
+    hr {
+        margin: 2em 0;
+        background-color: gray;
+    }
+}
+
+.profile-info {
+    padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+
+    img.avatar-big {
+        max-width: 500px;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+}
+
+// ---------------------------------------------------

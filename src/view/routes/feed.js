@@ -5,44 +5,53 @@ function createFeedRoute (feedId) {
     console.log('in feed.js', feedId)
 
     return function Feed (props) {
-        var { emit } = props
+        var { avatarUrl, me, emit } = props
         emit(evs.feed.get, feedId)
         if(!props.feeds[feedId]) return null
 
         var posts = props.feeds[feedId]
 
-        return html`<ul class="feed post-list">
-            ${posts.map(function (post) {
-                var hash = post.value.content.mentions[0] ?
-                    post.value.content.mentions[0].link :
-                    null
-                if (!hash) return null
+        return html`<div class="feed-route">
+            <div class="profile-info">
+                <img class="avatar-big" src=${avatarUrl} />
+                <h1>${me.name}</h1>
+            </div>
 
-                var authorId = post.value.author
-                var author = (props.people[authorId] || {})
-                var postAvatar = (author.imgUrl || '')
+            <hr />
 
-                return html`<li class="post">
-                    <a href=${encodeURI('/' + post.key)}>
-                        <img src=${props.postUrls[hash]} />
-                    </a>
-                    <div class="post-attributes">
-                        <div class="post-avatar">
-                            <img src="${postAvatar}" />
+            <ul class="feed post-list">
+                ${posts.map(function (post) {
+                    var hash = post.value.content.mentions[0] ?
+                        post.value.content.mentions[0].link :
+                        null
+                    if (!hash) return null
+
+                    var authorId = post.value.author
+                    var author = (props.people[authorId] || {})
+                    var postAvatar = (author.imgUrl || '')
+
+                    return html`<li class="post">
+                        <a href=${encodeURI('/' + post.key)}>
+                            <img src=${props.postUrls[hash]} />
+                        </a>
+                        <div class="post-attributes">
+                            <div class="post-avatar">
+                                <img src="${postAvatar}" />
+                            </div>
+
+                            <div class="post-metadata">
+                                ${post.value.content.text ?
+                                    html`<div class="post-text">
+                                        ${post.value.content.text}
+                                    </div>` :
+                                    null
+                                }
+                            </div>
                         </div>
-
-                        <div class="post-metadata">
-                            ${post.value.content.text ?
-                                html`<div class="post-text">
-                                    ${post.value.content.text}
-                                </div>` :
-                                null
-                            }
-                        </div>
-                    </div>
-                </li>`
-            })}
-        </ul>`
+                    </li>`
+                })}
+            </ul>
+        </div>`
     }
 }
 
