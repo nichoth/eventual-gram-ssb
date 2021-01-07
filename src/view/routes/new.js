@@ -18,7 +18,6 @@ class TextPlace extends Component {
 
 function test (ev) {
     var val = ev.srcElement.value
-    console.log('input', ev, val)
 }
 
 function FilePreview (props) {

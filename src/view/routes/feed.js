@@ -11,10 +11,12 @@ function createFeedRoute (feedId) {
 
         var posts = props.feeds[feedId]
 
+        console.log('avi URL', avatarUrl)
+
         return html`<div class="feed-route">
             <div class="profile-info">
                 <img class="avatar-big" src=${avatarUrl} />
-                <h1>${me.name}</h1>
+                <h1 class="user-name">${me.name}</h1>
             </div>
 
             <hr />

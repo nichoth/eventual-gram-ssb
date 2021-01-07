@@ -67,6 +67,7 @@ describe('avatar', () => {
 
                 cy.get('img.avatar')
                     .should('have.attr', 'src')
+                    .should('include', 'localhost')
             })
         })
     })
@@ -84,15 +85,17 @@ function fileUpload (name, fileName, el) {
     el.dispatchEvent(new Event('change', { bubbles: true }))
 }
 
-// describe('set your avatar', () => {
-//     it('clicks', () => {
-//         cy.visit('/').then(() => {
-//             // click the avatar space
-//             cy.get('#avatar-label').click()
-//         })
-//     })
-// })
-
+describe('profile route', () => {
+    it('has the right stuff in the profle view', () => {
+        cy.get('.user-name a').click().then(() => {
+            cy.get('h1.user-name')
+                .should('exist')
+            cy.get('img.avatar-big')
+                .should('have.attr', 'src')
+                .should('include', 'localhost')
+        })
+    })
+})
 
 //     // after(() => {
 //     //     // runs once after all tests in the block
