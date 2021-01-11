@@ -15,10 +15,6 @@ class TextPlace extends Component {
     }
 }
 
-// function test (ev) {
-//     var val = ev.srcElement.value
-// }
-
 function FilePreview (props) {
     var { selectedFile } = props
 
