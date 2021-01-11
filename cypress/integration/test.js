@@ -96,8 +96,3 @@ describe('profile route', () => {
         })
     })
 })
-
-//     // after(() => {
-//     //     // runs once after all tests in the block
-//     // })
-// })
