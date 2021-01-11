@@ -168,12 +168,12 @@ function subscribe (bus, state, app, setRoute) {
         })
     })
 
-    bus.on(evs.route.pubs, function () {
-        app.getPubs(function (err, pubs) {
-            if (err) throw err
-            state.pubs.list.set(pubs)
-        })
-    })
+    // bus.on(evs.route.pubs, function () {
+    //     app.getPubs(function (err, pubs) {
+    //         if (err) throw err
+    //         state.pubs.list.set(pubs)
+    //     })
+    // })
 
     bus.on(evs.follow.start, function ({ id }) {
         app.follow(id, function (err, res) {
