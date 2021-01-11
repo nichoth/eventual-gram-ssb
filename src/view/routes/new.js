@@ -10,15 +10,14 @@ class TextPlace extends Component {
 
     render () {
         return html`<div className="text-input">
-            <textarea ref=${el => this.el = el}
-                id="text" name="text" oninput=${test}><//>
+            <textarea ref=${el => this.el = el} id="text" name="text"><//>
         </div>`
     }
 }
 
-function test (ev) {
-    var val = ev.srcElement.value
-}
+// function test (ev) {
+//     var val = ev.srcElement.value
+// }
 
 function FilePreview (props) {
     var { selectedFile } = props
