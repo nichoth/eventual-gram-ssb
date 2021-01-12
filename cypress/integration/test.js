@@ -20,7 +20,7 @@ describe('The app', () => {
     it('starts', () => {
         cy.window().then(win => {
             // from the application code
-            console.log('win app', win.theApp)
+            console.log('win app', win)
             // emit = win.theApp.emit
             // _sbot = win.theApp.sbot
             // state = win.theApp.state

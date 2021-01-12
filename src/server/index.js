@@ -13,6 +13,8 @@ var ssbConfigInject = require('ssb-config/inject')
 var caps = require('ssb-caps')
 var manifest = require('../manifest.json')
 var WS_PORT = process.env.WS_PORT || 8000
+// var ssbFeed = require('ssb-feed')
+// var ssbKeys = require('ssb-keys')
 
 
 
@@ -37,7 +39,15 @@ function startSSB () {
     }
 
     if (process.env.NODE_ENV === 'test') {
-        // could add mock data here
+        // add mock data here
+        var feed = Feed(sbot, keysAlice)
+        feed.publish({
+            type: 'post',
+            text: 'hello world, I am alice.'
+        }, function (err) {
+            if (err) return console.log('errrrr', err)
+            console.log('posted alice')
+        })
     }
 
     console.log('node env', process.env.NODE_ENV)
