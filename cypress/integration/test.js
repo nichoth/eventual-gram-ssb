@@ -47,6 +47,7 @@ describe('a new post', () => {
                         .click().then(() => {
                             // check that we're at the home page
                             cy.get('.route-home')
+                                .should('exist')
                         })
 
                     cy.get('.post .post-text')
