@@ -15,6 +15,8 @@ var manifest = require('../manifest.json')
 var WS_PORT = process.env.WS_PORT || 8000
 // var ssbFeed = require('ssb-feed')
 // var ssbKeys = require('ssb-keys')
+var { read, write } = require('pull-files')
+var createHash = require('multiblob/util').createHash
 
 
 
@@ -41,13 +43,28 @@ function startSSB () {
     if (process.env.NODE_ENV === 'test') {
         // add mock data here
         var feed = Feed(sbot, keysAlice)
-        feed.publish({
-            type: 'post',
-            text: 'hello world, I am alice.'
-        }, function (err) {
-            if (err) return console.log('errrrr', err)
-            console.log('posted alice')
-        })
+        // how to get blobs for mentions array?
+        var hasher = createHash('sha256')
+        S(
+            read('./iguana.jpg'),
+            hasher,
+            sbot.blobs.add('blob', function (err, blobId) {
+                if (err) return console.log('oh noooo', err)
+                var hash = '&' + hasher.digest
+                publish(hash)
+            })
+        )
+
+        function publish (hash) {
+            feed.publish({
+                type: 'ev.post',
+                mentions: [{ link: hash }],
+                text: 'hello world, I am alice.'
+            }, function (err) {
+                if (err) return console.log('errrrr', err)
+                console.log('posted alice')
+            })
+        }
     }
 
     console.log('node env', process.env.NODE_ENV)
