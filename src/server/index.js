@@ -40,6 +40,8 @@ function startSSB () {
         appName += ('-' + process.env.APP_NAME)
     }
 
+
+    // ---------- test stuff ------------------
     if (process.env.NODE_ENV === 'test') {
         // add mock data here
         var feed = Feed(sbot, keysAlice)
@@ -66,6 +68,8 @@ function startSSB () {
             })
         }
     }
+    // ---------- /test stuff ------------------
+
 
     console.log('node env', process.env.NODE_ENV)
     // use dev database
