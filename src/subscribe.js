@@ -128,6 +128,8 @@ function subscribe (bus, state, app, setRoute) {
             // console.log('new post created', err, res)
             if (err) throw err
 
+            setRoute('/')
+
             var posts = (state.posts() || [])
             posts.unshift(res)
             state.posts.set(posts)

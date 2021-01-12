@@ -44,12 +44,13 @@ describe('a new post', () => {
 
                 cy.get('#text').type('foo blob').then(() => {
                     cy.get('button[type=submit]')
-                        .click()
+                        .click().then(() => {
+                            // check that we're at the home page
+                            cy.get('.route-home')
+                        })
 
-                    cy.visit('/').then(() => {
-                        cy.get('.post .post-text')
-                            .should('contain', 'foo blob')
-                    })
+                    cy.get('.post .post-text')
+                        .should('contain', 'foo blob')
                 })
             })
 
