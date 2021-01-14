@@ -15,7 +15,7 @@ var manifest = require('../manifest.json')
 var WS_PORT = process.env.WS_PORT || 8000
 // var ssbFeed = require('ssb-feed')
 // var ssbKeys = require('ssb-keys')
-var { read, write } = require('pull-files')
+var { read } = require('@nichoth/pull-files')
 var createHash = require('multiblob/util').createHash
 
 // testing
@@ -92,34 +92,38 @@ function startSSB () {
 
 
     // ---------- test stuff ------------------
-    // if (process.env.NODE_ENV === 'test') {
-    //     // add mock data here
-    //     var feed = Feed(_sbot, keysAlice)
-    //     // how to get blobs for mentions array?
-    //     var hasher = createHash('sha256')
-    //     S(
-    //         read(__dirname + '/../../cypress/fixtures/iguana.jpg'),
-    //         hasher,
-    //         _sbot.blobs.add(hasher.digest, function (err, blobId) {
-    //             if (err) return console.log('oh noooo', err)
-    //             var hash = '&' + hasher.digest
-    //             publish(hash)
-    //             console.log('add blob', blobId)
-    //         })
-    //     )
+    if (process.env.NODE_ENV === 'test') {
+        // add mock data here
+        var feed = Feed(_sbot, keysAlice)
+        // how to get blobs for mentions array?
+        var hasher = createHash('sha256')
+        S(
+            read(__dirname + '/../../cypress/fixtures/iguana.jpg'),
+            hasher,
+            S.map(function (data) {
+                console.log('*********data', data)
+                return data
+            }),
+            _sbot.blobs.add(function (err, blobId) {
+                if (err) return console.log('oh noooo', err)
+                var hash = '&' + hasher.digest
+                publish(hash)
+                console.log('add blob', blobId)
+            })
+        )
 
 
-    //     function publish (hash) {
-    //         feed.publish({
-    //             type: 'ev.post',
-    //             mentions: [{ link: hash }],
-    //             text: 'hello world, I am alice.'
-    //         }, function (err) {
-    //             if (err) return console.log('errrrr', err)
-    //             console.log('posted alice')
-    //         })
-    //     }
-    // }
+        function publish (hash) {
+            feed.publish({
+                type: 'ev.post',
+                mentions: [{ link: hash }],
+                text: 'hello world, I am alice.'
+            }, function (err) {
+                if (err) return console.log('errrrr', err)
+                console.log('posted alice')
+            })
+        }
+    }
     // ---------- /test stuff ------------------
 
 
@@ -136,28 +140,12 @@ function startSSB () {
     })
 
 
-    // console.log('sbot', _sbot)
-    // console.log('sbot.aaaaa', _sbot.aaaaa)
-
-
-    // _sbot.publish({
-    //     type: 'post',
-    //     text: 'Hello, world!'
-    // }, function (err, msg) {
-    //     console.log('**post 2', err, msg)
-    //     if (err) throw err
-    //     // sbot.tags.get(function (err, data) {
-    //     //     console.log('**get2**', err, data)
-    //     // })
-    // })
-
-
 
     // testing
-    _sbot.alice = Feed(_sbot, keysAlice)
-    manifest.alice = {
-        publish: 'async'
-    }
+    // _sbot.alice = Feed(_sbot, keysAlice)
+    // manifest.alice = {
+    //     publish: 'async'
+    // }
 
 
 
