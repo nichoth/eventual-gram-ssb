@@ -49,6 +49,10 @@ function App (sbot) {
             )
         }, 'image/jpeg')
     }
+
+    // if (process.env.NODE_ENV === 'test') {
+    //     window.ev.alice._publish('aaaaaaaa')
+    // }
     // -------------------------------------------------------
 
 

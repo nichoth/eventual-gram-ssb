@@ -18,8 +18,6 @@ var WS_PORT = process.env.WS_PORT || 8000
 var { read, write } = require('pull-files')
 var createHash = require('multiblob/util').createHash
 
-
-
 // testing
 var Feed = require('ssb-feed')
 var keysAlice = require('../../keys-alice.json')
@@ -41,34 +39,6 @@ function startSSB () {
     }
 
 
-    // ---------- test stuff ------------------
-    if (process.env.NODE_ENV === 'test') {
-        // add mock data here
-        var feed = Feed(sbot, keysAlice)
-        // how to get blobs for mentions array?
-        var hasher = createHash('sha256')
-        S(
-            read('./iguana.jpg'),
-            hasher,
-            sbot.blobs.add('blob', function (err, blobId) {
-                if (err) return console.log('oh noooo', err)
-                var hash = '&' + hasher.digest
-                publish(hash)
-            })
-        )
-
-        function publish (hash) {
-            feed.publish({
-                type: 'ev.post',
-                mentions: [{ link: hash }],
-                text: 'hello world, I am alice.'
-            }, function (err) {
-                if (err) return console.log('errrrr', err)
-                console.log('posted alice')
-            })
-        }
-    }
-    // ---------- /test stuff ------------------
 
 
     console.log('node env', process.env.NODE_ENV)
@@ -119,6 +89,39 @@ function startSSB () {
     // .use(require('ssb-query'))
     // .use(require('scuttlebot/plugins/invite'))
     // .use(require('scuttlebot/plugins/local'))
+
+
+    // ---------- test stuff ------------------
+    // if (process.env.NODE_ENV === 'test') {
+    //     // add mock data here
+    //     var feed = Feed(_sbot, keysAlice)
+    //     // how to get blobs for mentions array?
+    //     var hasher = createHash('sha256')
+    //     S(
+    //         read(__dirname + '/../../cypress/fixtures/iguana.jpg'),
+    //         hasher,
+    //         _sbot.blobs.add(hasher.digest, function (err, blobId) {
+    //             if (err) return console.log('oh noooo', err)
+    //             var hash = '&' + hasher.digest
+    //             publish(hash)
+    //             console.log('add blob', blobId)
+    //         })
+    //     )
+
+
+    //     function publish (hash) {
+    //         feed.publish({
+    //             type: 'ev.post',
+    //             mentions: [{ link: hash }],
+    //             text: 'hello world, I am alice.'
+    //         }, function (err) {
+    //             if (err) return console.log('errrrr', err)
+    //             console.log('posted alice')
+    //         })
+    //     }
+    // }
+    // ---------- /test stuff ------------------
+
 
     var server = http.createServer(function onRequest (req, res) {
         console.log('got request')
