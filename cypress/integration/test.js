@@ -12,15 +12,22 @@
 // var emit
 // var state
 
+var keysAlice = require('../../keys-alice.json')
+
 describe('The app', () => {
     it('loads the home page', () => {
         cy.visit('/')
     })
 
+    it('has feed 2 in the main view', () => {
+        cy.get('.author a')
+            .should('contain', keysAlice.public)
+    })
+
     it('starts', () => {
         cy.window().then(win => {
             // from the application code
-            console.log('win app', win)
+            console.log('win app', win.theApp)
             // emit = win.theApp.emit
             // _sbot = win.theApp.sbot
             // state = win.theApp.state
