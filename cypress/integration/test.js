@@ -1,5 +1,4 @@
-var ssbKeys = require('ssb-keys')
-var keysAlice = ssbKeys.generate()
+var keysAlice = require('../../keys-alice.json')
 
 describe('The app', () => {
     it('loads the home page', () => {
