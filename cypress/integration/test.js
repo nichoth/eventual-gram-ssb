@@ -1,18 +1,5 @@
-// var ssbKeys = require('ssb-keys')
-// var ssbFeed = require('ssb-feed')
-// var S = require('pull-stream')
-// var start = require('../../src/start')
-// var ts = require('../../src/types')
-// var evs = require('../../src/EVENTS')
-// var subscribe = require('../../src/subscribe')
-
-// from application code
-// these are weird though
-// var _sbot
-// var emit
-// var state
-
-var keysAlice = require('../../keys-alice.json')
+var ssbKeys = require('ssb-keys')
+var keysAlice = ssbKeys.generate()
 
 describe('The app', () => {
     it('loads the home page', () => {
@@ -37,9 +24,6 @@ describe('The app', () => {
 
 // i think the _sbot on window might be weird, like it's running
 // in a different process from the main tests
-
-// could make a function that runs in the server file if the 
-// process.env === 'test', and adds a message to sbot
 
 describe('a new post', () => {
     it('makes a new post', () => {
