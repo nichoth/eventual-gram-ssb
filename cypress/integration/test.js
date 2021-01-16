@@ -1,11 +1,14 @@
+// need to require the keys b/c they are shared with the server app code
+// or could generate in the app & attach them to `window`
 var keysAlice = require('../../keys-alice.json')
 
-describe('The app', () => {
+describe('the main part', () => {
     it('loads the home page', () => {
         cy.visit('/')
     })
 
     it('has feed 2 in the main view', () => {
+        // this depends on an automated post in the server file
         cy.get('.author a')
             .should('contain', keysAlice.public)
     })
