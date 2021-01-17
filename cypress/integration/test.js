@@ -62,7 +62,10 @@ describe('username', () => {
                     .type('bork')
                     .then(() => {
                         cy.get('.menu form button[type="submit"]')
-                            .click()
+                            .click().then(() => {
+                                cy.get('.menu .user-name a')
+                                    .should('contain', 'bork')
+                            })
                     })
             })
     })

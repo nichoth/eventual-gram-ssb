@@ -100,10 +100,10 @@ function startSSB () {
         S(
             read(__dirname + '/../../cypress/fixtures/iguana.jpg'),
             hasher,
-            S.map(function (data) {
-                console.log('*********data', data)
-                return data
-            }),
+            // S.map(function (data) {
+            //     console.log('*********data', data)
+            //     return data
+            // }),
             _sbot.blobs.add(function (err, blobId) {
                 if (err) return console.log('oh noooo', err)
                 var hash = '&' + hasher.digest
