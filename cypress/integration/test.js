@@ -52,6 +52,22 @@ describe('a new post', () => {
     })
 })
 
+describe('username', () => {
+    it('can set your username', () => {
+        cy.get('.menu .user-name button.edit')
+            .click()
+            .then(() => {
+                cy.get('form input[name="name"]')
+                    .type('{selectall}')
+                    .type('bork')
+                    .then(() => {
+                        cy.get('.menu form button[type="submit"]')
+                            .click()
+                    })
+            })
+    })
+})
+
 describe('avatar', () => {
     it('can set a new avatar', () => {
         cy.visit('/').then(() => {
