@@ -17,7 +17,7 @@ function _Router () {
     })
 
     router.addRoute('/pubs', () => {
-        return { view: Pubs, events: [evs.route.pubs] }
+        return { view: Pubs, events: [] }
     })
 
     router.addRoute('/@*', function (match) {
