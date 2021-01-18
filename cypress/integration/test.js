@@ -114,14 +114,14 @@ describe('profile route', () => {
 describe('follow button', () => {
     it('has a follow button', () => {
         cy.visit('/').then(() => {
-            cy.get('.author a').contains(
-                // this is alice's public key from the JSON file
-                '@L1UBLpbh9CHK329HevfD3c/C5r3Ww4gzjvlDLbNNYN8=.ed25519')
-                    .then(() => {
-                        cy.get('.post .follow-icon button')
-                            .last()
-                            .click()
-                    })
+            cy.get('.author a').contains(keysAlice.public)
+                .then(() => {
+                    cy.get('.post .follow-icon button')
+                        // the alice post is done first so thats why `last` 
+                        // works
+                        .last()
+                        .click()
+                })
         })
     })
 })
