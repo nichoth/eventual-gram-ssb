@@ -4,7 +4,7 @@ var New = require('./new')
 var createFeedRoute = require('./feed')
 var createPostView = require('./post')
 var Pubs = require('./pubs')
-var evs = require('../../EVENTS')
+// var evs = require('../../EVENTS')
 
 function _Router () {
     var router = Router()
