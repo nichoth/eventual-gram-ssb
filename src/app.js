@@ -17,7 +17,7 @@ function App (sbot) {
     // ----------------- testing ----------------------------------
     window.ev = window.ev || {}
     window.ev.alice = sbot.alice
-    window.ev.alice._publish = function (text) {
+    window.ev.alice.publish = function (text) {
         document.createElement('canvas').toBlob(function (blob) {
             var file = new File([blob], 'canvas.jpg', { type: blob.type })
             var image = file
