@@ -119,7 +119,7 @@ describe('follow button', () => {
                 '@L1UBLpbh9CHK329HevfD3c/C5r3Ww4gzjvlDLbNNYN8=.ed25519')
                     .then(() => {
                         cy.get('.post .follow-icon button')
-                            .eq(0)
+                            .last()
                             .click()
                     })
         })
