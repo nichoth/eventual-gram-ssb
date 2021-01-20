@@ -3,30 +3,40 @@ var evs = require('../../EVENTS')
 var get = require('lodash/get')
 
 function pubsRoute ({ emit, pubs }) {
-    // @TODO should not call this on every render
-    // emit(evs.route.pubs, null)
+
+    // @TODO need a 
+    // * list of following
+    // * list of pubs
+
+    // need to emit an event only when this route first loads
+
+    console.log('pubssss render', pubs)
 
     return html`<div class="pubs-route">
-        pubs
-
         <form onsubmit=${ev => {
             ev.preventDefault()
             var invite = ev.target.elements.invite.value
             emit(evs.pub.join, invite)
         }}>
 
-            <${FormInput} label="Invite code" name="invite" class="pubs"/>
+            <${FormInput} label="Invite code" name="invite" class="pubs" />
 
             <button type="submit">Join pub</button>
         </form>
 
-        <ul class="pubs-list">
-            ${pubs.list.map(function (pub) {
-                return html`<li class="pub">
-                    ${get(pub, 'value.content.address.host', null)}
-                </li>`
-            })}
-        </ul>
+        <hr />
+
+        <p>Current pubs</p>
+        ${pubs.list.length === 0 ?
+            html`<div><em>none</em></div>` :
+            html`<ul class="pubs-list">
+                ${pubs.list.map(function (pub) {
+                    return html`<li class="pub">
+                        ${get(pub, 'value.content.address.host', null)}
+                    </li>`
+                })}
+            </ul>`
+        }
     </div>`
 }
 

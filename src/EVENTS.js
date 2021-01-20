@@ -8,7 +8,7 @@ var EVENTS = namespace({
     app: ['start'],
     post: ['new'],
     feed: ['get'],
-    pub: ['join'],
+    pub: ['join', 'route'],
     follow: ['start']
 })
 

@@ -86,12 +86,10 @@ function App (sbot) {
     // the top of the list
     // could have UI that lets you connect to pubs in the list (with invite)
     function getPubs (cb) {
-        console.log('start getting pubs')
         S(
             sbot.messagesByType({ type: 'pub' }),
             S.collect(function (err, msgs) {
                 if (err) return cb(err)
-                console.log('pubs here', msgs)
                 cb(null, msgs)
             })
         )

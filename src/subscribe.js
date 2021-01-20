@@ -18,6 +18,7 @@ function subscribe (bus, state, app, setRoute) {
     })
 
     // should do the routes differently
+    // for navigating programatically
     bus.on(evs.route.change, ev => {
         console.log('route ev', ev)
         setRoute(ev)
@@ -30,16 +31,13 @@ function subscribe (bus, state, app, setRoute) {
     bus.on(evs.app.start, (ev) => {
         console.log('***start***', ev)
 
-        console.log('**getting profile**')
         app.getProfile(function (err, profile) {
-            console.log('**got profile**', err, profile)
             if (err) throw err
             var hash = profile.image
             var { id } = profile
             if (!hash) return state.me.set(profile)
 
             app.getUrlForHash(hash, function (err, url) {
-                console.log('**got profile avatar**', err, url)
                 if (err) return console.log('err profile', err)
                 state.avatarUrl.set(url)
                 state.me.set(profile)
@@ -57,7 +55,6 @@ function subscribe (bus, state, app, setRoute) {
         app.messages(function (err, msgs) {
             if (err) throw err
             var posts = msgs.map(([hash, url, post]) => post)
-            console.log('postssss', posts)
             var urls = msgs.reduce(function (acc, [hash, url, post]) {
                 acc[hash] = url
                 return acc
@@ -167,6 +164,16 @@ function subscribe (bus, state, app, setRoute) {
         app.joinPub(inviteCode, function (err) {
             if (err) throw err
             console.log('pub joined', err)
+        })
+    })
+
+    bus.on(evs.pub.route, function () {
+        console.log('evs.pub.route', arguments)
+        console.log('getting pubs')
+        app.getPubs((err, pubs) => {
+            console.log('got pubs', err, pubs)
+            if (err) throw err
+            state.pubs.list.set(pubs)
         })
     })
 
