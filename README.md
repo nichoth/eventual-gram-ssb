@@ -630,6 +630,17 @@ Rewriting the app structure
 I think the best thing to do is to keep any tests that require us to call `sbot` functions in the `tape-run` version, because cypress is weird with the rpc sbot calls. It's like any interaction in cypress has to be done through the DOM.
 
 
+----------------------------------------
+
+## 1-19-2021
+
+* [who are you following?](https://scuttlebot.io/docs/social/query-the-social-graph.html)
+  - try `gossip.peers(cb)`
+
+* Get the current peerlist -- [gossip](https://scuttlebot.io/apis/scuttlebot/gossip.html)
+
+
+
 
 
 
