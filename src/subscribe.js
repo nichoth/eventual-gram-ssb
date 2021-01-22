@@ -163,7 +163,7 @@ function subscribe (bus, state, app, setRoute) {
         console.log('start joining a pub', inviteCode)
         app.joinPub(inviteCode, function (err) {
             if (err) throw err
-            console.log('pub joined', err)
+            console.log('pub joined????', err)
         })
     })
 
