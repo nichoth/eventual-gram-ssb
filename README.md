@@ -6,6 +6,19 @@ The electron apps are in the "releases" link to the right ->
 
 [public pubs](https://github.com/ssbc/ssb-server/wiki/pub-servers#public-pubs)
 
+
+## Public pubs
+
+|Pub Name|Operator|Invite Code|
+|--------|--------|-----------|
+|[gossip.noisebridge.info](https://www.noisebridge.net/wiki/Pub)|[Noisebridge Hackerspace](https://www.noisebridge.net/wiki/Unicorn) [@james.network](https://james.network)|`gossip.noisebridge.info:8008:@2NANnQVdsoqk0XPiJG2oMZqaEpTeoGrxOHJkLIqs7eY=.ed25519~JWTC6+rPYPW5b5zCion0gqjcJs35h6JKpUrQoAKWgJ4=`|
+|`scuttle.us`|[@Ryan](https://keybase.io/ryan_singer)|`scuttle.us:8008:@WqcuCOIpLtXFRw/9vOAQJti8avTZ9vxT9rKrPo8qG6o=.ed25519~/ZUi9Chpl0g1kuWSrmehq2EwMQeV0Pd+8xw8XhWuhLE=`|
+|`SSB PeerNet US-East`|[timjrobinson](https://github.com/timjrobinson)|`us-east.ssbpeer.net:8008:@sTO03jpVivj65BEAJMhlwtHXsWdLd9fLwyKAT1qAkc0=.ed25519~sXFc5taUA7dpGTJITZVDCRy2A9jmkVttsr107+ufInU=`|
+|`Lohn's Pub`|[@lohn](https://github.com/lohn)|`ssb.lo.hn:8018:@LohnKVll9HdLI3AndEc4zwGtfdF/J7xC7PW9B/JpI4U=.ed25519~cnAXdSdM2gkuobvfmOQNEaiXFz4j62gwyA/6x2fKEa4=`|
+|[Scuttle Space](https://scuttle.space/) | [@guil-dot](https://github.com/guil-dot) | Visit [scuttle.space](https://scuttle.space/)|
+|[pub1.upsocial.com](https://upsocial.com) | [@freedomrules](https://github.com/freedomrules) | `pub1.upsocial.com:8008:@gjlNF5Cyw3OKZxEoEpsVhT5Xv3HZutVfKBppmu42MkI=.ed25519~lMd6f4nnmBZEZSavAl4uahl+feajLUGqu8s2qdoTLi8=` |
+
+
 --------------------------------------
 
 Start a dev server that automatically reloads on any change, with the `NODE_ENV` env variable set to 'development', which gives an `appName` of `ssb-ev-DEV`: 

@@ -117,8 +117,8 @@ describe('follow button', () => {
             cy.get('.author a').contains(keysAlice.public)
                 .then(() => {
                     cy.get('.post .follow-icon button')
-                        // the alice post is done first so thats why `last` 
-                        // works
+                        // the alice post is done first so thats why
+                        // `last` works
                         .last()
                         .click()
                 })
