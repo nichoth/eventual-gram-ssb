@@ -80,8 +80,17 @@ function App (sbot) {
     // peers[0].host, b/c the `peers` call has the connected state
     // and use `sbot.gossip.changes` to keep it up to date
 
+
+
+
+
+    // this returns all pubs that we *know* about
     // getPubs((err, res) => console.log('got pubs', err, res))
 
+
+
+
+    // --------- trying gossip --------------------------
     sbot.gossip.peers(function (err, peers) {
         console.log('peeeeers', err, peers)
     })
@@ -92,6 +101,23 @@ function App (sbot) {
             console.log('gossip change', ev)
         })
     )
+    // --------------------------------------------
+
+
+
+    // **-------------trying friends---------------**
+    S(
+        sbot.friends.createFriendStream({ meta: true }),
+        S.drain(ev => {
+            console.log('**friend stream**', ev)
+        })
+    )
+    // ----------------------------------------------
+
+
+
+
+
 
     // *this takes too long*
     // also renders too many pubs
