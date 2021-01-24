@@ -16,6 +16,8 @@ function App (sbot) {
 
     // ----------------- testing ----------------------------------
     window.ev = window.ev || {}
+    window.ev.sbot = sbot
+    window.ev.S = S
     window.ev.alice = sbot.alice
     window.ev.alice.publish = function (text) {
         document.createElement('canvas').toBlob(function (blob) {
@@ -80,11 +82,25 @@ function App (sbot) {
 
     // getPubs((err, res) => console.log('got pubs', err, res))
 
+    sbot.gossip.peers(function (err, peers) {
+        console.log('peeeeers', err, peers)
+    })
+
+    S(
+        sbot.gossip.changes(),
+        S.drain(ev => {
+            console.log('gossip change', ev)
+        })
+    )
+
     // *this takes too long*
     // also renders too many pubs
     // we need to know if we are connected or not and put connected pubs at
     // the top of the list
     // could have UI that lets you connect to pubs in the list (with invite)
+
+    // this is not good b/c it reuturns a list of all pubs we know about,
+    // regardless of the connection state
     function getPubs (cb) {
         S(
             sbot.messagesByType({ type: 'pub' }),
@@ -310,7 +326,7 @@ function App (sbot) {
             var { id } = res
 
             getAvatar(sbot, id, id, function (err, profile) {
-                console.log('profile', profile)
+                // console.log('profile', profile)
                 cb(err, profile)
             })
         })
