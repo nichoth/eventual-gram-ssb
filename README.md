@@ -648,7 +648,8 @@ I think the best thing to do is to keep any tests that require us to call `sbot`
 ## 1-19-2021
 
 * [who are you following?](https://scuttlebot.io/docs/social/query-the-social-graph.html)
-  - try `gossip.peers(cb)`
+  - try `gossip.peers(cb)` -- https://scuttlebot.io/apis/scuttlebot/gossip.html
+  - `sbot.friends.stream`
 
 * Get the current peerlist -- [gossip](https://scuttlebot.io/apis/scuttlebot/gossip.html)
 
