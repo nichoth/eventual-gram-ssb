@@ -2,7 +2,7 @@ import { html } from 'htm/preact'
 var evs = require('../../EVENTS')
 var get = require('lodash/get')
 
-function pubsRoute ({ emit, pubs }) {
+function pubsRoute ({ emit, pubs, following }) {
 
     // @TODO need a 
     // * list of following
@@ -26,7 +26,7 @@ function pubsRoute ({ emit, pubs }) {
 
         <hr />
 
-        <p>Current pubs</p>
+        <h2>Current pubs</h2>
         ${pubs.list.length === 0 ?
             html`<div><em>none</em></div>` :
             html`<ul class="pubs-list">
@@ -37,6 +37,19 @@ function pubsRoute ({ emit, pubs }) {
                 })}
             </ul>`
         }
+
+        <h2>Following</h2>
+        ${following.length === 0 ?
+            html`<div><em>none</em></div>` :
+            html`<ul class="following-list">
+                ${following.map(function (followed) {
+                    return html`<li class="following">
+                        following ${followed}
+                    </li>`
+                })}
+            </ul>`
+        }
+
     </div>`
 }
 

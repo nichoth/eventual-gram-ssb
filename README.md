@@ -674,10 +674,10 @@ I think the best thing to do is to keep any tests that require us to call `sbot`
 ----------------------------------------------
 
 ## 1-23-2021
-
 I think `.gossip` is for pubs, and `.friends` is for follows
 
 
+## 1-25-2021
 
 
 
