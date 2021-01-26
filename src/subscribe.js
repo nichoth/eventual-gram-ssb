@@ -176,7 +176,7 @@ function subscribe (bus, state, app, setRoute) {
             state.pubs.list.set(pubs)
         })
 
-        app.getFollows((err, folls) => {
+        app.getFollowing((err, folls) => {
             console.log('got follows', err, folls)
             if (err) throw err
             state.following.set(folls)

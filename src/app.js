@@ -116,7 +116,7 @@ function App (sbot) {
 
 
 
-    function getFollows (cb) {
+    function getFollowing (cb) {
         S(
             sbot.friends.createFriendStream({ meta: true, hops: 1 }),
             S.collect(function (err, res) {
@@ -126,19 +126,21 @@ function App (sbot) {
     }
 
 
-    // *this takes too long*
-    // also renders too many pubs
-    // we need to know if we are connected or not and put connected pubs at
-    // the top of the list
-    // could have UI that lets you connect to pubs in the list (with invite)
 
-    // this is not good b/c it reuturns a list of all pubs we know about,
-    // regardless of the connection state
     function getPubs (cb) {
         sbot.gossip.peers(function (err, peers) {
             console.log('peeeeers', err, peers)
             return cb(err, peers)
         })
+
+        // *this takes too long*
+        // also renders too many pubs
+        // we need to know if we are connected or not and put connected pubs at
+        // the top of the list
+        // could have UI that lets you connect to pubs in the list (with invite)
+
+        // this is not good b/c it reuturns a list of all pubs we know about,
+        // regardless of the connection state
 
         // S(
         //     sbot.messagesByType({ type: 'pub' }),
@@ -188,7 +190,7 @@ function App (sbot) {
         getPubs,
         contacts,
         follow,
-        getFollows
+        getFollowing
     }
 
     function joinPub (inviteCode, cb) {
