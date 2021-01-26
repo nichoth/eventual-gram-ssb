@@ -43,13 +43,13 @@ function subscribe (bus, state, app, setRoute) {
                 state.me.set(profile)
             })
 
-            S(
-                app.getFollows(id),
-                S.collect(function (err, res) {
-                    if (err) throw err
-                    state.followed.set(res)
-                })
-            )
+            // S(
+            //     app.getFollows(id),
+            //     S.collect(function (err, res) {
+            //         if (err) throw err
+            //         state.followed.set(res)
+            //     })
+            // )
         })
 
         app.messages(function (err, msgs) {
