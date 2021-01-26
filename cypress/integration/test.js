@@ -132,7 +132,7 @@ describe('follow button', () => {
     })
 })
 
-describe('test avatar on posts', () => {
+describe('follow button disabled', () => {
     it('has a good button', () => {
         cy.get('.post-attributes .follow-icon button')
             .should('have.css', 'cursor', 'not-allowed')
