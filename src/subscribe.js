@@ -43,13 +43,18 @@ function subscribe (bus, state, app, setRoute) {
                 state.me.set(profile)
             })
 
-            S(
-                app.getFollows(id),
-                S.collect(function (err, res) {
-                    if (err) throw err
-                    state.followed.set(res)
-                })
-            )
+            app.getFollowing(function (err, res) {
+                console.log('---in here---', err, res)
+                state.followed.set(res)
+            })
+
+            // S(
+            //     app.getFollows(id),
+            //     S.collect(function (err, res) {
+            //         if (err) throw err
+            //         state.followed.set(res)
+            //     })
+            // )
         })
 
         app.messages(function (err, msgs) {
@@ -179,7 +184,8 @@ function subscribe (bus, state, app, setRoute) {
         app.getFollowing((err, folls) => {
             console.log('got follows', err, folls)
             if (err) throw err
-            state.following.set(folls)
+            // state.following.set(folls)
+            state.followed.set(folls)
         })
     })
 
@@ -198,6 +204,8 @@ function subscribe (bus, state, app, setRoute) {
             // need to update state
             var list = state.followed()
             list.unshift(followed)
+            state.followed.set(list)
+            // state.following.set(list)
         })
     })
 
