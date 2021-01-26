@@ -1,7 +1,7 @@
 var evs = require('./EVENTS')
 var xtend = require('xtend')
 var after = require('after')
-var S = require('pull-stream')
+// var S = require('pull-stream')
 
 
 // for testing ---------------
@@ -34,7 +34,7 @@ function subscribe (bus, state, app, setRoute) {
         app.getProfile(function (err, profile) {
             if (err) throw err
             var hash = profile.image
-            var { id } = profile
+            // var { id } = profile
             if (!hash) return state.me.set(profile)
 
             app.getUrlForHash(hash, function (err, url) {
