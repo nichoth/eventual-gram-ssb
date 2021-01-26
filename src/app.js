@@ -107,7 +107,7 @@ function App (sbot) {
 
     // **-------------trying friends -- follows---------------**
     S(
-        sbot.friends.createFriendStream({ meta: true }),
+        sbot.friends.createFriendStream({ meta: true, }),
         S.drain(ev => {
             console.log('**friend stream**', ev)
         })
@@ -116,25 +116,39 @@ function App (sbot) {
 
 
 
-
-
-
-    // *this takes too long*
-    // also renders too many pubs
-    // we need to know if we are connected or not and put connected pubs at
-    // the top of the list
-    // could have UI that lets you connect to pubs in the list (with invite)
-
-    // this is not good b/c it reuturns a list of all pubs we know about,
-    // regardless of the connection state
-    function getPubs (cb) {
+    function getFollowing (cb) {
         S(
-            sbot.messagesByType({ type: 'pub' }),
-            S.collect(function (err, msgs) {
-                if (err) return cb(err)
-                cb(null, msgs)
+            sbot.friends.createFriendStream({ meta: true, hops: 1 }),
+            S.collect(function (err, res) {
+                cb(err, res)
             })
         )
+    }
+
+
+
+    function getPubs (cb) {
+        sbot.gossip.peers(function (err, peers) {
+            console.log('peeeeers', err, peers)
+            return cb(err, peers)
+        })
+
+        // *this takes too long*
+        // also renders too many pubs
+        // we need to know if we are connected or not and put connected pubs at
+        // the top of the list
+        // could have UI that lets you connect to pubs in the list (with invite)
+
+        // this is not good b/c it reuturns a list of all pubs we know about,
+        // regardless of the connection state
+
+        // S(
+        //     sbot.messagesByType({ type: 'pub' }),
+        //     S.collect(function (err, msgs) {
+        //         if (err) return cb(err)
+        //         cb(null, msgs)
+        //     })
+        // )
     }
 
 
@@ -176,7 +190,7 @@ function App (sbot) {
         getPubs,
         contacts,
         follow,
-        getFollows
+        getFollowing
     }
 
     function joinPub (inviteCode, cb) {
@@ -447,35 +461,35 @@ function App (sbot) {
         }, cb)
     }
 
-    function getFollows (myId) {
-        return createFollowsStream(myId)
+    // function getFollows (myId) {
+    //     return createFollowsStream(myId)
 
-        function createFollowsStream (id) {
-            if (!sbot.links) {
-                return S.error(new Error('missing sbot.links'))
-            }
+    //     function createFollowsStream (id) {
+    //         if (!sbot.links) {
+    //             return S.error(new Error('missing sbot.links'))
+    //         }
 
-            return S(
-                sbot.links({
-                    source: id,
-                    rel: 'contact',
-                    values: true,
-                    reverse: true
-                }),
-                S.map(function (msg) {
-                    return msg && msg.value && msg.value.content
-                }),
-                S.filter(function (content) {
-                    return content && content.type === 'contact'
-                }),
-                S.unique('contact'),
-                S.filter(function (content) {
-                    return content.following === true
-                }),
-                S.map('contact')
-            )
-        }
-    }
+    //         return S(
+    //             sbot.links({
+    //                 source: id,
+    //                 rel: 'contact',
+    //                 values: true,
+    //                 reverse: true
+    //             }),
+    //             S.map(function (msg) {
+    //                 return msg && msg.value && msg.value.content
+    //             }),
+    //             S.filter(function (content) {
+    //                 return content && content.type === 'contact'
+    //             }),
+    //             S.unique('contact'),
+    //             S.filter(function (content) {
+    //                 return content.following === true
+    //             }),
+    //             S.map('contact')
+    //         )
+    //     }
+    // }
 }
 
 module.exports = App

@@ -175,6 +175,12 @@ function subscribe (bus, state, app, setRoute) {
             if (err) throw err
             state.pubs.list.set(pubs)
         })
+
+        app.getFollowing((err, folls) => {
+            console.log('got follows', err, folls)
+            if (err) throw err
+            state.following.set(folls)
+        })
     })
 
     // bus.on(evs.route.pubs, function () {

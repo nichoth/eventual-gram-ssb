@@ -9,6 +9,24 @@ The electron apps are in the "releases" link to the right ->
 
 ## Public pubs
 
+### noisebridge
+
+gossip.noisebridge.info:8008:@2NANnQVdsoqk0XPiJG2oMZqaEpTeoGrxOHJkLIqs7eY=.ed25519~JWTC6+rPYPW5b5zCion0gqjcJs35h6JKpUrQoAKWgJ4=
+
+### scuttle.us
+scuttle.us:8008:@WqcuCOIpLtXFRw/9vOAQJti8avTZ9vxT9rKrPo8qG6o=.ed25519~/ZUi9Chpl0g1kuWSrmehq2EwMQeV0Pd+8xw8XhWuhLE=
+
+### peernet
+us-east.ssbpeer.net:8008:@sTO03jpVivj65BEAJMhlwtHXsWdLd9fLwyKAT1qAkc0=.ed25519~sXFc5taUA7dpGTJITZVDCRy2A9jmkVttsr107+ufInU=
+
+### upsocial
+pub1.upsocial.com:8008:@gjlNF5Cyw3OKZxEoEpsVhT5Xv3HZutVfKBppmu42MkI=.ed25519~lMd6f4nnmBZEZSavAl4uahl+feajLUGqu8s2qdoTLi8=
+
+### scuttle.space
+scuttle.space:8008:@skBzPazHliOXCWLwloGvHYki0wPLOUeJpvW10U7MOJ4=.ed25519~wEC4nVDFiuuTqPOP/heQ1IqCZwrEQ234Cpa7j2HkygM=
+
+
+
 |Pub Name|Operator|Invite Code|
 |--------|--------|-----------|
 |[gossip.noisebridge.info](https://www.noisebridge.net/wiki/Pub)|[Noisebridge Hackerspace](https://www.noisebridge.net/wiki/Unicorn) [@james.network](https://james.network)|`gossip.noisebridge.info:8008:@2NANnQVdsoqk0XPiJG2oMZqaEpTeoGrxOHJkLIqs7eY=.ed25519~JWTC6+rPYPW5b5zCion0gqjcJs35h6JKpUrQoAKWgJ4=`|
@@ -656,10 +674,10 @@ I think the best thing to do is to keep any tests that require us to call `sbot`
 ----------------------------------------------
 
 ## 1-23-2021
-
 I think `.gossip` is for pubs, and `.friends` is for follows
 
 
+## 1-25-2021
 
 
 
