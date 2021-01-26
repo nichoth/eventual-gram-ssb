@@ -38,7 +38,8 @@ function App (sbot) {
 
 
 
-                    sbot.publish({
+                    // is this ok? does sbot have `alice` on it
+                    sbot.alice.publish({
                         type: ts.post,
                         text: text || '',
                         mentions: [{

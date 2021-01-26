@@ -83,7 +83,6 @@ function Home (props) {
 }
 
 function FollowIcon (props) {
-    console.log('follow icon', props)
     var { authorId, id, isFollowing, onFollow } = props
     // if it's your own message
     if (authorId === id) return null

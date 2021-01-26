@@ -92,8 +92,9 @@ function startSSB () {
 
 
     // ---------- test stuff ------------------
-    var postThings = (process.env.NODE_ENV === 'test' ||
-        process.env.NODE_ENV === 'development')
+    // var postThings = (process.env.NODE_ENV === 'test' ||
+    //     process.env.NODE_ENV === 'development')
+    var postThings = process.env.NODE_ENV === 'test'
 
     if (postThings) {
         // add mock data here

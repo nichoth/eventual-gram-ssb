@@ -144,7 +144,8 @@ button.edit {
                 color: cyan;
             }
             &:disabled {
-                color: black;
+                // color: black;
+                color: #8700ff;
                 cursor: not-allowed;
             }
         }

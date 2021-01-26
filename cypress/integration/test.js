@@ -119,9 +119,23 @@ describe('follow button', () => {
                     cy.get('.post .follow-icon button')
                         // the alice post is done first so thats why
                         // `last` works
-                        .last()
-                        .click()
+                        .last().then($el => {
+                            if ($el.has.attr, 'disabled') {
+                                cy.get('.post .follow-icon button')
+                                    .should('exist')
+                            } else {
+                                $el.click()
+                            }
+                        })
                 })
         })
+    })
+})
+
+describe('test avatar on posts', () => {
+    it('has a good button', () => {
+        cy.get('.post-attributes .follow-icon button')
+            .should('have.css', 'cursor', 'not-allowed')
+            .should('have.css', 'color', 'rgb(135, 0, 255)')
     })
 })
