@@ -84,13 +84,13 @@ function App (sbot) {
 
 
 
-    // this returns all pubs that we *know* about
+    // this returns *all pubs that we know about*
     // getPubs((err, res) => console.log('got pubs', err, res))
 
 
 
 
-    // --------- trying gossip --------------------------
+    // --------- trying gossip -- pubs --------------------------
     sbot.gossip.peers(function (err, peers) {
         console.log('peeeeers', err, peers)
     })
@@ -105,7 +105,7 @@ function App (sbot) {
 
 
 
-    // **-------------trying friends---------------**
+    // **-------------trying friends -- follows---------------**
     S(
         sbot.friends.createFriendStream({ meta: true }),
         S.drain(ev => {
