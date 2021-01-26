@@ -92,7 +92,10 @@ function startSSB () {
 
 
     // ---------- test stuff ------------------
-    if (process.env.NODE_ENV === 'test') {
+    var postThings = (process.env.NODE_ENV === 'test' ||
+        process.env.NODE_ENV === 'development')
+
+    if (postThings) {
         // add mock data here
         var feed = Feed(_sbot, keysAlice)
         // how to get blobs for mentions array?
@@ -100,10 +103,6 @@ function startSSB () {
         S(
             read(__dirname + '/../../cypress/fixtures/iguana.jpg'),
             hasher,
-            // S.map(function (data) {
-            //     console.log('*********data', data)
-            //     return data
-            // }),
             _sbot.blobs.add(function (err, blobId) {
                 if (err) return console.log('oh noooo', err)
                 var hash = '&' + hasher.digest

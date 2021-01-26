@@ -33,10 +33,14 @@ function App (sbot) {
                 sbot.blobs.add(function (err, _hash) {
                     if (err) throw err
                     var hash = '&' + hasher.digest
-                    
-                    window.ev.alice.publish({
+
+
+
+
+
+                    sbot.publish({
                         type: ts.post,
-                        text: text,
+                        text: text || '',
                         mentions: [{
                             link: hash,        // the hash given by blobs.add
                         //   name: 'hello.txt', // optional, but recommended
@@ -45,8 +49,27 @@ function App (sbot) {
                         }]
                     }, function (err, res) {
                         if (err) return console.log('err', err)
-                        console.log('res', res)
+                        // console.log('made new post', err, res)
+                        console.log(null, arguments)
                     })
+
+                    
+
+
+
+                    // window.ev.alice.publish({
+                    //     type: ts.post,
+                    //     text: text,
+                    //     mentions: [{
+                    //         link: hash,        // the hash given by blobs.add
+                    //     //   name: 'hello.txt', // optional, but recommended
+                    //     //   size: 12,          // optional, but recommended
+                    //     //   type: 'text/plain' // optional, but recommended
+                    //     }]
+                    // }, function (err, res) {
+                    //     if (err) return console.log('err', err)
+                    //     console.log('res', res)
+                    // })
                 })
             )
         }, 'image/jpeg')

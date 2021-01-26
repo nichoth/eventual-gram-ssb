@@ -39,12 +39,11 @@ function Home (props) {
                     name: authorId
                 })
                 var postAvatar = (author.imgUrl || '')
-                // console.log('postAvatar', postAvatar)
-                // console.log('post', post)
 
-                var isFollowing = followed.find(followedId => {
-                    return followedId === authorId
+                var isFollowing = followed.find(({ id }) => {
+                    return id === authorId
                 })
+
 
                 return html`<li class="post">
                     <a class="post-link" href="${encodeURIComponent(post.key)}">
@@ -84,6 +83,7 @@ function Home (props) {
 }
 
 function FollowIcon (props) {
+    console.log('follow icon', props)
     var { authorId, id, isFollowing, onFollow } = props
     // if it's your own message
     if (authorId === id) return null

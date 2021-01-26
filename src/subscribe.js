@@ -31,6 +31,12 @@ function subscribe (bus, state, app, setRoute) {
     bus.on(evs.app.start, (ev) => {
         console.log('***start***', ev)
 
+        app.getFollowing(function (err, folls) {
+            console.log('got following', err, folls)
+            if (err) throw err
+            state.followed.set(folls)
+        })
+
         app.getProfile(function (err, profile) {
             if (err) throw err
             var hash = profile.image
@@ -43,10 +49,10 @@ function subscribe (bus, state, app, setRoute) {
                 state.me.set(profile)
             })
 
-            app.getFollowing(function (err, res) {
-                console.log('---in here---', err, res)
-                state.followed.set(res)
-            })
+            // app.getFollowing(function (err, res) {
+            //     console.log('---in here---', err, res)
+            //     state.followed.set(res)
+            // })
         })
 
         app.messages(function (err, msgs) {
