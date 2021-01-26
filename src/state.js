@@ -17,8 +17,7 @@ function State () {
             list: observ([]),
             err: observ(null)
         }),
-        feeds: struct({}),
-        following: observ([])
+        feeds: struct({})
     })
 
     return state

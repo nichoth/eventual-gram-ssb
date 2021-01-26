@@ -47,14 +47,6 @@ function subscribe (bus, state, app, setRoute) {
                 console.log('---in here---', err, res)
                 state.followed.set(res)
             })
-
-            // S(
-            //     app.getFollows(id),
-            //     S.collect(function (err, res) {
-            //         if (err) throw err
-            //         state.followed.set(res)
-            //     })
-            // )
         })
 
         app.messages(function (err, msgs) {
@@ -88,29 +80,6 @@ function subscribe (bus, state, app, setRoute) {
             state.postUrls.set(urls)
             state.posts.set(posts)
         })
-
-
-
-        // testing
-        // follows are like { from: id, to: id }
-        // function getFollows () {
-        //     // we don't use S.collect b/c the stream never finishes
-        //     S(
-        //         app.contacts(),
-        //         S.drain(function (msg) {
-        //             var fromMe = msg.value.author === state.me().id
-        //             if (!fromMe) return
-        //             console.log('from me', msg)
-        //             var followed = msg.value.content.contact
-        //             console.log('followed', followed)
-        //             var list = state.followed()
-        //             list.unshift(followed)
-        //             state.followed.set(list)
-        //         })
-        //     )
-        // }
-
-
 
     })
 
@@ -182,19 +151,11 @@ function subscribe (bus, state, app, setRoute) {
         })
 
         app.getFollowing((err, folls) => {
-            console.log('got follows', err, folls)
+            console.log('got following', err, folls)
             if (err) throw err
-            // state.following.set(folls)
             state.followed.set(folls)
         })
     })
-
-    // bus.on(evs.route.pubs, function () {
-    //     app.getPubs(function (err, pubs) {
-    //         if (err) throw err
-    //         state.pubs.list.set(pubs)
-    //     })
-    // })
 
     bus.on(evs.follow.start, function ({ id }) {
         app.follow(id, function (err, res) {
@@ -205,7 +166,6 @@ function subscribe (bus, state, app, setRoute) {
             var list = state.followed()
             list.unshift(followed)
             state.followed.set(list)
-            // state.following.set(list)
         })
     })
 
