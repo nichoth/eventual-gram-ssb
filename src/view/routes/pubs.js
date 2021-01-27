@@ -47,22 +47,19 @@ function pubsRoute ({ emit, pubs, followed, people }) {
             html`<ul class="following-list">
                 ${followed.map(function (foll) {
 
-
-
                     var person = ((people || {})[foll.id] || {
                         id: foll.id,
                         name: foll.id
                     })
                     var avatar = (person.imgUrl || '')
 
-
-
                     return html`<li class="following">
                         <span class="followed-avatar">
                             <img src="${avatar}" />
                         </span>
-                        <span>${person.name}</span>
-                        
+                        <a href="/${foll.id}">
+                            ${person.name}
+                        </a>
                     </li>`
                 })}
             </ul>`

@@ -143,5 +143,7 @@ describe('follow button', () => {
 })
 
 describe("has a list of people you're following", () => {
+    cy.visit('/pubs').then(() => {
 
+    })
 })
