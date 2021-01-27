@@ -152,7 +152,7 @@ function startSSB () {
             type: 'about',
             about: _sbot.alice.id,
             name: name
-          }, cb || function noop () {})
+        }, cb || function noop () {})
     }
     manifest.alice = {
         publish: 'async',
