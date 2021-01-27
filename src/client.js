@@ -4,7 +4,10 @@ var muxrpc = require('muxrpc')
 var manifest = require('./manifest.json')
 
 // manifest for testing
-manifest.alice = { publish: 'async' }
+manifest.alice = {
+    publish: 'async',
+    setName: 'async'
+}
 
 var WS_URL = 'ws://localhost:' + (process.env.WS_PORT || '8000')
 

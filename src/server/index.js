@@ -74,8 +74,8 @@ function startSSB () {
         .use(require('ssb-gossip'))
         .use(require('ssb-replicate'))
         .use(require('ssb-backlinks'))
-        .use(require('scuttle-tag'))
-        .use(require('ssb-tags'))
+        // .use(require('scuttle-tag'))
+        // .use(require('ssb-tags'))
         .use(require('ssb-blobs'))
         .use(require('ssb-serve-blobs'))
         .use(require('ssb-invite'))
@@ -89,6 +89,7 @@ function startSSB () {
     // .use(require('ssb-query'))
     // .use(require('scuttlebot/plugins/invite'))
     // .use(require('scuttlebot/plugins/local'))
+
 
 
     // ---------- test stuff ------------------
@@ -112,7 +113,6 @@ function startSSB () {
             })
         )
 
-
         function publish (hash) {
             feed.publish({
                 type: 'ev.post',
@@ -123,8 +123,11 @@ function startSSB () {
                 console.log('posted alice')
             })
         }
+
+        // here, set the username & avatar for tests
     }
     // ---------- /test stuff ------------------
+
 
 
     var server = http.createServer(function onRequest (req, res) {
@@ -141,11 +144,21 @@ function startSSB () {
 
 
 
-    // testing
-    // _sbot.alice = Feed(_sbot, keysAlice)
-    // manifest.alice = {
-    //     publish: 'async'
-    // }
+
+    // ----------- testing -------------------
+    _sbot.alice = Feed(_sbot, keysAlice)
+    _sbot.alice.setName = function (name, cb) {
+        _sbot.alice.publish({
+            type: 'about',
+            about: _sbot.alice.id,
+            name: name
+          }, cb || function noop () {})
+    }
+    manifest.alice = {
+        publish: 'async',
+        setName: 'async'
+    }
+    // ----------- /testing -------------------
 
 
 
