@@ -119,6 +119,8 @@ describe('follow button', () => {
                     cy.get('.post .follow-icon button')
                         // the alice post is done first so thats why
                         // `last` works
+                        // if you have already run the test once this session
+                        // then it will already be following
                         .last().then($el => {
                             if ($el.has.attr, 'disabled') {
                                 cy.get('.post .follow-icon button')
