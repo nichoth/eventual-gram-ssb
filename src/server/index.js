@@ -95,7 +95,7 @@ function startSSB () {
     // ---------- test stuff ------------------
     // var postThings = (process.env.NODE_ENV === 'test' ||
     //     process.env.NODE_ENV === 'development')
-    var postThings = process.env.NODE_ENV === 'test'
+    var postThings = (process.env.NODE_ENV === 'test')
 
     if (postThings) {
         // add mock data here
@@ -124,6 +124,8 @@ function startSSB () {
             })
         }
 
+        setName('alice')
+
         // here, set the username & avatar for tests
     }
     // ---------- /test stuff ------------------
@@ -147,7 +149,9 @@ function startSSB () {
 
     // ----------- testing -------------------
     _sbot.alice = Feed(_sbot, keysAlice)
-    _sbot.alice.setName = function (name, cb) {
+    _sbot.alice.setName = setName
+
+    function setName (name, cb) {
         _sbot.alice.publish({
             type: 'about',
             about: _sbot.alice.id,

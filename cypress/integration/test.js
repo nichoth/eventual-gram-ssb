@@ -134,8 +134,8 @@ describe('follow button', () => {
     })
 })
 
-describe('follow button disabled', () => {
-    it('has a disabled button', () => {
+describe('follow button', () => {
+    it('is disabled', () => {
         cy.get('.post-attributes .follow-icon button')
             .should('have.css', 'cursor', 'not-allowed')
             .should('have.css', 'color', 'rgb(135, 0, 255)')
