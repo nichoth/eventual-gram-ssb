@@ -37,7 +37,6 @@ function App (sbot) {
 
 
 
-
                     // is this ok? does sbot have `alice` on it
                     sbot.alice.publish({
                         type: ts.post,
@@ -54,23 +53,8 @@ function App (sbot) {
                         console.log(null, arguments)
                     })
 
-                    
 
 
-
-                    // window.ev.alice.publish({
-                    //     type: ts.post,
-                    //     text: text,
-                    //     mentions: [{
-                    //         link: hash,        // the hash given by blobs.add
-                    //     //   name: 'hello.txt', // optional, but recommended
-                    //     //   size: 12,          // optional, but recommended
-                    //     //   type: 'text/plain' // optional, but recommended
-                    //     }]
-                    // }, function (err, res) {
-                    //     if (err) return console.log('err', err)
-                    //     console.log('res', res)
-                    // })
                 })
             )
         }, 'image/jpeg')
