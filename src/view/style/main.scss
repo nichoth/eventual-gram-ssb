@@ -124,6 +124,12 @@ button.edit {
     align-items: stretch;
 }
 
+.following-list {
+    li {
+        margin-bottom: 0.5em;
+    }
+}
+
 .post-attributes {
     height: 3em;
     display: flex;

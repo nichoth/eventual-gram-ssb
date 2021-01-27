@@ -2,7 +2,7 @@ import { html } from 'htm/preact'
 var evs = require('../../EVENTS')
 var get = require('lodash/get')
 
-function pubsRoute ({ emit, pubs, following }) {
+function pubsRoute ({ emit, pubs, followed }) {
 
     // @TODO need a 
     // * list of following
@@ -10,7 +10,7 @@ function pubsRoute ({ emit, pubs, following }) {
 
     // need to emit an event only when this route first loads
 
-    console.log('pubssss render', pubs)
+    console.log('pubssss render', pubs, followed)
 
     return html`<div class="pubs-route">
         <form onsubmit=${ev => {
@@ -39,12 +39,12 @@ function pubsRoute ({ emit, pubs, following }) {
         }
 
         <h2>Following</h2>
-        ${following.length === 0 ?
+        ${followed.length === 0 ?
             html`<div><em>none</em></div>` :
             html`<ul class="following-list">
-                ${following.map(function (followed) {
+                ${followed.map(function (foll) {
                     return html`<li class="following">
-                        following ${followed}
+                        ${foll.id}
                     </li>`
                 })}
             </ul>`

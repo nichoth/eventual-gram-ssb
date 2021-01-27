@@ -135,9 +135,13 @@ describe('follow button', () => {
 })
 
 describe('follow button disabled', () => {
-    it('has a good button', () => {
+    it('has a disabled button', () => {
         cy.get('.post-attributes .follow-icon button')
             .should('have.css', 'cursor', 'not-allowed')
             .should('have.css', 'color', 'rgb(135, 0, 255)')
     })
+})
+
+describe("has a list of people you're following", () => {
+
 })
