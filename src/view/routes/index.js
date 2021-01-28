@@ -22,7 +22,8 @@ function _Router () {
 
     router.addRoute('/@*', function (match) {
         var { splats } = match
-        var userId = '@' + splats[0]
+        var userId = '@' + decodeURIComponent(splats[0])
+        console.log('user id', userId)
         return { view: createFeedRoute(userId) }
     })
 

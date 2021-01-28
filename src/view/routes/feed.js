@@ -5,18 +5,18 @@ function createFeedRoute (feedId) {
     console.log('in feed.js', feedId)
 
     return function Feed (props) {
-        var { avatarUrl, me, emit } = props
+        var { emit } = props
         emit(evs.feed.get, feedId)
         if(!props.feeds[feedId]) return null
 
         var posts = props.feeds[feedId]
-
-        console.log('avi URL', avatarUrl)
+        var person = props.people[feedId]
+        var avatarUrl = person.imgUrl
 
         return html`<div class="feed-route">
             <div class="profile-info">
                 <img class="avatar-big" src=${avatarUrl} />
-                <h1 class="user-name">${me.name}</h1>
+                <h1 class="user-name">${person.name}</h1>
             </div>
 
             <hr />

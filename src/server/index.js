@@ -92,6 +92,22 @@ function startSSB () {
 
 
 
+
+
+    // ----------- testing -------------------
+    _sbot.alice = Feed(_sbot, keysAlice)
+    _sbot.alice.setName = setName
+
+    manifest.alice = {
+        publish: 'async',
+        setName: 'async'
+    }
+    // ----------- /testing -------------------
+
+
+
+
+
     // ---------- test stuff ------------------
     // var postThings = (process.env.NODE_ENV === 'test' ||
     //     process.env.NODE_ENV === 'development')
@@ -99,7 +115,7 @@ function startSSB () {
 
     if (postThings) {
         // add mock data here
-        var feed = Feed(_sbot, keysAlice)
+        // var feed = Feed(_sbot, keysAlice)
         // how to get blobs for mentions array?
         var hasher = createHash('sha256')
         S(
@@ -114,7 +130,7 @@ function startSSB () {
         )
 
         function publish (hash) {
-            feed.publish({
+            _sbot.alice.publish({
                 type: 'ev.post',
                 mentions: [{ link: hash }],
                 text: 'hello world, I am alice.'
@@ -127,8 +143,16 @@ function startSSB () {
         setName('alice')
 
         // here, set the username & avatar for tests
+        function setName (name, cb) {
+            _sbot.alice.publish({
+                type: 'about',
+                about: _sbot.alice.id,
+                name: name
+            }, cb || function noop () {})
+        }
     }
     // ---------- /test stuff ------------------
+
 
 
 
@@ -143,29 +167,6 @@ function startSSB () {
         // for electron .fork
         if (process.send) process.send('ok')
     })
-
-
-
-
-    // ----------- testing -------------------
-    _sbot.alice = Feed(_sbot, keysAlice)
-    _sbot.alice.setName = setName
-
-    function setName (name, cb) {
-        _sbot.alice.publish({
-            type: 'about',
-            about: _sbot.alice.id,
-            name: name
-        }, cb || function noop () {})
-    }
-    manifest.alice = {
-        publish: 'async',
-        setName: 'async'
-    }
-    // ----------- /testing -------------------
-
-
-
 
     ws({ server }, function onConnection (wsStream) {
         console.log('got ws connection')

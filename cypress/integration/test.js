@@ -111,7 +111,7 @@ describe('profile route', () => {
     })
 })
 
-describe('follow button', () => {
+describe('follow button state', () => {
     it('has a follow button', () => {
         cy.visit('/').then(() => {
             cy.get('.author a').contains(keysAlice.public)
@@ -122,19 +122,20 @@ describe('follow button', () => {
                         // if you have already run the test once this session
                         // then it will already be following
                         .last().then($el => {
-                            if ($el.has.attr, 'disabled') {
-                                cy.get('.post .follow-icon button')
-                                    .should('exist')
-                            } else {
-                                $el.click()
-                            }
+                            $el.click()
+                            // if ($el.has.attr, 'disabled') {
+                            //     cy.get('.post .follow-icon button')
+                            //         .should('exist')
+                            // } else {
+                            //     $el.click()
+                            // }
                         })
                 })
         })
     })
 })
 
-describe('follow button', () => {
+describe('follow button state when followed', () => {
     it('is disabled', () => {
         cy.get('.post-attributes .follow-icon button')
             .should('have.css', 'cursor', 'not-allowed')
@@ -142,8 +143,11 @@ describe('follow button', () => {
     })
 })
 
-describe("has a list of people you're following", () => {
-    cy.visit('/pubs').then(() => {
-
+describe("/pubs route", () => {
+    it("has a list of people you're following", () => {
+        cy.visit('/pubs').then(() => {
+            cy.get('a[href=/@L1UBLpbh9CHK329HevfD3c/C5r3Ww4gzjvlDLbNNYN8=.ed25519]')
+                .should('contain', 'alice')
+        })
     })
 })
