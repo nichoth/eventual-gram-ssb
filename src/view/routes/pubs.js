@@ -57,7 +57,7 @@ function pubsRoute ({ emit, pubs, followed, people }) {
                         <span class="followed-avatar">
                             <img src="${avatar}" />
                         </span>
-                        <a href="/${encodeURIComponent(foll.id)}">
+                        <a href="/${foll.id}">
                             ${person.name}
                         </a>
                     </li>`
