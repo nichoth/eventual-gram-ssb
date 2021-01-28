@@ -140,16 +140,17 @@ function startSSB () {
             })
         }
 
-        setName('alice')
 
         // here, set the username & avatar for tests
-        function setName (name, cb) {
-            _sbot.alice.publish({
-                type: 'about',
-                about: _sbot.alice.id,
-                name: name
-            }, cb || function noop () {})
-        }
+        setName('alice')
+    }
+
+    function setName (name, cb) {
+        _sbot.alice.publish({
+            type: 'about',
+            about: _sbot.alice.id,
+            name: name
+        }, cb || function noop () {})
     }
     // ---------- /test stuff ------------------
 
