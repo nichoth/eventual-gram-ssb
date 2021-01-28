@@ -2,7 +2,6 @@ import { html } from 'htm/preact'
 var evs = require('../../EVENTS')
 
 function createFeedRoute (feedId) {
-    console.log('in feed.js', feedId)
 
     return function Feed (props) {
         var { emit } = props
