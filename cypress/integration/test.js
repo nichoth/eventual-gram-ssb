@@ -157,7 +157,7 @@ describe('avatars', () => {
         cy.get('.following-list .following img')
             .last()
             .invoke('attr', 'src')
-            .should('equal', 'example')
+            .should('include', 'svg')
             // check that the img src here is ok for a defaault
             // .should()  
 

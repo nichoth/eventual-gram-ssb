@@ -299,9 +299,12 @@ ul.feed {
     flex-wrap: wrap;
 
     img.avatar-big {
-        max-width: 500px;
-        border-radius: 50%;
         border: 1px solid black;
+        object-fit: cover;
+        border-radius: 50%;
+        width: 500px;
+        height: 500px;
+        overflow: hidden;
     }
 }
 
