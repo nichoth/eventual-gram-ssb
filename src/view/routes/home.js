@@ -2,6 +2,7 @@ var evs = require('../../EVENTS')
 import { html } from 'htm/preact'
 import { Component } from 'preact'
 var marked = require('ssb-marked')
+import { generateFromString } from 'generate-avatar'
 
 class PostText extends Component {
     shouldComponentUpdate() {
@@ -38,7 +39,12 @@ function Home (props) {
                     id: authorId,
                     name: authorId
                 })
-                var postAvatar = (author.imgUrl || '')
+                // var postAvatar = (author.imgUrl || '')
+                var postAvatar = (author.imgUrl ||
+                    ('data:image/svg+xml;utf8,' +
+                        generateFromString(authorId)
+                    )
+                )
 
                 var isFollowing = followed.find(({ id }) => {
                     return id === authorId
