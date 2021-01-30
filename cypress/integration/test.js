@@ -146,7 +146,8 @@ describe('follow button state when followed', () => {
 describe("/pubs route", () => {
     it("has a list of people you're following", () => {
         cy.visit('/pubs').then(() => {
-            cy.get('a[href=/@L1UBLpbh9CHK329HevfD3c/C5r3Ww4gzjvlDLbNNYN8=.ed25519]')
+            cy.get('.following a')
+                .last()
                 .should('contain', 'alice')
         })
     })
