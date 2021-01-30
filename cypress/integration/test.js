@@ -151,3 +151,17 @@ describe("/pubs route", () => {
         })
     })
 })
+
+describe('avatars', () => {
+    it('has something as a default avatar', () => {
+        cy.get('.following-list .following img')
+            .last()
+            .invoke('attr', 'src')
+            .should('equal', 'example')
+            // check that the img src here is ok for a defaault
+            // .should()  
+
+            // .should('have.attr', 'src')
+            // .should('include', 'foo')
+    })
+})

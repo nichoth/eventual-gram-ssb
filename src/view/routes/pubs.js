@@ -1,6 +1,7 @@
 import { html } from 'htm/preact'
 var evs = require('../../EVENTS')
 var get = require('lodash/get')
+import { generateFromString } from 'generate-avatar'
 
 function pubsRoute ({ emit, pubs, followed, people }) {
 
@@ -51,11 +52,14 @@ function pubsRoute ({ emit, pubs, followed, people }) {
                         id: foll.id,
                         name: foll.id
                     })
-                    var avatar = (person.imgUrl || '')
+                    var avatar = (person.imgUrl ||
+                        ('data:image/svg+xml;utf8,' +
+                        generateFromString(foll.id))
+                    )
 
                     return html`<li class="following">
                         <span class="followed-avatar">
-                            <img src="${avatar}" />
+                            <img src=${avatar} />
                         </span>
                         <a href="/${foll.id}">
                             ${person.name}

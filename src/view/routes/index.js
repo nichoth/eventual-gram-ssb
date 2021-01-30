@@ -20,6 +20,7 @@ function _Router () {
         return { view: Pubs, events: [evs.pub.route] }
     })
 
+    // user route
     router.addRoute('/@*', function (match) {
         var { splats } = match
         var userId =  '@' + splats[0]

@@ -679,6 +679,14 @@ I think `.gossip` is for pubs, and `.friends` is for follows
 
 ## 1-25-2021
 
+--------------------------------------------
+
+## 1-29-2921
+
+* https://www.npmjs.com/package/gradient-avatar
+* https://www.npmjs.com/package/generate-avatar
+
+
 
 
 
