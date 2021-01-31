@@ -3,9 +3,8 @@ var evs = require('../../EVENTS')
 
 function createFeedRoute (feedId) {
 
-
     return function Feed (props) {
-        console.log(props.feeds)
+        console.log('feeds', props.feeds)
         var { emit } = props
         emit(evs.feed.get, feedId)
         emit(evs.people.getProfile, feedId)
@@ -14,6 +13,10 @@ function createFeedRoute (feedId) {
         var posts = props.feeds[feedId]
         var person = props.people[feedId]
         console.log('person', person, person.imgUrl)
+
+        // i don't know why this is necessary, but it makes the cypress
+        // test pass
+        // maybe some kind of raace condition brought out by cypress
         var avatarUrl = person.imgUrl ||
             (feedId === props.me.id ? props.avatarUrl : null)
 
