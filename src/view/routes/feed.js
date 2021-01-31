@@ -11,13 +11,13 @@ function createFeedRoute (feedId) {
         var { emit } = props
         emit(evs.feed.get, feedId)
         emit(evs.people.getProfile, feedId)
-        if(!props.feeds[feedId]) return null
+        if (!props.feeds[feedId]) return null
 
         var posts = props.feeds[feedId]
         var person = props.people[feedId]
         console.log('person', person, person.imgUrl)
         var avatarUrl = person.imgUrl ||
-            feedId === props.me.id ? props.avatarUrl : null
+            (feedId === props.me.id ? props.avatarUrl : null)
 
         return html`<div class="feed-route">
             <div class="profile-info">
