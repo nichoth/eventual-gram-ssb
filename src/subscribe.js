@@ -18,7 +18,7 @@ function subscribe (bus, state, app, setRoute) {
     })
 
     bus.on(evs.people.getProfile, function (feedId) {
-        if (state.people()[feedId] && props.people()[feedId.imgUrl]) return
+        if (state.people()[feedId] && props.people()[feedId].imgUrl) return
 
         console.log('in hererererererere')
 
