@@ -23,7 +23,7 @@ function subscribe (bus, state, app, setRoute) {
         console.log('in hererererererere')
 
         app.getProfileById(feedId, function (err, person) {
-            if (err) return next(err)
+            if (err) throw err
             var { name, image } = person
             app.getUrlForHash(image, (err, imgUrl) => {
                 if (err) throw err
@@ -32,8 +32,6 @@ function subscribe (bus, state, app, setRoute) {
                 state.people.set(xtend(state.people(), newOne))
                 console.log('state.poeple', state.people())
                 console.log('baaaaaaaa')
-                // acc[id] = { name, image, imgUrl }
-                // next(null, acc)
             })
         })
     })
