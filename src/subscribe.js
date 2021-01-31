@@ -17,6 +17,27 @@ function subscribe (bus, state, app, setRoute) {
         console.log('* ev data', ev)
     })
 
+    bus.on(evs.people.getProfile, function (feedId) {
+        if (state.people()[feedId]) return
+
+        console.log('in hererererererere')
+
+        app.getProfileById(feedId, function (err, person) {
+            if (err) return next(err)
+            var { name, image } = person
+            app.getUrlForHash(image, (err, imgUrl) => {
+                if (err) throw err
+                var newOne = {}
+                newOne[feedId] = { name, image, imgUrl }
+                state.people.set(xtend(state.people(), newOne))
+                console.log('state.poeple', state.people())
+                console.log('baaaaaaaa')
+                // acc[id] = { name, image, imgUrl }
+                // next(null, acc)
+            })
+        })
+    })
+
     // should do the routes differently
     // for navigating programatically
     bus.on(evs.route.change, ev => {
@@ -116,14 +137,16 @@ function subscribe (bus, state, app, setRoute) {
     bus.on(evs.feed.get, function (feedId) {
         console.log('**get feed**', feedId)
 
-        if (state.feeds()[feedId]) return
+        if (!(state.feeds()[feedId])) {
+            return app.getUserPosts(feedId, function (err, posts) {
+                console.log('**feed**', err, posts)
+                var feeds = state.feeds()
+                feeds[feedId] = posts
+                state.feeds.set(feeds)
+            })
+        }
 
-        app.getUserPosts(feedId, function (err, posts) {
-            console.log('**feed**', err, posts)
-            var feeds = state.feeds()
-            feeds[feedId] = posts
-            state.feeds.set(feeds)
-        })
+        console.log('**keep going**')
     })
 
     bus.on(evs.profile.setAvatar, function (ev) {

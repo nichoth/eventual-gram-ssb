@@ -4,7 +4,7 @@ var EVENTS = namespace({
     route: ['change'],
     ok: ['ok'],
     profile: ['save', 'setAvatar'],
-    people: ['getAvatar'],
+    people: ['getAvatar', 'getProfile'],
     app: ['start'],
     post: ['new'],
     feed: ['get'],
