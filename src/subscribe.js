@@ -20,8 +20,6 @@ function subscribe (bus, state, app, setRoute) {
     bus.on(evs.people.getProfile, function (feedId) {
         if (state.people()[feedId] && state.people()[feedId].imgUrl) return
 
-        console.log('in hererererererere')
-
         app.getProfileById(feedId, function (err, person) {
             if (err) throw err
             var { name, image } = person
@@ -30,8 +28,6 @@ function subscribe (bus, state, app, setRoute) {
                 var newOne = {}
                 newOne[feedId] = { name, image, imgUrl }
                 state.people.set(xtend(state.people(), newOne))
-                console.log('state.poeple', state.people())
-                console.log('baaaaaaaa')
             })
         })
     })
