@@ -14,11 +14,13 @@ function createFeedRoute (feedId) {
         var person = props.people[feedId]
         console.log('person', person, person.imgUrl)
 
+
         // i don't know why this is necessary, but it makes the cypress
         // test pass
         // maybe some kind of raace condition brought out by cypress
         var avatarUrl = person.imgUrl ||
             (feedId === props.me.id ? props.avatarUrl : null)
+
 
         return html`<div class="feed-route">
             <div class="profile-info">

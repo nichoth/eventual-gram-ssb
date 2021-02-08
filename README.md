@@ -1,4 +1,21 @@
 # eventual-gram ssb
+A social app designed for sharing photographs. Heavily influenced by [patchwork](https://github.com/ssbc/patchwork), but with a UI designed for photos. 
+
+This uses `preact` as the view layer, just because it's something I already knew. React would also be fine since this is an electron app that needs to be downloaded in advance, not a website.
+
+This uses a simple structure where the view consumes an event emitter and emits events that are then consumed by the data layer.
+
+--------------------------------------------------
+
+```js
+// index.js
+var app = require('./src/app')()  // the data layer
+var { bus, view, state, setRoute } = require('./src/view')()
+// connect the view and data layer
+require('./src/subscribe')(bus, state, app, setRoute)
+```
+
+--------------------------------------------------------
 
 The electron apps are in the "releases" link to the right ->
 
