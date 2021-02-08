@@ -5,8 +5,6 @@ This uses `preact` as the view layer, just because it's something I already knew
 
 This uses a simple structure where the view consumes an event emitter and emits events that are then consumed by the data layer.
 
---------------------------------------------------
-
 ```js
 // index.js
 var app = require('./src/app')()  // the data layer
