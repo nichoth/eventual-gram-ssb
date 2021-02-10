@@ -19,6 +19,40 @@ The electron apps are in the "releases" link to the right ->
 
 ------------------------------------
 
+
+Start a dev server that automatically reloads on any change, with the `NODE_ENV` env variable set to 'development', which gives an `appName` of `ssb-ev-DEV`: 
+```
+$ npm start
+```
+
+Start the dev server, with no env variables set (defaults to appName of `ssb-ev`:
+```
+npm run open
+```
+
+Open a test GUI
+```
+npm run cy:open
+```
+
+Run some tests with no GUI
+```
+npm run test-browser
+```
+
+Make a new electron release
+```
+npm run release
+```
+
+Open electron with the built app
+```
+npm run tron
+```
+
+------------------------------------------------
+
+
 [public pubs](https://github.com/ssbc/ssb-server/wiki/pub-servers#public-pubs)
 
 
@@ -54,35 +88,6 @@ scuttle.space:8008:@skBzPazHliOXCWLwloGvHYki0wPLOUeJpvW10U7MOJ4=.ed25519~wEC4nVD
 
 --------------------------------------
 
-Start a dev server that automatically reloads on any change, with the `NODE_ENV` env variable set to 'development', which gives an `appName` of `ssb-ev-DEV`: 
-```
-$ npm start
-```
-
-Start the dev server, with no env variables set (defaults to appName of `ssb-ev`:
-```
-npm run open
-```
-
-Open a test GUI
-```
-npm run cy:open
-```
-
-Run some tests with no GUI
-```
-npm run test-browser
-```
-
-Make a new electron release
-```
-npm run release
-```
-
-Open electron with the built app
-```
-npm run tron
-```
 
 
 ## notes

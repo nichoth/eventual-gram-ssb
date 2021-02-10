@@ -2,6 +2,8 @@
   "name": "eventual-gram-ssb",
   "version": "0.0.3",
   "description": "ssb photo sharing",
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
   "main": "public/main.js",
   "husky": {
     "hooks": {
@@ -27,8 +29,6 @@
     "start": "env $(cat .env | xargs) npm run open"
   },
   "keywords": [],
-  "author": "Nick Thomas <nichoth@gmail.com>",
-  "license": "ISC",
   "dependencies": {
     "@nichoth/catch-routes": "^1.0.3",
     "@nichoth/events": "^1.1.2",
