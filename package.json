@@ -10,7 +10,22 @@
       "pre-push": "npm run lint && npm test"
     }
   },
+  "build": {
+		"appId": "com.nichoth.eventual-gram",
+		"productName": "eventual gram",
+		"mac": {
+			"category": "public.app-category.lifestyle"
+		},
+		"dmg": {
+			"icon": false
+		},
+		"linux": {
+			"target": ["AppImage"],
+			"category": "Office"
+		}
+	},
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "dist": "electron-builder -c.snap.publish=github --mac --windows --linux",
     "release": "electron-builder --mac --windows --linux --publish=always",
     "tron": "env $(cat .env | xargs) electron .",
