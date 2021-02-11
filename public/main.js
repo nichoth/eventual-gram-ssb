@@ -17,7 +17,8 @@ function createWindow () {
   // console.log('env', process.env.NODE_ENV)
   var p = __dirname + '/../src/server/index.js'
   console.log('**pppppppp**', p)
-  var server = fork(p, [], { stdio: 'pipe' })
+  // var server = fork(p, [], { stdio: 'pipe' })
+  var server = fork(p)
 
   server.on('uncaughtException', function (err) {
     console.log('***uncaught exception***', err)
