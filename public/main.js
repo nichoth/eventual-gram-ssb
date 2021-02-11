@@ -34,11 +34,13 @@ function createWindow () {
   server.once('message', function (msg) {
     // and load the index.html of the app.
 
-    win.loadFile('./public/index.html')
+    // win.loadFile('./public/index.html')
+    win.loadFile(__dirname + '/index.html')
 
     console.log('**msg**', msg)
 
   // win.loadURL(`file://${__dirname}/index.html`)
+
   //   win.loadURL(url.format({
   //     pathname: path.join(__dirname, 'index.html'),
   //     protocol: 'file:',
