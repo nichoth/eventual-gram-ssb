@@ -15,7 +15,9 @@ function createWindow () {
   })
 
   // console.log('env', process.env.NODE_ENV)
-  var server = fork(require.resolve('../src/server/index.js'))
+  var p = require.resolve('../src/server/index.js')
+  console.log('**pppppppp**', p)
+  var server = fork(p)
 
   // var appName
   // if (process.env.NODE_ENV === 'development') {
@@ -28,11 +30,13 @@ function createWindow () {
 
     // win.loadFile('./public/index.html')
 
-    win.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file:',
-      slashes: true
-    }))
+    win.loadURL(`file://${__dirname}/index.html`)
+  //   win.loadURL(url.format({
+  //     pathname: path.join(__dirname, 'index.html'),
+  //     protocol: 'file:',
+  //     slashes: true
+  //   }))
+
   })
 
   // var server = spawn('node', [path.join(__dirname, '../src/server/index.js')])
