@@ -47,7 +47,7 @@ function createWindow () {
   app.on('will-quit', function (ev) {
     console.log('will quit', ev)
     // server.kill()
-    server.exit(0)
+    // server.exit(0)
   })
 
   // server.stderr.on('data', function (err) {
