@@ -34,8 +34,11 @@ function createWindow () {
   server.once('message', function (msg) {
     // and load the index.html of the app.
 
-    // win.loadFile('./public/index.html')
-    win.loadFile(__dirname + '/index.html')
+    win.loadFile('./public/index.html')
+    // win.loadFile(__dirname + '/index.html')
+
+    // doesn't work
+    // win.loadFile('index.html')
 
     console.log('**msg**', msg)
 
