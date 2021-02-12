@@ -4,7 +4,7 @@
   "description": "ssb photo sharing",
   "author": "Nick Thomas <nichoth@gmail.com>",
   "license": "ISC",
-  "main": "main.js",
+  "main": "./main.js",
   "husky": {
     "hooks": {
       "pre-push": "npm run lint && npm test"
@@ -28,7 +28,7 @@
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "dist": "electron-builder -c.snap.publish=github --mac --windows --linux",
+    "dist": "electron-builder --mac --windows --linux",
     "release": "electron-builder --mac --windows --linux --publish=always",
     "tron": "env $(cat .env | xargs) electron .",
     "open": "npm run build-css && concurrently --kill-others \"node src/server/index.js\" \"npm run serve\" \"npm run sass-watch\"",
