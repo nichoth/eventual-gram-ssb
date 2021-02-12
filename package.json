@@ -1,6 +1,6 @@
 {
   "name": "eventual-gram-ssb",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "ssb photo sharing",
   "author": "Nick Thomas <nichoth@gmail.com>",
   "license": "ISC",
