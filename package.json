@@ -4,7 +4,7 @@
   "description": "ssb photo sharing",
   "author": "Nick Thomas <nichoth@gmail.com>",
   "license": "ISC",
-  "main": "public/main.js",
+  "main": "main.js",
   "husky": {
     "hooks": {
       "pre-push": "npm run lint && npm test"

@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 const { fork } = require('child_process')
-// const path = require('path');
-// const url = require('url');
+const path = require('path');
+const url = require('url');
 // var path = require('path')
 
 function createWindow () {
@@ -16,7 +16,6 @@ function createWindow () {
 
   // console.log('env', process.env.NODE_ENV)
   var p = __dirname + '/src/server/index.js'
-  console.log('**dirname**', __dirname)
   console.log('**pppppppp**', p)
   // var server = fork(p, [], { stdio: 'pipe' })
   var server = fork(p)
@@ -35,13 +34,13 @@ function createWindow () {
   server.once('message', function (msg) {
     // and load the index.html of the app.
 
+    console.log('**msg**', msg)
+
     win.loadFile('./public/index.html')
     // win.loadFile(__dirname + '/index.html')
 
     // doesn't work
     // win.loadFile('index.html')
-
-    console.log('**msg**', msg)
 
   // win.loadURL(`file://${__dirname}/index.html`)
 
