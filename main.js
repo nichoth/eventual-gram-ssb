@@ -35,8 +35,8 @@ function createWindow () {
         // and load the index.html of the app.
 
         console.log('**msg**', msg)
-
-        win.loadFile('./public/index.html')
+        
+        win.loadFile(__dirname + '/public/index.html')
         // win.loadFile(__dirname + '/index.html')
 
         // doesn't work
