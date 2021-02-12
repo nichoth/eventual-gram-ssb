@@ -20,7 +20,6 @@
     "test-browser": "concurrently --kill-others \"NODE_ENV=\"test\" node src/server.js\" \"browserify -t babelify test-browser/index.js | htmlify test-browser/index.html | tape-run --input html | tap-spec\"",
     "build-css": "node-sass --output-style=compressed src/view/style/main.scss > public/style.css",
     "sass-watch": "node-sass --watch src/view/style/main.scss --source-map-embed public/style.css",
-    "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
     "lint": "eslint . --config .eslintrc",
     "cy:open": "concurrently --kill-others \"NODE_ENV=test npm run open\" \"cypress open\"",
